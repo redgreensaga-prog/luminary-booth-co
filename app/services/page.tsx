@@ -1,4 +1,5 @@
-import Link from 'next/link';
+import Navbar from '@/components/navigation/Navbar';
+import Footer from '@/components/navigation/Footer';
 
 export const metadata = {
   title: 'Services | Luminary Booth Co.',
@@ -7,21 +8,20 @@ export const metadata = {
 
 export default function ServicesPage() {
   return (
-    <main className="min-h-screen bg-black-green flex items-center justify-center px-4">
-      <div className="text-center max-w-lg">
-        <h1 className="text-5xl font-display font-light tracking-tight mb-6 text-textPrimary">
-          Services
-        </h1>
-        <p className="text-lg text-textSecondary mb-8">
-          A full menu of bespoke photo booth experiences is coming soon.
+    <main className="bg-black-green min-h-screen">
+      <Navbar />
+      <section className="flex flex-col items-center justify-center min-h-screen text-center px-6">
+        <p className="text-gold font-sans text-sm tracking-[0.3em] uppercase mb-6">
+          Luminary Booth Co.
         </p>
-        <Link
-          href="/"
-          className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-gold hover:bg-gold-light text-black font-semibold text-sm transition-all duration-300"
-        >
-          Back to Home
-        </Link>
-      </div>
+        <h1 className="font-display text-textPrimary text-7xl font-light mb-6">
+          What We Do
+        </h1>
+        <p className="text-textPrimary/50 font-sans text-lg max-w-md leading-relaxed">
+          Every service designed for the extraordinary.
+        </p>
+      </section>
+      <Footer />
     </main>
   );
 }

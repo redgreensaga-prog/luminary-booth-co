@@ -197,6 +197,15 @@ export default function BoothShowcase() {
       <div className="container px-4 mx-auto max-w-7xl">
         {/* Section header */}
         <div className="mb-16 text-center">
+          <motion.p
+            className="section-label inline-block text-xs font-semibold tracking-widest uppercase text-gold mb-4"
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: MOTION.duration.normal / 1000, ease: MOTION.easing.editorial }}
+          >
+            Signature Collection
+          </motion.p>
           <motion.h2
             className="mb-4 text-4xl font-bold tracking-tight text-[var(--color-text-primary)] md:text-5xl"
             initial={{ opacity: 0, y: 20 }}
@@ -360,6 +369,7 @@ export default function BoothShowcase() {
                   <Button
                     variant="primary"
                     size="lg"
+                    className="btn-glow"
                     rightIcon={<Zap className="w-5 h-5" />}
                   >
                     Inquire About {activeBooth.title}

@@ -10,21 +10,21 @@ interface StatsCounterProps {
   className?: string;
 }
 
-const useCountUp = (end: number, duration: number = 2000, startCounting: boolean = false) => {
+const useCountUp = (end: number, duration: number = 2000, trigger: boolean = false) => {
   const [count, setCount] = useState(0);
 
   useEffect(() => {
-    if (!startCounting) return;
-    let startTime: number;
-    const step = (timestamp: number) => {
-      if (!startTime) startTime = timestamp;
-      const progress = Math.min((timestamp - startTime) / duration, 1);
-      setCount(Math.floor(progress * end));
-      if (progress < 1) requestAnimationFrame(step);
+    if (!trigger) return;
+    let start: number;
+    const animate = (ts: number) => {
+      if (!start) start = ts;
+      const progress = Math.min((ts - start) / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      setCount(Math.floor(eased * end));
+      if (progress < 1) requestAnimationFrame(animate);
     };
-    const raf = requestAnimationFrame(step);
-    return () => cancelAnimationFrame(raf);
-  }, [end, duration, startCounting]);
+    requestAnimationFrame(animate);
+  }, [end, duration, trigger]);
 
   return count;
 };
@@ -34,11 +34,12 @@ function StatCard({
   index,
   isInView,
 }: {
-  stat: { value: number; suffix: string; label: string; description: string };
+  stat: { value: number; suffix: string; label: string; description: string; isStatic?: boolean };
   index: number;
   isInView: boolean;
 }) {
-  const count = useCountUp(stat.value, 2000 + index * 200, isInView);
+  const count = useCountUp(stat.value, 2000 + index * 200, stat.isStatic ? false : isInView);
+  const displayValue = stat.isStatic ? stat.value : count;
 
   const itemVariants = {
     hidden: { opacity: 0, y: 30 },
@@ -65,7 +66,7 @@ function StatCard({
         {/* Animated number */}
         <div className="flex items-baseline justify-center gap-1 mb-4">
           <span className="text-5xl md:text-6xl lg:text-7xl font-display font-bold bg-gradient-to-b from-gold to-goldLight bg-clip-text text-transparent">
-            {count}
+            {displayValue}
           </span>
           {stat.suffix && (
             <span className="text-2xl md:text-3xl text-goldLight font-display">
@@ -107,7 +108,7 @@ export function StatsCounter({ className }: StatsCounterProps) {
   const { stats: statsData } = COPY;
   const stats = statsData.stats;
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: '-100px' });
+  const isInView = useInView(ref, { once: true, amount: 0.3 });
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -127,6 +128,9 @@ export function StatsCounter({ className }: StatsCounterProps) {
           transition={{ duration: 0.8, ease: MOTION.easing.cinematic }}
           className="text-center mb-16"
         >
+          <p className="section-label inline-block text-xs font-semibold tracking-widest uppercase text-gold mb-4">
+            Impact
+          </p>
           <h2 className="text-4xl md:text-5xl font-display font-light tracking-tight mb-4">
             {statsData.title}
           </h2>

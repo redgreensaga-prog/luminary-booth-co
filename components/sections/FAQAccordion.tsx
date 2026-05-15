@@ -84,6 +84,9 @@ export function FAQAccordion({ className, maxOpen = 1 }: FAQAccordionProps) {
           transition={{ duration: 0.8, ease: MOTION.easing.cinematic }}
           className="text-center mb-16"
         >
+          <p className="section-label inline-block text-xs font-semibold tracking-widest uppercase text-gold mb-4">
+            Questions
+          </p>
           <h2 className="text-4xl md:text-5xl font-display font-light tracking-tight mb-4">
             {COPY.faq.title}
           </h2>

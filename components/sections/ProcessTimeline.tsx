@@ -58,6 +58,9 @@ export function ProcessTimeline({ className }: ProcessTimelineProps) {
           transition={{ duration: 0.8, ease: MOTION.easing.cinematic }}
           className="text-center mb-16"
         >
+          <p className="section-label inline-block text-xs font-semibold tracking-widest uppercase text-gold mb-4">
+            The Process
+          </p>
           <h2 className="text-4xl md:text-5xl font-display font-light tracking-tight mb-4">
             {COPY.process.title}
           </h2>

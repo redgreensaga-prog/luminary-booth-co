@@ -189,6 +189,7 @@ export default function HeroSection() {
             <Button
               variant="primary"
               size="lg"
+              className="btn-glow"
               rightIcon={<ArrowRight className="w-5 h-5" />}
             >
               Book a Consultation

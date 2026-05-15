@@ -131,24 +131,36 @@ export default function Navbar() {
                 ...MOTION.spring.cinematic,
               }}
             >
-              <Link href="/" className="group flex items-center gap-3">
-                <div className="relative">
-                  <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[var(--color-gold)] to-[var(--color-gold-dark)] flex items-center justify-center">
-                    <span className="text-lg font-bold text-[var(--color-black)] font-display">
-                      L
+              <motion.div
+                className="relative"
+                whileHover={{ scale: 1.02, transition: { duration: 0.3, ease: [0.16, 1, 0.3, 1] } }}
+              >
+                <Link href="/" className="group flex items-center gap-3">
+                  <div className="relative">
+                    <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[var(--color-gold)] to-[var(--color-gold-dark)] flex items-center justify-center">
+                      <span className="text-lg font-bold text-[var(--color-black)] font-display">
+                        L
+                      </span>
+                    </div>
+                    <div className="absolute inset-0 rounded-full border border-[var(--color-gold)] opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  </div>
+                  <div className="flex flex-col">
+                    <span className="text-xl font-bold tracking-tight text-[var(--color-text-primary)] font-display leading-none">
+                      Luminary
+                    </span>
+                    <span className="text-xs tracking-widest text-[var(--color-text-secondary)] uppercase">
+                      Booth Co.
                     </span>
                   </div>
-                  <div className="absolute inset-0 rounded-full border border-[var(--color-gold)] opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                </div>
-                <div className="flex flex-col">
-                  <span className="text-xl font-bold tracking-tight text-[var(--color-text-primary)] font-display leading-none">
-                    Luminary
-                  </span>
-                  <span className="text-xs tracking-widest text-[var(--color-text-secondary)] uppercase">
-                    Booth Co.
-                  </span>
-                </div>
-              </Link>
+                </Link>
+                <motion.div
+                  className="h-px bg-gold w-full"
+                  initial={{ scaleX: 0 }}
+                  whileHover={{ scaleX: 1 }}
+                  transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+                  style={{ originX: 0 }}
+                />
+              </motion.div>
             </motion.div>
 
             {/* Desktop Navigation */}
@@ -202,7 +214,7 @@ export default function Navbar() {
 
             {/* Desktop CTA Button */}
             <div className="hidden lg:block">
-              <Button variant="primary" size="md">
+              <Button variant="primary" size="md" className="btn-glow">
                 Book Now
               </Button>
             </div>

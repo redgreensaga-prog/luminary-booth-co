@@ -129,6 +129,9 @@ export default function TestimonialsCarousel({
           transition={{ duration: MOTION.duration.slow / 1000, ease: MOTION.easing.cinematic }}
           className="text-center mb-12 md:mb-16"
         >
+          <p className="section-label inline-block text-xs font-semibold tracking-widest uppercase text-gold mb-4">
+            Client Stories
+          </p>
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-display font-light tracking-tight mb-4">
             {COPY.testimonials.title}
           </h2>
