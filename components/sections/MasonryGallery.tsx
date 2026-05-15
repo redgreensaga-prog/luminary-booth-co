@@ -50,33 +50,33 @@ const galleryItems: GalleryItem[] = [
   },
   {
     id: 7, title: 'Luxury Wedding', category: 'weddings', aspectRatio: 'portrait',
-    image: 'https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=800&q=80',
-    imageAlt: 'Luxury wedding reception with crystal chandeliers and white floral arrangements',
+    image: 'https://images.unsplash.com/photo-1469371670807-013ccf25f16a?w=800&q=80',
+    imageAlt: 'Luxury wedding ceremony with warm ambient lighting and elegant floral arrangements',
   },
   {
     id: 8, title: 'Mirror Effects', category: 'mirror', aspectRatio: 'landscape',
-    image: 'https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?w=800&q=80',
-    imageAlt: 'Mirror booth effects display with vibrant multicolour light show',
+    image: 'https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=800&q=80',
+    imageAlt: 'Mirror booth light display with dramatic multicoloured reflections at a night event',
   },
   {
     id: 9, title: 'Editorial Lighting', category: 'editorial', aspectRatio: 'square', featured: true,
-    image: 'https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=800&q=80',
-    imageAlt: 'Editorial event photography with dramatic crowd silhouettes and stage lighting',
+    image: 'https://images.unsplash.com/photo-1429962714451-bb934ecdc4ec?w=800&q=80',
+    imageAlt: 'Editorial event with deep shadows and selective stage lighting on a live crowd',
   },
   {
     id: 10, title: 'Gala Night', category: 'events', aspectRatio: 'landscape',
-    image: 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&q=80',
-    imageAlt: 'Gala night event with guests dressed in formal attire under elegant venue lighting',
+    image: 'https://images.unsplash.com/photo-1524368535928-5b5e00ddc76b?w=800&q=80',
+    imageAlt: 'Gala night event with guests in formal attire beneath theatrical venue lighting',
   },
   {
     id: 11, title: 'Corporate Awards', category: 'corporate', aspectRatio: 'portrait',
-    image: 'https://images.unsplash.com/photo-1515187029135-18ee286d815b?w=800&q=80',
-    imageAlt: 'Corporate awards ceremony with podium lighting and professional presentation setup',
+    image: 'https://images.unsplash.com/photo-1475721027785-f74eccf877e2?w=800&q=80',
+    imageAlt: 'Corporate awards evening with spotlit stage and seated audience in a grand venue',
   },
   {
     id: 12, title: 'Vintage Prints', category: 'vintage', aspectRatio: 'square',
-    image: 'https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?w=800&q=80',
-    imageAlt: 'Vintage-themed event with warm analogue tones and retro festival atmosphere',
+    image: 'https://images.unsplash.com/photo-1519741347686-c1e0aadf4611?w=800&q=80',
+    imageAlt: 'Vintage-themed shoot with warm film tones and retro analogue atmosphere',
   },
 ];
 

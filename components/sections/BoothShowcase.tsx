@@ -74,8 +74,8 @@ const boothTypes: BoothType[] = [
     ],
     price: 'From $1,400',
     icon: <Camera className="w-6 h-6" />,
-    image: 'https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?w=600&q=80',
-    imageAlt: 'Vintage darkroom analog photo booth with film camera aesthetic at a retro-themed event',
+    image: 'https://images.unsplash.com/photo-1452587925148-ce544e77e70d?w=600&q=80',
+    imageAlt: 'Vintage darkroom aesthetic with warm film tones and classic photographic equipment',
     accentColor: 'var(--color-gold-dark)',
   },
 ];
