@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { cn } from '@/lib/utils';
 import { COPY } from '@/content/copy';
 import { MOTION } from '@/lib/tokens';
+import Link from 'next/link';
 
 interface FAQAccordionProps {
   className?: string;
@@ -119,7 +120,7 @@ export function FAQAccordion({ className, maxOpen = 1 }: FAQAccordionProps) {
                 {/* Question header */}
                 <button
                   onClick={() => toggleItem(index)}
-                  className="w-full p-6 md:p-8 text-left flex items-center justify-between gap-6 group"
+                  className="w-full p-6 md:p-8 text-left flex items-center justify-between gap-6 group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-gold-transparent-50)] focus-visible:ring-inset rounded-xl"
                   aria-expanded={isOpen}
                 >
                   <div className="flex-1">
@@ -218,12 +219,12 @@ export function FAQAccordion({ className, maxOpen = 1 }: FAQAccordionProps) {
             <p className="text-textSecondary max-w-md">
               Our team is ready to answer any questions about custom designs, availability, or special requests.
             </p>
-            <a
+            <Link
               href="/contact"
-              className="px-8 py-3 rounded-lg bg-gradient-to-r from-goldDark to-gold text-textInverse font-medium hover:shadow-goldLg transition-all duration-300"
+              className="px-8 py-3 rounded-lg bg-gradient-to-r from-goldDark to-gold text-textInverse font-medium hover:shadow-goldLg transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-gold-transparent-50)]"
             >
               Contact Our Team
-            </a>
+            </Link>
           </div>
         </motion.div>
 

@@ -6,6 +6,7 @@ import { cn } from '@/lib/utils';
 import { MOTION, COLORS } from '@/lib/tokens';
 import Link from 'next/link';
 import { X } from 'lucide-react';
+import { Button } from '@/components/primitives/Button';
 
 interface MobileMenuProps {
   links: Array<{ href: string; label: string; icon?: React.ReactNode }>;
@@ -143,7 +144,7 @@ export default function MobileMenu({ links, activeLink, onClose }: MobileMenuPro
         >
           {/* Close button */}
           <motion.button
-            className="absolute top-8 right-8 w-12 h-12 flex items-center justify-center rounded-full bg-[var(--color-black-transparent-30)] border border-[var(--color-gold-transparent-30)]"
+            className="absolute top-8 right-8 w-12 h-12 flex items-center justify-center rounded-full bg-[var(--color-black-transparent-30)] border border-[var(--color-gold-transparent-30)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-black"
             onClick={onClose}
             aria-label="Close menu"
             whileHover={{ scale: 1.1, backgroundColor: 'rgba(10, 10, 10, 0.5)' }}
@@ -245,16 +246,14 @@ export default function MobileMenu({ links, activeLink, onClose }: MobileMenuPro
               ease: MOTION.easing.editorial,
             }}
           >
-            <button
-              className="group relative px-8 py-4 text-base font-medium tracking-wider uppercase transition-all duration-300"
+            <Button
+              variant="ghost"
+              size="lg"
+              className="tracking-wider uppercase border border-[var(--color-gold)] text-[var(--color-gold)] hover:bg-[var(--color-gold)] hover:text-[var(--color-black)] px-8"
               onClick={onClose}
             >
-              <span className="relative z-10 text-[var(--color-gold)] group-hover:text-[var(--color-black)] transition-colors duration-300">
-                Book a Consultation
-              </span>
-              <div className="absolute inset-0 border border-[var(--color-gold)] rounded-sm group-hover:bg-[var(--color-gold)] transition-all duration-300"></div>
-              <div className="absolute inset-0 border border-[var(--color-gold)] rounded-sm translate-x-1 translate-y-1 opacity-0 group-hover:translate-x-0 group-hover:translate-y-0 group-hover:opacity-30 transition-all duration-300"></div>
-            </button>
+              Book a Consultation
+            </Button>
           </motion.div>
 
           {/* Contact info */}

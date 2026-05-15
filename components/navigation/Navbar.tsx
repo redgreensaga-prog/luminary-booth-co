@@ -8,6 +8,7 @@ import { Menu, X } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import MobileMenu from '../navigation/MobileMenu';
+import { Button } from '@/components/primitives/Button';
 
 interface NavLink {
   href: string;
@@ -201,18 +202,18 @@ export default function Navbar() {
 
             {/* Desktop CTA Button */}
             <div className="hidden lg:block">
-              <button className="group relative px-6 py-3 text-sm font-medium tracking-wider uppercase transition-all duration-300">
-                <span className="relative z-10 text-[var(--color-gold)] group-hover:text-[var(--color-black)] transition-colors duration-300">
-                  Book Now
-                </span>
-                <div className="absolute inset-0 border border-[var(--color-gold)] rounded-sm group-hover:bg-[var(--color-gold)] transition-all duration-300"></div>
-                <div className="absolute inset-0 border border-[var(--color-gold)] rounded-sm translate-x-1 translate-y-1 opacity-0 group-hover:translate-x-0 group-hover:translate-y-0 group-hover:opacity-30 transition-all duration-300"></div>
-              </button>
+              <Button
+                variant="ghost"
+                size="md"
+                className="tracking-wider uppercase border border-[var(--color-gold)] text-[var(--color-gold)] hover:bg-[var(--color-gold)] hover:text-[var(--color-black)]"
+              >
+                Book Now
+              </Button>
             </div>
 
             {/* Mobile Menu Toggle */}
             <button
-              className="lg:hidden relative w-10 h-10 flex items-center justify-center"
+              className="lg:hidden relative w-10 h-10 flex items-center justify-center rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-black"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               aria-label={isMobileMenuOpen ? 'Close menu' : 'Open menu'}
             >

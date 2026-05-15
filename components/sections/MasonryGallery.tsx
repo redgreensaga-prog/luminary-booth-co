@@ -212,7 +212,7 @@ export default function MasonryGallery() {
               {categories.map((category) => (
                 <motion.button
                   key={category.id}
-                  className={`px-4 py-2 text-sm font-medium rounded-sm transition-all duration-300 ${
+                  className={`px-4 py-2 text-sm font-medium rounded-sm transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-black ${
                     activeCategory === category.id
                       ? 'bg-[var(--color-gold)] text-[var(--color-black)]'
                       : 'bg-[var(--color-gray-dark)] text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] hover:bg-[var(--color-gray-medium)]'
@@ -240,7 +240,8 @@ export default function MasonryGallery() {
               {searchQuery && (
                 <button
                   onClick={() => setSearchQuery('')}
-                  className="absolute right-3 top-1/2 transform -translate-y-1/2 text-[var(--color-text-tertiary)] hover:text-[var(--color-text-primary)]"
+                  className="absolute right-3 top-1/2 transform -translate-y-1/2 text-[var(--color-text-tertiary)] hover:text-[var(--color-text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold rounded-sm"
+                  aria-label="Clear search"
                 >
                   <X className="w-4 h-4" />
                 </button>
@@ -272,8 +273,17 @@ export default function MasonryGallery() {
                     animate={{ opacity: 1, scale: 1 }}
                     exit={{ opacity: 0, scale: 0.9 }}
                     transition={{ duration: MOTION.duration.fast / 1000 }}
-                    className="relative mb-4 break-inside-avoid cursor-pointer"
+                    className="relative mb-4 break-inside-avoid cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-black rounded-sm"
                     onClick={() => handleImageClick(item)}
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        handleImageClick(item);
+                      }
+                    }}
+                    role="button"
+                    tabIndex={0}
+                    aria-label={`View ${item.title}`}
                   >
                     <div className={`relative overflow-hidden rounded-sm ${aspectRatioClasses[item.aspectRatio as keyof typeof aspectRatioClasses]}`}>
                       {/* SVG pattern background */}

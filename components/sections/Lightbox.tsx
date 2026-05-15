@@ -108,7 +108,7 @@ export default function Lightbox({
         >
           {/* Close button */}
           <motion.button
-            className="absolute top-4 right-4 z-20 p-2 rounded-sm bg-[var(--color-black-transparent-70)] backdrop-blur-sm border border-[var(--color-gold-transparent-30)] hover:bg-[var(--color-black-transparent-80)] transition-colors"
+            className="absolute top-4 right-4 z-20 p-2 rounded-sm bg-[var(--color-black-transparent-70)] backdrop-blur-sm border border-[var(--color-gold-transparent-30)] hover:bg-[var(--color-black-transparent-80)] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-black"
             onClick={onClose}
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.95 }}
@@ -122,7 +122,7 @@ export default function Lightbox({
 
           {/* Navigation buttons */}
           <motion.button
-            className="absolute left-4 top-1/2 z-20 p-3 -translate-y-1/2 rounded-sm bg-[var(--color-black-transparent-70)] backdrop-blur-sm border border-[var(--color-gold-transparent-30)] hover:bg-[var(--color-black-transparent-80)] transition-colors disabled:opacity-30 disabled:pointer-events-none"
+            className="absolute left-4 top-1/2 z-20 p-3 -translate-y-1/2 rounded-sm bg-[var(--color-black-transparent-70)] backdrop-blur-sm border border-[var(--color-gold-transparent-30)] hover:bg-[var(--color-black-transparent-80)] transition-colors disabled:opacity-30 disabled:pointer-events-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-black"
             onClick={handlePrev}
             disabled={total === 0}
             whileHover={{ scale: 1.1, x: -2 }}
@@ -136,7 +136,7 @@ export default function Lightbox({
           </motion.button>
 
           <motion.button
-            className="absolute right-4 top-1/2 z-20 p-3 -translate-y-1/2 rounded-sm bg-[var(--color-black-transparent-70)] backdrop-blur-sm border border-[var(--color-gold-transparent-30)] hover:bg-[var(--color-black-transparent-80)] transition-colors disabled:opacity-30 disabled:pointer-events-none"
+            className="absolute right-4 top-1/2 z-20 p-3 -translate-y-1/2 rounded-sm bg-[var(--color-black-transparent-70)] backdrop-blur-sm border border-[var(--color-gold-transparent-30)] hover:bg-[var(--color-black-transparent-80)] transition-colors disabled:opacity-30 disabled:pointer-events-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-black"
             onClick={handleNext}
             disabled={total === 0}
             whileHover={{ scale: 1.1, x: 2 }}
@@ -197,7 +197,7 @@ export default function Lightbox({
               {/* Action buttons */}
               <div className="flex gap-2">
                 <motion.button
-                  className="p-3 rounded-sm bg-[var(--color-black-transparent-70)] border border-[var(--color-gold-transparent-30)] hover:bg-[var(--color-black-transparent-80)] transition-colors"
+                  className="p-3 rounded-sm bg-[var(--color-black-transparent-70)] border border-[var(--color-gold-transparent-30)] hover:bg-[var(--color-black-transparent-80)] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-black"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   aria-label="Full screen (coming soon)"
@@ -205,7 +205,7 @@ export default function Lightbox({
                   <Maximize2 className="w-5 h-5 text-[var(--color-gold)]" />
                 </motion.button>
                 <motion.button
-                  className="p-3 rounded-sm bg-[var(--color-black-transparent-70)] border border-[var(--color-gold-transparent-30)] hover:bg-[var(--color-black-transparent-80)] transition-colors"
+                  className="p-3 rounded-sm bg-[var(--color-black-transparent-70)] border border-[var(--color-gold-transparent-30)] hover:bg-[var(--color-black-transparent-80)] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-black"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   aria-label="Download image"
