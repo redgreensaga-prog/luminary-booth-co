@@ -59,29 +59,47 @@ export default function HeroSection() {
       {/* Background */}
       <div className="absolute inset-0 z-0">
         <svg
+          viewBox="0 0 1440 800"
+          xmlns="http://www.w3.org/2000/svg"
           aria-hidden="true"
           className="absolute inset-0 w-full h-full"
-          xmlns="http://www.w3.org/2000/svg"
-          preserveAspectRatio="xMidYMid slice"
         >
-          <rect width="100%" height="100%" fill="#0A0A0A" />
-          {Array.from({ length: 20 }).map((_, i) => (
-            <line
-              key={`dg-${i}`}
-              x1={`${i * 5 - 10}%`} y1="0%"
-              x2={`${i * 5 + 10}%`} y2="100%"
-              stroke="rgba(0,92,72,0.05)"
-              strokeWidth="1"
-            />
-          ))}
-          <polygon
-            points="50%,5% 95%,50% 50%,95% 5%,50%"
+          <defs>
+            <linearGradient id="arc-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stopColor="transparent" />
+              <stop offset="50%" stopColor="#005C48" stopOpacity="0.6" />
+              <stop offset="100%" stopColor="transparent" />
+            </linearGradient>
+            <radialGradient id="hero-glow" cx="50%" cy="60%" r="50%">
+              <stop offset="0%" stopColor="#005C48" stopOpacity="0.12" />
+              <stop offset="100%" stopColor="transparent" stopOpacity="0" />
+            </radialGradient>
+          </defs>
+          <rect width="1440" height="800" fill="url(#hero-glow)" />
+          <path
+            d="M -100 420 Q 720 280 1540 420"
+            stroke="url(#arc-gradient)"
+            strokeWidth="1.5"
             fill="none"
-            stroke="rgba(0,92,72,0.10)"
+            opacity="0.5"
+          />
+          <path
+            d="M -100 480 Q 720 340 1540 480"
+            stroke="url(#arc-gradient)"
             strokeWidth="1"
+            fill="none"
+            opacity="0.3"
+          />
+          <rect
+            x="660" y="160"
+            width="120" height="120"
+            transform="rotate(45 720 220)"
+            stroke="#005C48"
+            strokeWidth="0.5"
+            fill="none"
+            opacity="0.08"
           />
         </svg>
-        <div className="absolute inset-0 bg-gradient-to-r from-[var(--color-black-transparent-70)] via-transparent to-[var(--color-black-transparent-70)]"></div>
 
         {/* Animated SVG lines */}
         <div className="absolute inset-0">
