@@ -1,10 +1,10 @@
 'use client';
 
-import { forwardRef, ElementRef } from 'react';
+import { forwardRef } from 'react';
 import { motion, HTMLMotionProps } from 'framer-motion';
 import { cva, type VariantProps } from 'class-variance-authority';
 import { cn } from '@/lib/utils';
-import { COLORS, MOTION } from '@/lib/tokens';
+import { MOTION } from '@/lib/tokens';
 
 // Badge variants using CVA
 const badgeVariants = cva(

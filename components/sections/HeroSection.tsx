@@ -49,7 +49,31 @@ export default function HeroSection() {
     <section className="relative min-h-screen overflow-hidden bg-gradient-to-b from-[var(--color-black)] via-[var(--color-gray-dark)] to-[var(--color-black)]">
       {/* Parallax background */}
       <div className="absolute inset-0 z-0">
-        <div className="absolute inset-0 bg-[url('/placeholder/hero-bg.jpg')] bg-cover bg-center bg-no-repeat opacity-20"></div>
+        <svg
+          aria-hidden="true"
+          className="absolute inset-0 w-full h-full"
+          xmlns="http://www.w3.org/2000/svg"
+          preserveAspectRatio="xMidYMid slice"
+        >
+          <rect width="100%" height="100%" fill="#0A0A0A" />
+          {/* Diagonal grid lines */}
+          {Array.from({ length: 20 }).map((_, i) => (
+            <line
+              key={`dg-${i}`}
+              x1={`${i * 5 - 10}%`} y1="0%"
+              x2={`${i * 5 + 10}%`} y2="100%"
+              stroke="rgba(0,92,72,0.05)"
+              strokeWidth="1"
+            />
+          ))}
+          {/* Large diamond outline */}
+          <polygon
+            points="50%,5% 95%,50% 50%,95% 5%,50%"
+            fill="none"
+            stroke="rgba(0,92,72,0.10)"
+            strokeWidth="1"
+          />
+        </svg>
         <div className="absolute inset-0 bg-gradient-to-r from-[var(--color-black-transparent-70)] via-transparent to-[var(--color-black-transparent-70)]"></div>
         
         {/* Animated SVG lines */}

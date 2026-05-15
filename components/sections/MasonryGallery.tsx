@@ -10,23 +10,126 @@ type GalleryItem = {
   title: string;
   category: string;
   image: string;
+  svgPattern: React.ReactNode;
   aspectRatio: string;
   featured?: boolean;
 };
 
+const makeSvg = (children: React.ReactNode) => (
+  <svg aria-hidden="true" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+    <rect width="100%" height="100%" fill="#111111" />
+    {children}
+  </svg>
+);
+
 const galleryItems: GalleryItem[] = [
-  { id: 1, title: 'Gala Event Setup', category: 'events', image: '/placeholder/gallery/gala-1.jpg', aspectRatio: 'portrait', featured: true },
-  { id: 2, title: 'Mirror Booth in Action', category: 'mirror', image: '/placeholder/gallery/mirror-1.jpg', aspectRatio: 'square' },
-  { id: 3, title: 'Wedding Reception', category: 'weddings', image: '/placeholder/gallery/wedding-1.jpg', aspectRatio: 'landscape' },
-  { id: 4, title: 'Editorial Portraits', category: 'editorial', image: '/placeholder/gallery/editorial-1.jpg', aspectRatio: 'portrait', featured: true },
-  { id: 5, title: 'Corporate Launch', category: 'corporate', image: '/placeholder/gallery/corporate-1.jpg', aspectRatio: 'landscape' },
-  { id: 6, title: 'Vintage Retro Setup', category: 'vintage', image: '/placeholder/gallery/vintage-1.jpg', aspectRatio: 'square' },
-  { id: 7, title: 'Luxury Wedding', category: 'weddings', image: '/placeholder/gallery/wedding-2.jpg', aspectRatio: 'portrait' },
-  { id: 8, title: 'Mirror Effects', category: 'mirror', image: '/placeholder/gallery/mirror-2.jpg', aspectRatio: 'landscape' },
-  { id: 9, title: 'Editorial Lighting', category: 'editorial', image: '/placeholder/gallery/editorial-2.jpg', aspectRatio: 'square', featured: true },
-  { id: 10, title: 'Gala Night', category: 'events', image: '/placeholder/gallery/gala-2.jpg', aspectRatio: 'landscape' },
-  { id: 11, title: 'Corporate Awards', category: 'corporate', image: '/placeholder/gallery/corporate-2.jpg', aspectRatio: 'portrait' },
-  { id: 12, title: 'Vintage Prints', category: 'vintage', image: '/placeholder/gallery/vintage-2.jpg', aspectRatio: 'square' },
+  {
+    id: 1, title: 'Gala Event Setup', category: 'events', image: '', aspectRatio: 'portrait', featured: true,
+    svgPattern: makeSvg(<>
+      {Array.from({ length: 8 }).map((_, i) => <line key={i} x1={`${i * 14}%`} y1="0%" x2={`${i * 14 + 14}%`} y2="100%" stroke="rgba(0,92,72,0.10)" strokeWidth="1" />)}
+      <polygon points="50%,10% 85%,50% 50%,90% 15%,50%" fill="none" stroke="rgba(0,92,72,0.22)" strokeWidth="1.5" />
+      <circle cx="50%" cy="50%" r="15%" fill="none" stroke="rgba(0,92,72,0.12)" strokeWidth="1" />
+    </>),
+  },
+  {
+    id: 2, title: 'Mirror Booth in Action', category: 'mirror', image: '', aspectRatio: 'square',
+    svgPattern: makeSvg(<>
+      {Array.from({ length: 6 }).map((_, i) => <circle key={i} cx="50%" cy="50%" r={`${(i + 1) * 8}%`} fill="none" stroke="rgba(0,92,72,0.10)" strokeWidth="1" />)}
+      <rect x="25%" y="25%" width="50%" height="50%" fill="none" stroke="rgba(0,92,72,0.20)" strokeWidth="1.5" transform="rotate(45 50 50)" />
+    </>),
+  },
+  {
+    id: 3, title: 'Wedding Reception', category: 'weddings', image: '', aspectRatio: 'landscape',
+    svgPattern: makeSvg(<>
+      {Array.from({ length: 10 }).map((_, i) => <line key={i} x1="0%" y1={`${i * 11}%`} x2="100%" y2={`${i * 11}%`} stroke="rgba(0,92,72,0.08)" strokeWidth="1" />)}
+      {Array.from({ length: 10 }).map((_, i) => <line key={`v${i}`} x1={`${i * 11}%`} y1="0%" x2={`${i * 11}%`} y2="100%" stroke="rgba(0,92,72,0.08)" strokeWidth="1" />)}
+      <rect x="20%" y="20%" width="60%" height="60%" fill="none" stroke="rgba(0,92,72,0.24)" strokeWidth="1.5" />
+    </>),
+  },
+  {
+    id: 4, title: 'Editorial Portraits', category: 'editorial', image: '', aspectRatio: 'portrait', featured: true,
+    svgPattern: makeSvg(<>
+      {Array.from({ length: 12 }).map((_, i) => {
+        const angle = (i * 30 * Math.PI) / 180;
+        return <line key={i} x1="50%" y1="50%" x2={`${50 + 50 * Math.cos(angle)}%`} y2={`${50 + 50 * Math.sin(angle)}%`} stroke="rgba(0,92,72,0.07)" strokeWidth="1" />;
+      })}
+      <circle cx="50%" cy="50%" r="20%" fill="none" stroke="rgba(0,92,72,0.25)" strokeWidth="1.5" />
+      <circle cx="50%" cy="50%" r="8%" fill="rgba(0,92,72,0.12)" />
+    </>),
+  },
+  {
+    id: 5, title: 'Corporate Launch', category: 'corporate', image: '', aspectRatio: 'landscape',
+    svgPattern: makeSvg(<>
+      {Array.from({ length: 5 }).map((_, row) =>
+        Array.from({ length: 7 }).map((_, col) => (
+          <rect key={`${row}-${col}`} x={`${col * 15 + 2}%`} y={`${row * 20 + 2}%`} width="12%" height="16%" fill="none" stroke="rgba(0,92,72,0.10)" strokeWidth="1" />
+        ))
+      )}
+    </>),
+  },
+  {
+    id: 6, title: 'Vintage Retro Setup', category: 'vintage', image: '', aspectRatio: 'square',
+    svgPattern: makeSvg(<>
+      {Array.from({ length: 8 }).map((_, i) => (
+        <circle key={i} cx="50%" cy="50%" r={`${i * 7}%`} fill="none" stroke="rgba(0,92,72,0.09)" strokeWidth="1" strokeDasharray="4,4" />
+      ))}
+      <line x1="20%" y1="50%" x2="80%" y2="50%" stroke="rgba(0,92,72,0.18)" strokeWidth="1" />
+      <line x1="50%" y1="20%" x2="50%" y2="80%" stroke="rgba(0,92,72,0.18)" strokeWidth="1" />
+    </>),
+  },
+  {
+    id: 7, title: 'Luxury Wedding', category: 'weddings', image: '', aspectRatio: 'portrait',
+    svgPattern: makeSvg(<>
+      {Array.from({ length: 6 }).map((_, i) => <line key={i} x1={`${i * 20}%`} y1="0%" x2={`${i * 20}%`} y2="100%" stroke="rgba(0,92,72,0.08)" strokeWidth="1" />)}
+      <polygon points="50%,5% 95%,50% 50%,95% 5%,50%" fill="none" stroke="rgba(0,92,72,0.18)" strokeWidth="1.5" />
+      <polygon points="50%,20% 80%,50% 50%,80% 20%,50%" fill="none" stroke="rgba(0,92,72,0.12)" strokeWidth="1" />
+    </>),
+  },
+  {
+    id: 8, title: 'Mirror Effects', category: 'mirror', image: '', aspectRatio: 'landscape',
+    svgPattern: makeSvg(<>
+      {Array.from({ length: 4 }).map((_, row) =>
+        Array.from({ length: 5 }).map((_, col) => {
+          const cx = col * 22 + 11;
+          const cy = row * 26 + 13;
+          return <polygon key={`${row}-${col}`} points={`${cx}%,${cy - 10}% ${cx + 9}%,${cy - 5}% ${cx + 9}%,${cy + 5}% ${cx}%,${cy + 10}% ${cx - 9}%,${cy + 5}% ${cx - 9}%,${cy - 5}%`} fill="none" stroke="rgba(0,92,72,0.10)" strokeWidth="1" />;
+        })
+      )}
+    </>),
+  },
+  {
+    id: 9, title: 'Editorial Lighting', category: 'editorial', image: '', aspectRatio: 'square', featured: true,
+    svgPattern: makeSvg(<>
+      {Array.from({ length: 15 }).map((_, i) => <line key={i} x1="0%" y1={`${i * 7}%`} x2="100%" y2={`${i * 7}%`} stroke="rgba(0,92,72,0.07)" strokeWidth="1" />)}
+      <rect x="15%" y="15%" width="70%" height="70%" fill="none" stroke="rgba(0,92,72,0.20)" strokeWidth="1.5" />
+      <rect x="30%" y="30%" width="40%" height="40%" fill="none" stroke="rgba(0,92,72,0.14)" strokeWidth="1" />
+      <circle cx="50%" cy="50%" r="10%" fill="rgba(0,92,72,0.10)" />
+    </>),
+  },
+  {
+    id: 10, title: 'Gala Night', category: 'events', image: '', aspectRatio: 'landscape',
+    svgPattern: makeSvg(<>
+      {Array.from({ length: 20 }).map((_, i) => <line key={i} x1={`${i * 5 - 5}%`} y1="0%" x2={`${i * 5 + 10}%`} y2="100%" stroke="rgba(0,92,72,0.07)" strokeWidth="1" />)}
+      <ellipse cx="50%" cy="50%" rx="35%" ry="40%" fill="none" stroke="rgba(0,92,72,0.20)" strokeWidth="1.5" />
+    </>),
+  },
+  {
+    id: 11, title: 'Corporate Awards', category: 'corporate', image: '', aspectRatio: 'portrait',
+    svgPattern: makeSvg(<>
+      {Array.from({ length: 8 }).map((_, i) => <line key={i} x1="0%" y1={`${i * 13}%`} x2="100%" y2={`${i * 13}%`} stroke="rgba(0,92,72,0.07)" strokeWidth="1" />)}
+      {Array.from({ length: 8 }).map((_, i) => <line key={`v${i}`} x1={`${i * 13}%`} y1="0%" x2={`${i * 13}%`} y2="100%" stroke="rgba(0,92,72,0.07)" strokeWidth="1" />)}
+      <polygon points="50%,15% 70%,40% 85%,70% 50%,85% 15%,70% 30%,40%" fill="none" stroke="rgba(0,92,72,0.22)" strokeWidth="1.5" />
+    </>),
+  },
+  {
+    id: 12, title: 'Vintage Prints', category: 'vintage', image: '', aspectRatio: 'square',
+    svgPattern: makeSvg(<>
+      {Array.from({ length: 10 }).map((_, i) => (
+        <circle key={i} cx="50%" cy="50%" r={`${i * 5 + 3}%`} fill="none" stroke="rgba(0,92,72,0.08)" strokeWidth="1" strokeDasharray="3,6" />
+      ))}
+      <rect x="30%" y="30%" width="40%" height="40%" fill="none" stroke="rgba(0,92,72,0.20)" strokeWidth="1.5" transform="rotate(45 50 50)" />
+    </>),
+  },
 ];
 
 const categories = [
@@ -80,7 +183,7 @@ export default function MasonryGallery() {
       <div className="container px-4 mx-auto max-w-7xl">
         {/* Header */}
         <div className="mb-12 text-center">
-          <motion.h2 
+          <motion.h2
             className="mb-4 text-4xl font-bold tracking-tight text-[var(--color-text-primary)] md:text-5xl"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -88,14 +191,14 @@ export default function MasonryGallery() {
           >
             Editorial Gallery
           </motion.h2>
-          <motion.p 
+          <motion.p
             className="max-w-3xl mx-auto text-lg text-[var(--color-text-secondary)]"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
           >
-            Explore our curated collection of luxury photo booth experiences. 
+            Explore our curated collection of luxury photo booth experiences.
             Each image showcases the meticulous attention to detail that defines Luminary Booth Co.
           </motion.p>
         </div>
@@ -172,27 +275,26 @@ export default function MasonryGallery() {
                     onClick={() => handleImageClick(item)}
                   >
                     <div className={`relative overflow-hidden rounded-sm ${aspectRatioClasses[item.aspectRatio as keyof typeof aspectRatioClasses]}`}>
-                      {/* Image background */}
-                      <div 
-                        className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
-                        style={{ backgroundImage: `url(${item.image})` }}
-                      ></div>
-                      
+                      {/* SVG pattern background */}
+                      <div className="absolute inset-0 transition-transform duration-700 group-hover:scale-110">
+                        {item.svgPattern}
+                      </div>
+
                       {/* Overlay gradient */}
-                      <div className="absolute inset-0 bg-gradient-to-t from-[var(--color-black-transparent-80)] via-transparent to-transparent"></div>
-                      
+                      <div className="absolute inset-0 bg-gradient-to-t from-[var(--color-black-transparent-70)] via-transparent to-transparent"></div>
+
                       {/* Content overlay */}
                       <div className="absolute inset-0 flex flex-col justify-end p-6 transition-all duration-300 group-hover:bg-[var(--color-black-transparent-50)]">
                         {/* Category badge */}
-                        <div className="inline-flex mb-2 px-3 py-1 text-xs font-medium tracking-wider uppercase rounded-sm bg-[var(--color-gold-transparent-20)] text-[var(--color-gold)]">
+                        <div className="inline-flex mb-2 px-3 py-1 text-xs font-medium tracking-wider uppercase rounded-sm bg-[var(--color-gold-transparent-10)] text-[var(--color-gold)]">
                           {item.category}
                         </div>
-                        
+
                         {/* Title */}
                         <h3 className="mb-2 text-xl font-semibold text-[var(--color-text-primary)]">
                           {item.title}
                         </h3>
-                        
+
                         {/* Featured tag */}
                         {item.featured && (
                           <div className="inline-flex items-center gap-1 mb-3 text-xs font-medium text-[var(--color-gold)]">
@@ -200,7 +302,7 @@ export default function MasonryGallery() {
                             Featured Work
                           </div>
                         )}
-                        
+
                         {/* Hover actions */}
                         <div className="absolute top-4 right-4 translate-y-2 opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100">
                           <div className="p-2 rounded-sm bg-[var(--color-black-transparent-70)] backdrop-blur-sm border border-[var(--color-gold-transparent-30)]">
@@ -209,7 +311,7 @@ export default function MasonryGallery() {
                         </div>
                       </div>
                     </div>
-                    
+
                     {/* Gold accent line */}
                     <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-[var(--color-gold-transparent-50)] to-transparent transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500"></div>
                   </motion.div>
@@ -220,7 +322,7 @@ export default function MasonryGallery() {
         </AnimatePresence>
 
         {/* Results count */}
-        <motion.div 
+        <motion.div
           className="mt-8 text-center text-[var(--color-text-tertiary)]"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}

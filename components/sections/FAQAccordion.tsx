@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { cn } from '@/lib/utils';
 import { COPY } from '@/content/copy';
-import { COLORS, MOTION, TYPOGRAPHY } from '@/lib/tokens';
+import { MOTION } from '@/lib/tokens';
 
 interface FAQAccordionProps {
   className?: string;

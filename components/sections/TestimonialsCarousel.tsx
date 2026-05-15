@@ -1,36 +1,10 @@
 'use client';
 
-/**
- * TestimonialsCarousel Component
- * 
- * A responsive, accessible carousel for displaying customer testimonials with auto-rotation.
- * Features:
- * - Smooth Framer Motion transitions between testimonials
- * - Auto-rotation (pauses on hover)
- * - Star ratings, customer photos, optional company/event tags
- * - Navigation dots and prev/next buttons
- * - Dark luxury editorial design with gold accents
- * - Built with accessibility in mind (ARIA labels, live regions)
- * 
- * Usage:
- * ```tsx
- * import TestimonialsCarousel from '@/components/sections/TestimonialsCarousel';
- * 
- * // Uses default testimonials from COPY.testimonials
- * <TestimonialsCarousel />
- * 
- * // With custom testimonials
- * <TestimonialsCarousel testimonials={myTestimonials} autoRotateInterval={8000} />
- * ```
- * 
- * Design tokens from lib/tokens.ts are used for consistent styling.
- */
-
 import React, { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Star, ChevronLeft, ChevronRight } from 'lucide-react';
 import { cn } from '@/lib/utils';
-import { COLORS, TYPOGRAPHY, MOTION, SPACING, BORDER_RADIUS } from '@/lib/tokens';
+import { MOTION } from '@/lib/tokens';
 import { COPY } from '@/content/copy';
 
 export interface Testimonial {
