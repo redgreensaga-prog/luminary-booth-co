@@ -202,11 +202,7 @@ export default function Navbar() {
 
             {/* Desktop CTA Button */}
             <div className="hidden lg:block">
-              <Button
-                variant="ghost"
-                size="md"
-                className="tracking-wider uppercase border border-[var(--color-gold)] text-[var(--color-gold)] hover:bg-[var(--color-gold)] hover:text-[var(--color-black)]"
-              >
+              <Button variant="primary" size="md">
                 Book Now
               </Button>
             </div>

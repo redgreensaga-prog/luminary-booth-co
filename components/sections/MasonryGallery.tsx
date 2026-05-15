@@ -180,7 +180,7 @@ export default function MasonryGallery() {
   };
 
   return (
-    <section className="py-[var(--space-10)] bg-[var(--color-gray-dark)]" onKeyDown={handleKeyDown} tabIndex={-1}>
+    <section className="py-[var(--space-10)] bg-black-green" onKeyDown={handleKeyDown} tabIndex={-1}>
       <div className="container px-4 mx-auto max-w-7xl">
         {/* Header */}
         <div className="mb-12 text-center">

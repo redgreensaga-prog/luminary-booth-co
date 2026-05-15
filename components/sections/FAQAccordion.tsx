@@ -74,7 +74,7 @@ export function FAQAccordion({ className, maxOpen = 1 }: FAQAccordionProps) {
   };
 
   return (
-    <section className={cn('py-20 relative overflow-hidden', className)}>
+    <section className={cn('py-20 relative overflow-hidden bg-surface', className)}>
       <div className="container mx-auto px-4 max-w-4xl">
         {/* Section header */}
         <motion.div
@@ -221,7 +221,7 @@ export function FAQAccordion({ className, maxOpen = 1 }: FAQAccordionProps) {
             </p>
             <Link
               href="/contact"
-              className="px-8 py-3 rounded-lg bg-gradient-to-r from-goldDark to-gold text-textInverse font-medium hover:shadow-goldLg transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-gold-transparent-50)]"
+              className="inline-flex items-center justify-center px-6 py-2.5 rounded-lg bg-gold hover:bg-gold-light text-black font-semibold text-sm transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-black shadow-md hover:shadow-lg"
             >
               Contact Our Team
             </Link>

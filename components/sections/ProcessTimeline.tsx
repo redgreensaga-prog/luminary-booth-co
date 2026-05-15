@@ -48,7 +48,7 @@ export function ProcessTimeline({ className }: ProcessTimelineProps) {
   };
 
   return (
-    <section className={cn('py-20 relative overflow-hidden', className)}>
+    <section className={cn('py-20 relative overflow-hidden bg-surface', className)}>
       <div className="container mx-auto px-4 max-w-6xl">
         {/* Section header */}
         <motion.div

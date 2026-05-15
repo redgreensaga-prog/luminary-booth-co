@@ -3,6 +3,7 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import { useState, useEffect } from 'react';
 import { Camera, Sparkles, Star, Zap } from 'lucide-react';
+import { Button } from '@/components/primitives/Button';
 import { MOTION } from '@/lib/tokens';
 
 type BoothType = {
@@ -192,7 +193,7 @@ export default function BoothShowcase() {
   };
 
   return (
-    <section className="py-24 bg-[var(--color-black)]">
+    <section className="py-24 bg-surface">
       <div className="container px-4 mx-auto max-w-7xl">
         {/* Section header */}
         <div className="mb-16 text-center">
@@ -350,15 +351,20 @@ export default function BoothShowcase() {
                 </div>
 
                 {/* CTA */}
-                <motion.button
+                <motion.div
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: prefersReduced ? 0 : 0.5 }}
-                  className="group relative inline-flex items-center justify-center gap-2 self-start px-8 py-4 text-base font-medium text-[var(--color-black)] bg-[var(--color-gold)] rounded-sm hover:bg-[var(--color-gold-light)] transition-all duration-300 hover:scale-105 hover:shadow-[0_0_40px_0_var(--color-gold-transparent-30)]"
+                  className="self-start"
                 >
-                  Inquire About {activeBooth.title}
-                  <Zap className="w-5 h-5 transition-transform group-hover:translate-x-1" />
-                </motion.button>
+                  <Button
+                    variant="primary"
+                    size="lg"
+                    rightIcon={<Zap className="w-5 h-5" />}
+                  >
+                    Inquire About {activeBooth.title}
+                  </Button>
+                </motion.div>
               </div>
             </motion.div>
           </AnimatePresence>

@@ -110,7 +110,7 @@ export default function TestimonialsCarousel({
   return (
     <section
       className={cn(
-        'relative py-16 md:py-24 overflow-hidden',
+        'relative py-16 md:py-24 overflow-hidden bg-black-green',
         className
       )}
       onMouseEnter={handleMouseEnter}

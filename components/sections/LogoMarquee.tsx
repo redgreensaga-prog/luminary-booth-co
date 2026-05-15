@@ -57,7 +57,7 @@ export function LogoMarquee({ className, speed = 'normal' }: LogoMarqueeProps) {
 
   return (
     <section
-      className={cn('py-16 relative overflow-hidden', className)}
+      className={cn('py-16 relative overflow-hidden bg-surface', className)}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >

@@ -43,7 +43,7 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className="bg-black text-text-primary font-body antialiased min-h-screen">
+      <body className="bg-black-green text-text-primary font-body antialiased min-h-screen">
         <main className="min-h-screen">{children}</main>
       </body>
     </html>

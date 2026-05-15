@@ -52,19 +52,19 @@ export const copy = {
         description: "From intimate weddings to corporate galas"
       },
       {
-        value: 98,
+        value: 99,
         suffix: "%",
         label: "Client Satisfaction",
         description: "Rated excellent by our clients"
       },
       {
-        value: 50,
+        value: 200,
         suffix: "+",
         label: "Custom Backdrops",
         description: "Unique designs for every occasion"
       },
       {
-        value: 24,
+        value: 7,
         suffix: "/7",
         label: "Support",
         description: "Dedicated team always available"

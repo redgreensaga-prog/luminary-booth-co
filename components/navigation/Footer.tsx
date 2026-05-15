@@ -10,7 +10,6 @@ import {
   Mail,
   Phone,
   MapPin,
-  Send,
 } from 'lucide-react';
 
 /* ── Inline SVG social icons ── */
@@ -34,10 +33,9 @@ const TwitterIcon = ({ className }: { className?: string }) => (
   </svg>
 );
 
-const YoutubeIcon = ({ className }: { className?: string }) => (
+const PinterestIcon = ({ className }: { className?: string }) => (
   <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.94 2C5.12 20 12 20 12 20s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z" />
-    <polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" />
+    <path d="M12 2C6.477 2 2 6.477 2 12c0 4.236 2.636 7.855 6.356 9.312-.088-.791-.167-2.005.035-2.868.181-.78 1.172-4.97 1.172-4.97s-.299-.598-.299-1.482c0-1.388.806-2.428 1.808-2.428.852 0 1.265.64 1.265 1.408 0 .858-.546 2.14-.828 3.33-.236.995.499 1.806 1.476 1.806 1.771 0 3.132-1.867 3.132-4.562 0-2.387-1.715-4.053-4.163-4.053-2.836 0-4.5 2.126-4.5 4.323 0 .856.33 1.772.741 2.273a.3.3 0 0 1 .069.286c-.076.315-.244.995-.277 1.134-.044.183-.146.222-.337.134-1.249-.581-2.03-2.407-2.03-3.874 0-3.154 2.292-6.052 6.608-6.052 3.469 0 6.165 2.473 6.165 5.776 0 3.447-2.173 6.22-5.19 6.22-1.013 0-1.966-.527-2.292-1.148l-.623 2.378c-.226.869-.835 1.958-1.244 2.621.937.29 1.931.446 2.962.446 5.523 0 10-4.477 10-10S17.523 2 12 2z" />
   </svg>
 );
 
@@ -48,10 +46,10 @@ interface SocialLink {
 }
 
 const socialLinks: SocialLink[] = [
-  { name: 'Instagram', href: '#', icon: <InstagramIcon className="w-5 h-5" /> },
-  { name: 'Facebook', href: '#', icon: <FacebookIcon className="w-5 h-5" /> },
-  { name: 'Twitter', href: '#', icon: <TwitterIcon className="w-5 h-5" /> },
-  { name: 'Youtube', href: '#', icon: <YoutubeIcon className="w-5 h-5" /> },
+  { name: 'Instagram', href: 'https://www.instagram.com/luminaryboothco/', icon: <InstagramIcon className="w-5 h-5" /> },
+  { name: 'Facebook', href: 'https://www.facebook.com/luminaryboothco/', icon: <FacebookIcon className="w-5 h-5" /> },
+  { name: 'Twitter', href: 'https://twitter.com/luminaryboothco', icon: <TwitterIcon className="w-5 h-5" /> },
+  { name: 'Pinterest', href: 'https://www.pinterest.com/luminaryboothco/', icon: <PinterestIcon className="w-5 h-5" /> },
 ];
 
 const footerLinks = {
@@ -168,14 +166,16 @@ export default function Footer() {
             {/* Social links */}
             <motion.div custom={2} variants={brandVariants} className="flex items-center gap-4">
               {socialLinks.map((social) => (
-                <Link
+                <a
                   key={social.name}
                   href={social.href}
                   aria-label={social.name}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center text-white/50 hover:text-gold hover:border-[var(--color-gold-transparent-50)] transition-colors"
                 >
                   {social.icon}
-                </Link>
+                </a>
               ))}
             </motion.div>
           </div>
@@ -254,24 +254,17 @@ export default function Footer() {
               </li>
             </ul>
 
-            {/* Newsletter */}
+            {/* Email contact */}
             <div>
               <h4 className="text-[11px] font-semibold tracking-widest uppercase text-white/40 mb-3">
-                Newsletter
+                Get in Touch
               </h4>
-              <div className="flex">
-                <input
-                  type="email"
-                  placeholder="Your email"
-                  className="bg-white/5 border border-white/10 px-4 py-2.5 text-sm text-white placeholder:text-white/30 w-full focus:outline-none focus:border-[var(--color-gold-transparent-50)] transition-colors"
-                />
-                <button
-                  aria-label="Subscribe"
-                  className="bg-[var(--color-gold)] hover:bg-[var(--color-gold-light)] text-black px-4 flex items-center justify-center transition-colors"
-                >
-                  <Send className="w-4 h-4" />
-                </button>
-              </div>
+              <a
+                href={`mailto:${copy.business.email}`}
+                className="text-sm text-[var(--color-gold)] hover:text-[var(--color-gold-light)] transition-colors"
+              >
+                {copy.business.email}
+              </a>
             </div>
           </motion.div>
         </div>

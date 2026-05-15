@@ -55,7 +55,7 @@ export default function HeroSection() {
   const linePath = 'M 0 100 Q 250 50 500 100 T 1000 100';
 
   return (
-    <section className="relative min-h-screen overflow-hidden bg-gradient-to-b from-[var(--color-black)] via-[var(--color-gray-dark)] to-[var(--color-black)]">
+    <section className="relative min-h-screen overflow-hidden bg-black-green">
       {/* Background */}
       <div className="absolute inset-0 z-0">
         <svg

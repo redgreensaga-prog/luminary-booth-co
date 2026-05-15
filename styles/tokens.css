@@ -7,6 +7,9 @@
   /* ===== Color Palette ===== */
   /* Core colors - dark luxury editorial */
   --color-black: #0A0A0A;          /* Near black background */
+  --color-black-green: #0A1A14;    /* Deep green-tinted black */
+  --color-surface: #0F2318;        /* Primary surface */
+  --color-surface-raised: #142B1E; /* Raised surface */
   --color-gray-dark: #141414;      /* Dark gray surface */
   --color-gray-medium: #2A2A2A;    /* Medium gray for borders */
   --color-gray-light: #404040;     /* Light gray for subtle elements */
