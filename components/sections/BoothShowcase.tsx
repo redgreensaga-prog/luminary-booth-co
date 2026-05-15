@@ -117,14 +117,18 @@ const boothTypes: BoothType[] = [
         {[8, 16, 24, 32, 40, 48].map((r, i) => (
           <circle key={i} cx="50%" cy="50%" r={`${r}%`} fill="none" stroke="rgba(0,92,72,0.10)" strokeWidth="1" />
         ))}
-        {Array.from({ length: 12 }).map((_, i) => {
-          const angle = (i * 30 * Math.PI) / 180;
-          const x2 = 50 + 48 * Math.cos(angle);
-          const y2 = 50 + 48 * Math.sin(angle);
-          return (
-            <line key={i} x1="50%" y1="50%" x2={`${x2}%`} y2={`${y2}%`} stroke="rgba(0,92,72,0.06)" strokeWidth="1" />
-          );
-        })}
+        <line x1="50%" y1="50%" x2="98.00%" y2="50.00%" stroke="rgba(0,92,72,0.06)" strokeWidth="1" />
+        <line x1="50%" y1="50%" x2="91.57%" y2="74.00%" stroke="rgba(0,92,72,0.06)" strokeWidth="1" />
+        <line x1="50%" y1="50%" x2="74.00%" y2="91.57%" stroke="rgba(0,92,72,0.06)" strokeWidth="1" />
+        <line x1="50%" y1="50%" x2="50.00%" y2="98.00%" stroke="rgba(0,92,72,0.06)" strokeWidth="1" />
+        <line x1="50%" y1="50%" x2="26.00%" y2="91.57%" stroke="rgba(0,92,72,0.06)" strokeWidth="1" />
+        <line x1="50%" y1="50%" x2="8.43%" y2="74.00%" stroke="rgba(0,92,72,0.06)" strokeWidth="1" />
+        <line x1="50%" y1="50%" x2="2.00%" y2="50.00%" stroke="rgba(0,92,72,0.06)" strokeWidth="1" />
+        <line x1="50%" y1="50%" x2="8.43%" y2="26.00%" stroke="rgba(0,92,72,0.06)" strokeWidth="1" />
+        <line x1="50%" y1="50%" x2="26.00%" y2="8.43%" stroke="rgba(0,92,72,0.06)" strokeWidth="1" />
+        <line x1="50%" y1="50%" x2="50.00%" y2="2.00%" stroke="rgba(0,92,72,0.06)" strokeWidth="1" />
+        <line x1="50%" y1="50%" x2="74.00%" y2="8.43%" stroke="rgba(0,92,72,0.06)" strokeWidth="1" />
+        <line x1="50%" y1="50%" x2="91.57%" y2="26.00%" stroke="rgba(0,92,72,0.06)" strokeWidth="1" />
         <circle cx="50%" cy="50%" r="8%" fill="none" stroke="rgba(0,92,72,0.30)" strokeWidth="1.5" />
         <circle cx="50%" cy="50%" r="3%" fill="rgba(0,92,72,0.15)" />
       </svg>

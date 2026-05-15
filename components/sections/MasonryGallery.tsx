@@ -50,10 +50,18 @@ const galleryItems: GalleryItem[] = [
   {
     id: 4, title: 'Editorial Portraits', category: 'editorial', image: '', aspectRatio: 'portrait', featured: true,
     svgPattern: makeSvg(<>
-      {Array.from({ length: 12 }).map((_, i) => {
-        const angle = (i * 30 * Math.PI) / 180;
-        return <line key={i} x1="50%" y1="50%" x2={`${50 + 50 * Math.cos(angle)}%`} y2={`${50 + 50 * Math.sin(angle)}%`} stroke="rgba(0,92,72,0.07)" strokeWidth="1" />;
-      })}
+      <line x1="50%" y1="50%" x2="100.00%" y2="50.00%" stroke="rgba(0,92,72,0.07)" strokeWidth="1" />
+      <line x1="50%" y1="50%" x2="93.30%" y2="75.00%" stroke="rgba(0,92,72,0.07)" strokeWidth="1" />
+      <line x1="50%" y1="50%" x2="75.00%" y2="93.30%" stroke="rgba(0,92,72,0.07)" strokeWidth="1" />
+      <line x1="50%" y1="50%" x2="50.00%" y2="100.00%" stroke="rgba(0,92,72,0.07)" strokeWidth="1" />
+      <line x1="50%" y1="50%" x2="25.00%" y2="93.30%" stroke="rgba(0,92,72,0.07)" strokeWidth="1" />
+      <line x1="50%" y1="50%" x2="6.70%" y2="75.00%" stroke="rgba(0,92,72,0.07)" strokeWidth="1" />
+      <line x1="50%" y1="50%" x2="0.00%" y2="50.00%" stroke="rgba(0,92,72,0.07)" strokeWidth="1" />
+      <line x1="50%" y1="50%" x2="6.70%" y2="25.00%" stroke="rgba(0,92,72,0.07)" strokeWidth="1" />
+      <line x1="50%" y1="50%" x2="25.00%" y2="6.70%" stroke="rgba(0,92,72,0.07)" strokeWidth="1" />
+      <line x1="50%" y1="50%" x2="50.00%" y2="0.00%" stroke="rgba(0,92,72,0.07)" strokeWidth="1" />
+      <line x1="50%" y1="50%" x2="75.00%" y2="6.70%" stroke="rgba(0,92,72,0.07)" strokeWidth="1" />
+      <line x1="50%" y1="50%" x2="93.30%" y2="25.00%" stroke="rgba(0,92,72,0.07)" strokeWidth="1" />
       <circle cx="50%" cy="50%" r="20%" fill="none" stroke="rgba(0,92,72,0.25)" strokeWidth="1.5" />
       <circle cx="50%" cy="50%" r="8%" fill="rgba(0,92,72,0.12)" />
     </>),
