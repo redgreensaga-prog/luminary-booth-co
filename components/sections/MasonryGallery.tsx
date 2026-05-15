@@ -2,6 +2,7 @@
 
 import { motion, AnimatePresence } from 'framer-motion';
 import { useState, useRef } from 'react';
+import Image from 'next/image';
 import { Search, X, Maximize2, Heart } from 'lucide-react';
 import Lightbox from './Lightbox';
 import { MOTION } from '@/lib/tokens';
@@ -11,133 +12,71 @@ type GalleryItem = {
   title: string;
   category: string;
   image: string;
-  svgPattern: React.ReactNode;
+  imageAlt: string;
   aspectRatio: string;
   featured?: boolean;
 };
 
-const makeSvg = (children: React.ReactNode) => (
-  <svg aria-hidden="true" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
-    <rect width="100%" height="100%" fill="#0A1A14" />
-    {children}
-  </svg>
-);
-
 const galleryItems: GalleryItem[] = [
   {
-    id: 1, title: 'Gala Event Setup', category: 'events', image: '', aspectRatio: 'portrait', featured: true,
-    svgPattern: makeSvg(<>
-      {Array.from({ length: 8 }).map((_, i) => <line key={i} x1={`${i * 14}%`} y1="0%" x2={`${i * 14 + 14}%`} y2="100%" stroke="rgba(0,92,72,0.10)" strokeWidth="1" />)}
-      <polygon points="50%,10% 85%,50% 50%,90% 15%,50%" fill="none" stroke="rgba(0,92,72,0.22)" strokeWidth="1.5" />
-      <circle cx="50%" cy="50%" r="15%" fill="none" stroke="rgba(0,92,72,0.12)" strokeWidth="1" />
-    </>),
+    id: 1, title: 'Gala Event Setup', category: 'events', aspectRatio: 'portrait', featured: true,
+    image: 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&q=80',
+    imageAlt: 'Elegant gala event setup with dramatic stage lighting and formal table arrangements',
   },
   {
-    id: 2, title: 'Mirror Booth in Action', category: 'mirror', image: '', aspectRatio: 'square',
-    svgPattern: makeSvg(<>
-      {Array.from({ length: 6 }).map((_, i) => <circle key={i} cx="50%" cy="50%" r={`${(i + 1) * 8}%`} fill="none" stroke="rgba(0,92,72,0.10)" strokeWidth="1" />)}
-      <rect x="25%" y="25%" width="50%" height="50%" fill="none" stroke="rgba(0,92,72,0.20)" strokeWidth="1.5" transform="rotate(45 50 50)" />
-    </>),
+    id: 2, title: 'Mirror Booth in Action', category: 'mirror', aspectRatio: 'square',
+    image: 'https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?w=800&q=80',
+    imageAlt: 'Interactive mirror photo booth with colourful lighting at a live event',
   },
   {
-    id: 3, title: 'Wedding Reception', category: 'weddings', image: '', aspectRatio: 'landscape',
-    svgPattern: makeSvg(<>
-      {Array.from({ length: 10 }).map((_, i) => <line key={i} x1="0%" y1={`${i * 11}%`} x2="100%" y2={`${i * 11}%`} stroke="rgba(0,92,72,0.08)" strokeWidth="1" />)}
-      {Array.from({ length: 10 }).map((_, i) => <line key={`v${i}`} x1={`${i * 11}%`} y1="0%" x2={`${i * 11}%`} y2="100%" stroke="rgba(0,92,72,0.08)" strokeWidth="1" />)}
-      <rect x="20%" y="20%" width="60%" height="60%" fill="none" stroke="rgba(0,92,72,0.24)" strokeWidth="1.5" />
-    </>),
+    id: 3, title: 'Wedding Reception', category: 'weddings', aspectRatio: 'landscape',
+    image: 'https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=800&q=80',
+    imageAlt: 'Romantic wedding reception venue with candlelit tables and floral centrepieces',
   },
   {
-    id: 4, title: 'Editorial Portraits', category: 'editorial', image: '', aspectRatio: 'portrait', featured: true,
-    svgPattern: makeSvg(<>
-      <line x1="50%" y1="50%" x2="100.00%" y2="50.00%" stroke="rgba(0,92,72,0.07)" strokeWidth="1" />
-      <line x1="50%" y1="50%" x2="93.30%" y2="75.00%" stroke="rgba(0,92,72,0.07)" strokeWidth="1" />
-      <line x1="50%" y1="50%" x2="75.00%" y2="93.30%" stroke="rgba(0,92,72,0.07)" strokeWidth="1" />
-      <line x1="50%" y1="50%" x2="50.00%" y2="100.00%" stroke="rgba(0,92,72,0.07)" strokeWidth="1" />
-      <line x1="50%" y1="50%" x2="25.00%" y2="93.30%" stroke="rgba(0,92,72,0.07)" strokeWidth="1" />
-      <line x1="50%" y1="50%" x2="6.70%" y2="75.00%" stroke="rgba(0,92,72,0.07)" strokeWidth="1" />
-      <line x1="50%" y1="50%" x2="0.00%" y2="50.00%" stroke="rgba(0,92,72,0.07)" strokeWidth="1" />
-      <line x1="50%" y1="50%" x2="6.70%" y2="25.00%" stroke="rgba(0,92,72,0.07)" strokeWidth="1" />
-      <line x1="50%" y1="50%" x2="25.00%" y2="6.70%" stroke="rgba(0,92,72,0.07)" strokeWidth="1" />
-      <line x1="50%" y1="50%" x2="50.00%" y2="0.00%" stroke="rgba(0,92,72,0.07)" strokeWidth="1" />
-      <line x1="50%" y1="50%" x2="75.00%" y2="6.70%" stroke="rgba(0,92,72,0.07)" strokeWidth="1" />
-      <line x1="50%" y1="50%" x2="93.30%" y2="25.00%" stroke="rgba(0,92,72,0.07)" strokeWidth="1" />
-      <circle cx="50%" cy="50%" r="20%" fill="none" stroke="rgba(0,92,72,0.25)" strokeWidth="1.5" />
-      <circle cx="50%" cy="50%" r="8%" fill="rgba(0,92,72,0.12)" />
-    </>),
+    id: 4, title: 'Editorial Portraits', category: 'editorial', aspectRatio: 'portrait', featured: true,
+    image: 'https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=800&q=80',
+    imageAlt: 'Crowd at an editorial event with atmospheric concert-style lighting',
   },
   {
-    id: 5, title: 'Corporate Launch', category: 'corporate', image: '', aspectRatio: 'landscape',
-    svgPattern: makeSvg(<>
-      {Array.from({ length: 5 }).map((_, row) =>
-        Array.from({ length: 7 }).map((_, col) => (
-          <rect key={`${row}-${col}`} x={`${col * 15 + 2}%`} y={`${row * 20 + 2}%`} width="12%" height="16%" fill="none" stroke="rgba(0,92,72,0.10)" strokeWidth="1" />
-        ))
-      )}
-    </>),
+    id: 5, title: 'Corporate Launch', category: 'corporate', aspectRatio: 'landscape',
+    image: 'https://images.unsplash.com/photo-1515187029135-18ee286d815b?w=800&q=80',
+    imageAlt: 'Corporate product launch event with professional stage and audience seating',
   },
   {
-    id: 6, title: 'Vintage Retro Setup', category: 'vintage', image: '', aspectRatio: 'square',
-    svgPattern: makeSvg(<>
-      {Array.from({ length: 8 }).map((_, i) => (
-        <circle key={i} cx="50%" cy="50%" r={`${i * 7}%`} fill="none" stroke="rgba(0,92,72,0.09)" strokeWidth="1" strokeDasharray="4,4" />
-      ))}
-      <line x1="20%" y1="50%" x2="80%" y2="50%" stroke="rgba(0,92,72,0.18)" strokeWidth="1" />
-      <line x1="50%" y1="20%" x2="50%" y2="80%" stroke="rgba(0,92,72,0.18)" strokeWidth="1" />
-    </>),
+    id: 6, title: 'Vintage Retro Setup', category: 'vintage', aspectRatio: 'square',
+    image: 'https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?w=800&q=80',
+    imageAlt: 'Vintage-style outdoor festival with warm golden-hour lighting and crowds',
   },
   {
-    id: 7, title: 'Luxury Wedding', category: 'weddings', image: '', aspectRatio: 'portrait',
-    svgPattern: makeSvg(<>
-      {Array.from({ length: 6 }).map((_, i) => <line key={i} x1={`${i * 20}%`} y1="0%" x2={`${i * 20}%`} y2="100%" stroke="rgba(0,92,72,0.08)" strokeWidth="1" />)}
-      <polygon points="50%,5% 95%,50% 50%,95% 5%,50%" fill="none" stroke="rgba(0,92,72,0.18)" strokeWidth="1.5" />
-      <polygon points="50%,20% 80%,50% 50%,80% 20%,50%" fill="none" stroke="rgba(0,92,72,0.12)" strokeWidth="1" />
-    </>),
+    id: 7, title: 'Luxury Wedding', category: 'weddings', aspectRatio: 'portrait',
+    image: 'https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=800&q=80',
+    imageAlt: 'Luxury wedding reception with crystal chandeliers and white floral arrangements',
   },
   {
-    id: 8, title: 'Mirror Effects', category: 'mirror', image: '', aspectRatio: 'landscape',
-    svgPattern: makeSvg(<>
-      {Array.from({ length: 4 }).map((_, row) =>
-        Array.from({ length: 5 }).map((_, col) => {
-          const cx = col * 22 + 11;
-          const cy = row * 26 + 13;
-          return <polygon key={`${row}-${col}`} points={`${cx}%,${cy - 10}% ${cx + 9}%,${cy - 5}% ${cx + 9}%,${cy + 5}% ${cx}%,${cy + 10}% ${cx - 9}%,${cy + 5}% ${cx - 9}%,${cy - 5}%`} fill="none" stroke="rgba(0,92,72,0.10)" strokeWidth="1" />;
-        })
-      )}
-    </>),
+    id: 8, title: 'Mirror Effects', category: 'mirror', aspectRatio: 'landscape',
+    image: 'https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?w=800&q=80',
+    imageAlt: 'Mirror booth effects display with vibrant multicolour light show',
   },
   {
-    id: 9, title: 'Editorial Lighting', category: 'editorial', image: '', aspectRatio: 'square', featured: true,
-    svgPattern: makeSvg(<>
-      {Array.from({ length: 15 }).map((_, i) => <line key={i} x1="0%" y1={`${i * 7}%`} x2="100%" y2={`${i * 7}%`} stroke="rgba(0,92,72,0.07)" strokeWidth="1" />)}
-      <rect x="15%" y="15%" width="70%" height="70%" fill="none" stroke="rgba(0,92,72,0.20)" strokeWidth="1.5" />
-      <rect x="30%" y="30%" width="40%" height="40%" fill="none" stroke="rgba(0,92,72,0.14)" strokeWidth="1" />
-      <circle cx="50%" cy="50%" r="10%" fill="rgba(0,92,72,0.10)" />
-    </>),
+    id: 9, title: 'Editorial Lighting', category: 'editorial', aspectRatio: 'square', featured: true,
+    image: 'https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=800&q=80',
+    imageAlt: 'Editorial event photography with dramatic crowd silhouettes and stage lighting',
   },
   {
-    id: 10, title: 'Gala Night', category: 'events', image: '', aspectRatio: 'landscape',
-    svgPattern: makeSvg(<>
-      {Array.from({ length: 20 }).map((_, i) => <line key={i} x1={`${i * 5 - 5}%`} y1="0%" x2={`${i * 5 + 10}%`} y2="100%" stroke="rgba(0,92,72,0.07)" strokeWidth="1" />)}
-      <ellipse cx="50%" cy="50%" rx="35%" ry="40%" fill="none" stroke="rgba(0,92,72,0.20)" strokeWidth="1.5" />
-    </>),
+    id: 10, title: 'Gala Night', category: 'events', aspectRatio: 'landscape',
+    image: 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&q=80',
+    imageAlt: 'Gala night event with guests dressed in formal attire under elegant venue lighting',
   },
   {
-    id: 11, title: 'Corporate Awards', category: 'corporate', image: '', aspectRatio: 'portrait',
-    svgPattern: makeSvg(<>
-      {Array.from({ length: 8 }).map((_, i) => <line key={i} x1="0%" y1={`${i * 13}%`} x2="100%" y2={`${i * 13}%`} stroke="rgba(0,92,72,0.07)" strokeWidth="1" />)}
-      {Array.from({ length: 8 }).map((_, i) => <line key={`v${i}`} x1={`${i * 13}%`} y1="0%" x2={`${i * 13}%`} y2="100%" stroke="rgba(0,92,72,0.07)" strokeWidth="1" />)}
-      <polygon points="50%,15% 70%,40% 85%,70% 50%,85% 15%,70% 30%,40%" fill="none" stroke="rgba(0,92,72,0.22)" strokeWidth="1.5" />
-    </>),
+    id: 11, title: 'Corporate Awards', category: 'corporate', aspectRatio: 'portrait',
+    image: 'https://images.unsplash.com/photo-1515187029135-18ee286d815b?w=800&q=80',
+    imageAlt: 'Corporate awards ceremony with podium lighting and professional presentation setup',
   },
   {
-    id: 12, title: 'Vintage Prints', category: 'vintage', image: '', aspectRatio: 'square',
-    svgPattern: makeSvg(<>
-      {Array.from({ length: 10 }).map((_, i) => (
-        <circle key={i} cx="50%" cy="50%" r={`${i * 5 + 3}%`} fill="none" stroke="rgba(0,92,72,0.08)" strokeWidth="1" strokeDasharray="3,6" />
-      ))}
-      <rect x="30%" y="30%" width="40%" height="40%" fill="none" stroke="rgba(0,92,72,0.20)" strokeWidth="1.5" transform="rotate(45 50 50)" />
-    </>),
+    id: 12, title: 'Vintage Prints', category: 'vintage', aspectRatio: 'square',
+    image: 'https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?w=800&q=80',
+    imageAlt: 'Vintage-themed event with warm analogue tones and retro festival atmosphere',
   },
 ];
 
@@ -294,13 +233,19 @@ export default function MasonryGallery() {
                     aria-label={`View ${item.title}`}
                   >
                     <div className={`relative overflow-hidden rounded-sm ${aspectRatioClasses[item.aspectRatio as keyof typeof aspectRatioClasses]}`}>
-                      {/* SVG pattern background */}
+                      {/* Photo background with zoom on hover */}
                       <motion.div
                         className="absolute inset-0"
                         whileHover={{ scale: 1.1 }}
                         transition={{ duration: MOTION.duration.slow / 1000, ease: MOTION.easing.inOut }}
                       >
-                        {item.svgPattern}
+                        <Image
+                          src={item.image}
+                          alt={item.imageAlt}
+                          fill
+                          className="object-cover"
+                          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                        />
                       </motion.div>
 
                       {/* Overlay gradient */}
