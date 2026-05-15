@@ -1,3 +1,11 @@
+export interface Stat {
+  value: number;
+  suffix: string;
+  label: string;
+  description: string;
+  isStatic?: boolean;
+}
+
 export const copy = {
   business: {
     name: "Luminary Booth Co.",

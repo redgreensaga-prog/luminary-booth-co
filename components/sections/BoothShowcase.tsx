@@ -369,7 +369,6 @@ export default function BoothShowcase() {
                   <Button
                     variant="primary"
                     size="lg"
-                    className="btn-glow"
                     rightIcon={<Zap className="w-5 h-5" />}
                   >
                     Inquire About {activeBooth.title}

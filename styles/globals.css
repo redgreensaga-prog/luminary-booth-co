@@ -409,14 +409,6 @@ hr {
   .grain-overlay { animation: none; }
 }
 
-/* ===== CTA Glow ===== */
-.btn-glow {
-  transition: box-shadow 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-}
-.btn-glow:hover {
-  box-shadow: 0 0 30px 8px rgba(0, 92, 72, 0.35);
-}
-
 /* ===== Section Label ===== */
 .section-label {
   position: relative;

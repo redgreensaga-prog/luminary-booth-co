@@ -46,6 +46,9 @@ export default function RootLayout({
       </head>
       <body className="bg-black-green text-text-primary font-body antialiased min-h-screen">
         <ScrollProgress />
+        {/* Note: grain-filter id is unique per page load.
+            If rendered in multiple contexts (Storybook etc),
+            use useId() to generate a unique filter id. */}
         <svg
           aria-hidden="true"
           className="grain-overlay"
@@ -62,7 +65,7 @@ export default function RootLayout({
           </filter>
           <rect width="100%" height="100%" filter="url(#grain-filter)" opacity="1" />
         </svg>
-        <main className="min-h-screen">{children}</main>
+        <div className="min-h-screen">{children}</div>
       </body>
     </html>
   );

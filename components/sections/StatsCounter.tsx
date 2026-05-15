@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 import { motion, useInView } from 'framer-motion';
 import { cn } from '@/lib/utils';
 import { COPY } from '@/content/copy';
+import type { Stat } from '@/content/copy';
 import { MOTION } from '@/lib/tokens';
 
 interface StatsCounterProps {
@@ -16,14 +17,18 @@ const useCountUp = (end: number, duration: number = 2000, trigger: boolean = fal
   useEffect(() => {
     if (!trigger) return;
     let start: number;
+    let rafId: number;
     const animate = (ts: number) => {
       if (!start) start = ts;
       const progress = Math.min((ts - start) / duration, 1);
       const eased = 1 - Math.pow(1 - progress, 3);
       setCount(Math.floor(eased * end));
-      if (progress < 1) requestAnimationFrame(animate);
+      if (progress < 1) {
+        rafId = requestAnimationFrame(animate);
+      }
     };
-    requestAnimationFrame(animate);
+    rafId = requestAnimationFrame(animate);
+    return () => cancelAnimationFrame(rafId);
   }, [end, duration, trigger]);
 
   return count;
@@ -34,7 +39,7 @@ function StatCard({
   index,
   isInView,
 }: {
-  stat: { value: number; suffix: string; label: string; description: string; isStatic?: boolean };
+  stat: Stat;
   index: number;
   isInView: boolean;
 }) {

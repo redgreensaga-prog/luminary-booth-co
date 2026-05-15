@@ -132,8 +132,16 @@ export default function Navbar() {
               }}
             >
               <motion.div
-                className="relative"
-                whileHover={{ scale: 1.02, transition: { duration: 0.3, ease: [0.16, 1, 0.3, 1] } }}
+                initial="rest"
+                whileHover="hover"
+                animate="rest"
+                variants={{
+                  rest: { scale: 1 },
+                  hover: {
+                    scale: 1.02,
+                    transition: { duration: 0.3, ease: [0.16, 1, 0.3, 1] },
+                  },
+                }}
               >
                 <Link href="/" className="group flex items-center gap-3">
                   <div className="relative">
@@ -155,10 +163,14 @@ export default function Navbar() {
                 </Link>
                 <motion.div
                   className="h-px bg-gold w-full"
-                  initial={{ scaleX: 0 }}
-                  whileHover={{ scaleX: 1 }}
-                  transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
                   style={{ originX: 0 }}
+                  variants={{
+                    rest: { scaleX: 0 },
+                    hover: {
+                      scaleX: 1,
+                      transition: { duration: 0.4, ease: [0.16, 1, 0.3, 1] },
+                    },
+                  }}
                 />
               </motion.div>
             </motion.div>
@@ -214,7 +226,7 @@ export default function Navbar() {
 
             {/* Desktop CTA Button */}
             <div className="hidden lg:block">
-              <Button variant="primary" size="md" className="btn-glow">
+              <Button variant="primary" size="md">
                 Book Now
               </Button>
             </div>
