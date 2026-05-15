@@ -57,7 +57,7 @@ export default function RootLayout({
           <filter id="grain-filter">
             <feTurbulence
               type="fractalNoise"
-              baseFrequency="0.65"
+              baseFrequency="0.75"
               numOctaves="3"
               stitchTiles="stitch"
             />

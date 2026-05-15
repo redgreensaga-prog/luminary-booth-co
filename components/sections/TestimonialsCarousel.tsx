@@ -252,7 +252,7 @@ export default function TestimonialsCarousel({
                     transition={{ delay: 0.3 }}
                     className="space-y-2"
                   >
-                    <h3 className="text-xl md:text-2xl font-display font-medium text-goldLight">
+                    <h3 className="text-xl md:text-2xl font-display font-medium text-[var(--color-text-primary)]">
                       {currentTestimonial.author}
                     </h3>
                     <div className="space-y-1">

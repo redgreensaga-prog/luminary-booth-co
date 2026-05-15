@@ -17,8 +17,8 @@ type GalleryItem = {
 };
 
 const makeSvg = (children: React.ReactNode) => (
-  <svg aria-hidden="true" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
-    <rect width="100%" height="100%" fill="#111111" />
+  <svg aria-hidden="true" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+    <rect width="100%" height="100%" fill="#0A1A14" />
     {children}
   </svg>
 );

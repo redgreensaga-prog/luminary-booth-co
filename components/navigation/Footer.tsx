@@ -142,7 +142,7 @@ export default function Footer() {
     <footer className="bg-black text-white border-t border-gray-800">
       {/* Main footer content */}
       <motion.div
-        className="max-w-7xl mx-auto px-4 py-16 md:py-24"
+        className="max-w-7xl mx-auto px-4 py-12 md:py-16"
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, margin: '-80px' }}

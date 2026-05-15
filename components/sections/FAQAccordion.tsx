@@ -187,7 +187,7 @@ export function FAQAccordion({ className, maxOpen = 1 }: FAQAccordionProps) {
                           {/* Decorative element */}
                           <div className="flex items-center gap-3 mt-6">
                             <div className="w-2 h-2 rounded-full bg-gold" />
-                            <div className="text-sm text-goldLight font-medium">
+                            <div className="text-sm text-[var(--color-text-secondary)] font-medium">
                               Need more details? Contact our team for personalized answers.
                             </div>
                           </div>
