@@ -68,25 +68,17 @@ function StatCard({
           'group-hover:border-[var(--color-gold-transparent-30)] group-hover:shadow-[0_0_40px_0_rgba(0,92,72,0.25)]'
         )}
       >
-        {/* Animated number */}
-        <div className="flex items-baseline justify-center gap-1 mb-4">
-          <span className="text-5xl md:text-6xl lg:text-7xl font-display font-bold bg-gradient-to-b from-gold to-goldLight bg-clip-text text-transparent">
-            {displayValue}
+        <div className="flex flex-col items-center text-center">
+          <span className="text-5xl md:text-6xl lg:text-7xl font-display font-bold text-[var(--color-text-primary)]">
+            {displayValue}{stat.suffix}
           </span>
-          {stat.suffix && (
-            <span className="text-2xl md:text-3xl text-goldLight font-display">
-              {stat.suffix}
-            </span>
-          )}
+          <h3 className="text-xl md:text-2xl font-display font-light mt-3 mb-2 text-[var(--color-text-primary)]">
+            {stat.label}
+          </h3>
+          <p className="text-[var(--color-text-secondary)] text-sm md:text-base">
+            {stat.description}
+          </p>
         </div>
-
-        <h3 className="text-xl md:text-2xl font-display font-light text-center mb-3">
-          {stat.label}
-        </h3>
-
-        <p className="text-textTertiary text-center text-sm md:text-base">
-          {stat.description}
-        </p>
 
         <motion.div
           initial={{ width: 0 }}

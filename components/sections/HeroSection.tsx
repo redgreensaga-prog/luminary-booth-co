@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion';
 import { ArrowRight, Sparkles } from 'lucide-react';
 import { useMemo, useEffect, useState } from 'react';
+import Image from 'next/image';
 import { MOTION } from '@/lib/tokens';
 import { Button } from '@/components/primitives/Button';
 
@@ -58,48 +59,15 @@ export default function HeroSection() {
     <section className="relative min-h-screen overflow-hidden bg-black-green">
       {/* Background */}
       <div className="absolute inset-0 z-0">
-        <svg
-          viewBox="0 0 1440 800"
-          xmlns="http://www.w3.org/2000/svg"
-          aria-hidden="true"
-          className="absolute inset-0 w-full h-full"
-        >
-          <defs>
-            <linearGradient id="arc-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stopColor="transparent" />
-              <stop offset="50%" stopColor="#005C48" stopOpacity="0.6" />
-              <stop offset="100%" stopColor="transparent" />
-            </linearGradient>
-            <radialGradient id="hero-glow" cx="50%" cy="60%" r="50%">
-              <stop offset="0%" stopColor="#005C48" stopOpacity="0.12" />
-              <stop offset="100%" stopColor="transparent" stopOpacity="0" />
-            </radialGradient>
-          </defs>
-          <rect width="1440" height="800" fill="url(#hero-glow)" />
-          <path
-            d="M -100 420 Q 720 280 1540 420"
-            stroke="url(#arc-gradient)"
-            strokeWidth="1.5"
-            fill="none"
-            opacity="0.5"
-          />
-          <path
-            d="M -100 480 Q 720 340 1540 480"
-            stroke="url(#arc-gradient)"
-            strokeWidth="1"
-            fill="none"
-            opacity="0.3"
-          />
-          <rect
-            x="660" y="160"
-            width="120" height="120"
-            transform="rotate(45 720 220)"
-            stroke="#005C48"
-            strokeWidth="0.5"
-            fill="none"
-            opacity="0.08"
-          />
-        </svg>
+        <Image
+          src="https://images.unsplash.com/photo-1519167758481-83f550bb49b3?w=1920&q=80"
+          alt="Grand luxury event ballroom with elegant chandelier lighting and draped ceilings"
+          fill
+          priority
+          className="object-cover"
+          sizes="100vw"
+        />
+        <div className="absolute inset-0 bg-black/65" />
 
         {/* Animated SVG lines */}
         <div className="absolute inset-0">

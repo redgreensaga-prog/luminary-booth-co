@@ -2,6 +2,7 @@
 
 import { motion, AnimatePresence } from 'framer-motion';
 import { useState, useEffect } from 'react';
+import Image from 'next/image';
 import { Camera, Sparkles, Star, Zap } from 'lucide-react';
 import { Button } from '@/components/primitives/Button';
 import { MOTION } from '@/lib/tokens';
@@ -14,7 +15,8 @@ type BoothType = {
   features: string[];
   price: string;
   icon: React.ReactNode;
-  svgPattern: React.ReactNode;
+  image: string;
+  imageAlt: string;
   accentColor: string;
 };
 
@@ -34,27 +36,8 @@ const boothTypes: BoothType[] = [
     ],
     price: 'From $2,500',
     icon: <Star className="w-6 h-6" />,
-    svgPattern: (
-      <svg aria-hidden="true" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
-        <rect width="100%" height="100%" fill="#0A0A0A" />
-        {Array.from({ length: 12 }).map((_, i) => (
-          <line
-            key={i}
-            x1={`${(i + 1) * (100 / 13)}%`} y1="0%"
-            x2={`${(i + 1) * (100 / 13)}%`} y2="100%"
-            stroke="rgba(0,92,72,0.12)"
-            strokeWidth="1"
-          />
-        ))}
-        <rect x="15%" y="10%" width="70%" height="80%" fill="none" stroke="rgba(0,92,72,0.20)" strokeWidth="1" />
-        <rect x="25%" y="20%" width="50%" height="60%" fill="none" stroke="rgba(0,92,72,0.12)" strokeWidth="1" />
-        <rect x="35%" y="30%" width="30%" height="40%" fill="none" stroke="rgba(0,92,72,0.08)" strokeWidth="1" />
-        <line x1="48%" y1="40%" x2="52%" y2="40%" stroke="rgba(0,92,72,0.30)" strokeWidth="1" />
-        <line x1="48%" y1="60%" x2="52%" y2="60%" stroke="rgba(0,92,72,0.30)" strokeWidth="1" />
-        <line x1="38%" y1="48%" x2="38%" y2="52%" stroke="rgba(0,92,72,0.30)" strokeWidth="1" />
-        <line x1="62%" y1="48%" x2="62%" y2="52%" stroke="rgba(0,92,72,0.30)" strokeWidth="1" />
-      </svg>
-    ),
+    image: 'https://images.unsplash.com/photo-1606216794074-735e91aa2c92?w=600&q=80',
+    imageAlt: 'Editorial pro photo booth setup with professional studio lighting at a luxury event',
     accentColor: 'var(--color-gold)',
   },
   {
@@ -72,28 +55,8 @@ const boothTypes: BoothType[] = [
     ],
     price: 'From $1,800',
     icon: <Sparkles className="w-6 h-6" />,
-    svgPattern: (
-      <svg aria-hidden="true" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
-        <rect width="100%" height="100%" fill="#0A0A0A" />
-        {Array.from({ length: 5 }).map((_, row) =>
-          Array.from({ length: 6 }).map((_, col) => {
-            const cx = col * 20 + (row % 2 === 0 ? 10 : 0);
-            const cy = row * 18 + 9;
-            return (
-              <polygon
-                key={`${row}-${col}`}
-                points={`${cx}%,${cy - 8}% ${cx + 7}%,${cy - 4}% ${cx + 7}%,${cy + 4}% ${cx}%,${cy + 8}% ${cx - 7}%,${cy + 4}% ${cx - 7}%,${cy - 4}%`}
-                fill="none"
-                stroke="rgba(0,92,72,0.12)"
-                strokeWidth="1"
-              />
-            );
-          })
-        )}
-        <polygon points="50%,20% 75%,50% 50%,80% 25%,50%" fill="none" stroke="rgba(0,92,72,0.28)" strokeWidth="1.5" />
-        <polygon points="50%,32% 63%,50% 50%,68% 37%,50%" fill="none" stroke="rgba(0,92,72,0.18)" strokeWidth="1" />
-      </svg>
-    ),
+    image: 'https://images.unsplash.com/photo-1519671482749-fd09be7ccebf?w=600&q=80',
+    imageAlt: 'Crystal mirror interactive photo booth with LED lighting at a gala event',
     accentColor: 'var(--color-gold-light)',
   },
   {
@@ -111,28 +74,8 @@ const boothTypes: BoothType[] = [
     ],
     price: 'From $1,400',
     icon: <Camera className="w-6 h-6" />,
-    svgPattern: (
-      <svg aria-hidden="true" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
-        <rect width="100%" height="100%" fill="#0A0A0A" />
-        {[8, 16, 24, 32, 40, 48].map((r, i) => (
-          <circle key={i} cx="50%" cy="50%" r={`${r}%`} fill="none" stroke="rgba(0,92,72,0.10)" strokeWidth="1" />
-        ))}
-        <line x1="50%" y1="50%" x2="98.00%" y2="50.00%" stroke="rgba(0,92,72,0.06)" strokeWidth="1" />
-        <line x1="50%" y1="50%" x2="91.57%" y2="74.00%" stroke="rgba(0,92,72,0.06)" strokeWidth="1" />
-        <line x1="50%" y1="50%" x2="74.00%" y2="91.57%" stroke="rgba(0,92,72,0.06)" strokeWidth="1" />
-        <line x1="50%" y1="50%" x2="50.00%" y2="98.00%" stroke="rgba(0,92,72,0.06)" strokeWidth="1" />
-        <line x1="50%" y1="50%" x2="26.00%" y2="91.57%" stroke="rgba(0,92,72,0.06)" strokeWidth="1" />
-        <line x1="50%" y1="50%" x2="8.43%" y2="74.00%" stroke="rgba(0,92,72,0.06)" strokeWidth="1" />
-        <line x1="50%" y1="50%" x2="2.00%" y2="50.00%" stroke="rgba(0,92,72,0.06)" strokeWidth="1" />
-        <line x1="50%" y1="50%" x2="8.43%" y2="26.00%" stroke="rgba(0,92,72,0.06)" strokeWidth="1" />
-        <line x1="50%" y1="50%" x2="26.00%" y2="8.43%" stroke="rgba(0,92,72,0.06)" strokeWidth="1" />
-        <line x1="50%" y1="50%" x2="50.00%" y2="2.00%" stroke="rgba(0,92,72,0.06)" strokeWidth="1" />
-        <line x1="50%" y1="50%" x2="74.00%" y2="8.43%" stroke="rgba(0,92,72,0.06)" strokeWidth="1" />
-        <line x1="50%" y1="50%" x2="91.57%" y2="26.00%" stroke="rgba(0,92,72,0.06)" strokeWidth="1" />
-        <circle cx="50%" cy="50%" r="8%" fill="none" stroke="rgba(0,92,72,0.30)" strokeWidth="1.5" />
-        <circle cx="50%" cy="50%" r="3%" fill="rgba(0,92,72,0.15)" />
-      </svg>
-    ),
+    image: 'https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?w=600&q=80',
+    imageAlt: 'Vintage darkroom analog photo booth with film camera aesthetic at a retro-themed event',
     accentColor: 'var(--color-gold-dark)',
   },
 ];
@@ -293,20 +236,26 @@ export default function BoothShowcase() {
             >
               {/* Image with crossfade */}
               <div className="relative overflow-hidden rounded-sm">
-                <div className="aspect-[4/3] bg-gradient-to-br from-[var(--color-gray-dark)] to-[var(--color-black)]">
-                  <div className="absolute inset-0 bg-gradient-to-t from-[var(--color-black-transparent-70)] via-transparent to-transparent"></div>
+                <div className="aspect-[4/3]">
                   <AnimatePresence mode="wait">
                     <motion.div
-                      key={`svg-${activeTab}`}
+                      key={`img-${activeTab}`}
                       className="absolute inset-0"
                       variants={svgCrossfadeVariants}
                       initial="enter"
                       animate="center"
                       exit="exit"
                     >
-                      {activeBooth.svgPattern}
+                      <Image
+                        src={activeBooth.image}
+                        alt={activeBooth.imageAlt}
+                        fill
+                        className="object-cover"
+                        sizes="(max-width: 1024px) 100vw, 50vw"
+                      />
                     </motion.div>
                   </AnimatePresence>
+                  <div className="absolute inset-0 bg-gradient-to-t from-[var(--color-black-transparent-70)] via-transparent to-transparent pointer-events-none" />
                 </div>
 
                 {/* Price badge */}
