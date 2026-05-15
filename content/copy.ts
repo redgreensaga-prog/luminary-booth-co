@@ -127,7 +127,7 @@ export const copy = {
         role: "Newlyweds",
         event: "Beverly Hills Wedding",
         rating: 5,
-        avatarUrl: "/testimonials/avatar-1.jpg"
+        avatarUrl: ""
       },
       {
         id: "2",
@@ -136,7 +136,7 @@ export const copy = {
         role: "Marketing Director",
         company: "TechInnovate Inc.",
         rating: 5,
-        avatarUrl: "/testimonials/avatar-2.jpg"
+        avatarUrl: ""
       },
       {
         id: "3",
@@ -145,7 +145,7 @@ export const copy = {
         role: "Lead Event Planner",
         company: "Elite Soirées",
         rating: 5,
-        avatarUrl: "/testimonials/avatar-3.jpg"
+        avatarUrl: ""
       },
       {
         id: "4",
@@ -154,7 +154,7 @@ export const copy = {
         role: "Celebrating 50 Years",
         event: "Golden Anniversary",
         rating: 5,
-        avatarUrl: "/testimonials/avatar-4.jpg"
+        avatarUrl: ""
       },
       {
         id: "5",
@@ -163,7 +163,7 @@ export const copy = {
         role: "Brand Manager",
         company: "Luxe Cosmetics",
         rating: 5,
-        avatarUrl: "/testimonials/avatar-5.jpg"
+        avatarUrl: ""
       }
     ]
   }

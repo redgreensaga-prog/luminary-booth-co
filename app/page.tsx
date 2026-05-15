@@ -9,10 +9,12 @@ import { LogoMarquee } from '@/components/sections/LogoMarquee';
 import { FAQAccordion } from '@/components/sections/FAQAccordion';
 import TestimonialsCarousel from '@/components/sections/TestimonialsCarousel';
 import Footer from '@/components/navigation/Footer';
+import Navbar from '@/components/navigation/Navbar';
 
 export default function HomePage() {
   return (
     <main className="min-h-screen">
+      <Navbar />
       {/* Hero Section - full width, no extra spacing */}
       <HeroSection />
       

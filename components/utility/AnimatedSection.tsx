@@ -4,6 +4,7 @@ import { ReactNode } from 'react';
 import { motion, HTMLMotionProps } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { cn } from '@/lib/utils';
+import { MOTION } from '@/lib/tokens';
 
 interface AnimatedSectionProps extends HTMLMotionProps<'section'> {
   children: ReactNode;
@@ -21,7 +22,7 @@ export default function AnimatedSection({
   threshold = 0.15,
   once = true,
   delay = 0,
-  staggerChildren = 80,
+  staggerChildren = 0.08,
   animation = 'slide-up',
   ...props
 }: AnimatedSectionProps) {
@@ -38,8 +39,8 @@ export default function AnimatedSection({
           visible: {
             opacity: 1,
             transition: {
-              duration: 0.6,
-              ease: [0.16, 1, 0.3, 1],
+              duration: MOTION.duration.normal / 1000,
+              ease: MOTION.easing.editorial,
               staggerChildren,
               delayChildren: delay,
             },
@@ -52,8 +53,8 @@ export default function AnimatedSection({
             opacity: 1,
             x: 0,
             transition: {
-              duration: 0.8,
-              ease: [0.16, 1, 0.3, 1],
+              duration: MOTION.duration.slow / 1000,
+              ease: MOTION.easing.editorial,
               staggerChildren,
               delayChildren: delay,
             },
@@ -66,8 +67,8 @@ export default function AnimatedSection({
             opacity: 1,
             x: 0,
             transition: {
-              duration: 0.8,
-              ease: [0.16, 1, 0.3, 1],
+              duration: MOTION.duration.slow / 1000,
+              ease: MOTION.easing.editorial,
               staggerChildren,
               delayChildren: delay,
             },
@@ -81,8 +82,8 @@ export default function AnimatedSection({
             opacity: 1,
             y: 0,
             transition: {
-              duration: 0.8,
-              ease: [0.16, 1, 0.3, 1],
+              duration: MOTION.duration.slow / 1000,
+              ease: MOTION.easing.editorial,
               staggerChildren,
               delayChildren: delay,
             },

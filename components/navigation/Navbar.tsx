@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import { motion, useScroll, useMotionValueEvent, AnimatePresence } from 'framer-motion';
 import { cn } from '@/lib/utils';
-import { COLORS, MOTION } from '@/lib/tokens';
+import { MOTION } from '@/lib/tokens';
 import { Menu, X } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
@@ -83,12 +83,12 @@ export default function Navbar() {
     initial: {
       backdropFilter: 'blur(0px)',
       backgroundColor: 'rgba(10, 10, 10, 0)',
-      borderBottomColor: 'rgba(201, 169, 110, 0)',
+      borderBottomColor: 'rgba(0, 92, 72, 0)',
     },
     scrolled: {
       backdropFilter: 'blur(12px)',
       backgroundColor: 'rgba(10, 10, 10, 0.85)',
-      borderBottomColor: 'rgba(201, 169, 110, 0.15)',
+      borderBottomColor: 'rgba(0, 92, 72, 0.15)',
     },
   };
 

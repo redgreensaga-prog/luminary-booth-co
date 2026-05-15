@@ -4,7 +4,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { cn } from '@/lib/utils';
 import { COPY } from '@/content/copy';
-import { COLORS, MOTION, TYPOGRAPHY, BORDER_RADIUS } from '@/lib/tokens';
+import { MOTION } from '@/lib/tokens';
 
 interface ProcessTimelineProps {
   className?: string;

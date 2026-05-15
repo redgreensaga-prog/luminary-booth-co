@@ -1,16 +1,13 @@
 'use client';
 
 import { cn } from '@/lib/utils';
-import { COLORS, MOTION, TYPOGRAPHY } from '@/lib/tokens';
 import { copy } from '@/content/copy';
 import Link from 'next/link';
-import { motion } from 'framer-motion';
 import {
   Mail,
   Phone,
   MapPin,
   Send,
-  ChevronRight,
 } from 'lucide-react';
 
 /* ── Inline SVG social icons (brand logos not in lucide) ── */

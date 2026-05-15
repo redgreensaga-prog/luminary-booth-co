@@ -12,7 +12,7 @@ type BoothType = {
   features: string[];
   price: string;
   icon: React.ReactNode;
-  image: string;
+  svgPattern: React.ReactNode;
   accentColor: string;
 };
 
@@ -32,7 +32,30 @@ const boothTypes: BoothType[] = [
     ],
     price: 'From $2,500',
     icon: <Star className="w-6 h-6" />,
-    image: '/placeholder/editorial-booth.jpg',
+    svgPattern: (
+      <svg aria-hidden="true" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+        <rect width="100%" height="100%" fill="#0A0A0A" />
+        {/* Vertical lines */}
+        {Array.from({ length: 12 }).map((_, i) => (
+          <line
+            key={i}
+            x1={`${(i + 1) * (100 / 13)}%`} y1="0%"
+            x2={`${(i + 1) * (100 / 13)}%`} y2="100%"
+            stroke="rgba(0,92,72,0.12)"
+            strokeWidth="1"
+          />
+        ))}
+        {/* Rectangle frames */}
+        <rect x="15%" y="10%" width="70%" height="80%" fill="none" stroke="rgba(0,92,72,0.20)" strokeWidth="1" />
+        <rect x="25%" y="20%" width="50%" height="60%" fill="none" stroke="rgba(0,92,72,0.12)" strokeWidth="1" />
+        <rect x="35%" y="30%" width="30%" height="40%" fill="none" stroke="rgba(0,92,72,0.08)" strokeWidth="1" />
+        {/* Center crosshair */}
+        <line x1="48%" y1="40%" x2="52%" y2="40%" stroke="rgba(0,92,72,0.30)" strokeWidth="1" />
+        <line x1="48%" y1="60%" x2="52%" y2="60%" stroke="rgba(0,92,72,0.30)" strokeWidth="1" />
+        <line x1="38%" y1="48%" x2="38%" y2="52%" stroke="rgba(0,92,72,0.30)" strokeWidth="1" />
+        <line x1="62%" y1="48%" x2="62%" y2="52%" stroke="rgba(0,92,72,0.30)" strokeWidth="1" />
+      </svg>
+    ),
     accentColor: 'var(--color-gold)',
   },
   {
@@ -50,7 +73,40 @@ const boothTypes: BoothType[] = [
     ],
     price: 'From $1,800',
     icon: <Sparkles className="w-6 h-6" />,
-    image: '/placeholder/mirror-booth.jpg',
+    svgPattern: (
+      <svg aria-hidden="true" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+        <rect width="100%" height="100%" fill="#0A0A0A" />
+        {/* Hexagonal / diamond lattice */}
+        {Array.from({ length: 5 }).map((_, row) =>
+          Array.from({ length: 6 }).map((_, col) => {
+            const cx = col * 20 + (row % 2 === 0 ? 10 : 0);
+            const cy = row * 18 + 9;
+            return (
+              <polygon
+                key={`${row}-${col}`}
+                points={`${cx}%,${cy - 8}% ${cx + 7}%,${cy - 4}% ${cx + 7}%,${cy + 4}% ${cx}%,${cy + 8}% ${cx - 7}%,${cy + 4}% ${cx - 7}%,${cy - 4}%`}
+                fill="none"
+                stroke="rgba(0,92,72,0.12)"
+                strokeWidth="1"
+              />
+            );
+          })
+        )}
+        {/* Central diamond */}
+        <polygon
+          points="50%,20% 75%,50% 50%,80% 25%,50%"
+          fill="none"
+          stroke="rgba(0,92,72,0.28)"
+          strokeWidth="1.5"
+        />
+        <polygon
+          points="50%,32% 63%,50% 50%,68% 37%,50%"
+          fill="none"
+          stroke="rgba(0,92,72,0.18)"
+          strokeWidth="1"
+        />
+      </svg>
+    ),
     accentColor: 'var(--color-gold-light)',
   },
   {
@@ -68,7 +124,43 @@ const boothTypes: BoothType[] = [
     ],
     price: 'From $1,400',
     icon: <Camera className="w-6 h-6" />,
-    image: '/placeholder/vintage-booth.jpg',
+    svgPattern: (
+      <svg aria-hidden="true" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+        <rect width="100%" height="100%" fill="#0A0A0A" />
+        {/* Concentric circles */}
+        {[8, 16, 24, 32, 40, 48].map((r, i) => (
+          <circle
+            key={i}
+            cx="50%"
+            cy="50%"
+            r={`${r}%`}
+            fill="none"
+            stroke="rgba(0,92,72,0.10)"
+            strokeWidth="1"
+          />
+        ))}
+        {/* Radiating lines */}
+        {Array.from({ length: 12 }).map((_, i) => {
+          const angle = (i * 30 * Math.PI) / 180;
+          const x2 = 50 + 48 * Math.cos(angle);
+          const y2 = 50 + 48 * Math.sin(angle);
+          return (
+            <line
+              key={i}
+              x1="50%"
+              y1="50%"
+              x2={`${x2}%`}
+              y2={`${y2}%`}
+              stroke="rgba(0,92,72,0.06)"
+              strokeWidth="1"
+            />
+          );
+        })}
+        {/* Inner accent circle */}
+        <circle cx="50%" cy="50%" r="8%" fill="none" stroke="rgba(0,92,72,0.30)" strokeWidth="1.5" />
+        <circle cx="50%" cy="50%" r="3%" fill="rgba(0,92,72,0.15)" />
+      </svg>
+    ),
     accentColor: 'var(--color-gold-dark)',
   },
 ];
@@ -121,7 +213,7 @@ export default function BoothShowcase() {
       <div className="container px-4 mx-auto max-w-7xl">
         {/* Section header */}
         <div className="mb-16 text-center">
-          <motion.h2 
+          <motion.h2
             className="mb-4 text-4xl font-bold tracking-tight text-[var(--color-text-primary)] md:text-5xl"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -129,14 +221,14 @@ export default function BoothShowcase() {
           >
             Signature Booths
           </motion.h2>
-          <motion.p 
+          <motion.p
             className="max-w-3xl mx-auto text-lg text-[var(--color-text-secondary)]"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
           >
-            Each booth is meticulously designed and engineered for luxury events. 
+            Each booth is meticulously designed and engineered for luxury events.
             Choose from our curated collection of premium experiences.
           </motion.p>
         </div>
@@ -158,8 +250,8 @@ export default function BoothShowcase() {
               whileTap={{ scale: 0.95 }}
             >
               <div className={`p-2 rounded ${
-                activeTab === booth.id 
-                  ? 'bg-[var(--color-gold-transparent-30)]' 
+                activeTab === booth.id
+                  ? 'bg-[var(--color-gold-transparent-30)]'
                   : 'bg-[var(--color-gray-dark)]'
               }`}>
                 <div style={{ color: activeTab === booth.id ? booth.accentColor : 'var(--color-text-tertiary)' }}>
@@ -170,7 +262,7 @@ export default function BoothShowcase() {
                 <div className="font-medium text-[var(--color-text-primary)]">{booth.title}</div>
                 <div className="text-sm text-[var(--color-text-tertiary)]">{booth.subtitle}</div>
               </div>
-              
+
               {/* Animated indicator */}
               {activeTab === booth.id && (
                 <motion.div
@@ -199,12 +291,11 @@ export default function BoothShowcase() {
               <div className="relative overflow-hidden rounded-sm">
                 <div className="aspect-[4/3] bg-gradient-to-br from-[var(--color-gray-dark)] to-[var(--color-black)]">
                   <div className="absolute inset-0 bg-gradient-to-t from-[var(--color-black-transparent-70)] via-transparent to-transparent"></div>
-                  <div 
-                    className="absolute inset-0 bg-cover bg-center"
-                    style={{ backgroundImage: `url(${activeBooth.image})` }}
-                  ></div>
+                  <div className="absolute inset-0">
+                    {activeBooth.svgPattern}
+                  </div>
                 </div>
-                
+
                 {/* Price badge */}
                 <motion.div
                   initial={{ opacity: 0, x: -20 }}

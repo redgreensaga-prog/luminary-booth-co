@@ -1,10 +1,10 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { cn } from '@/lib/utils';
 import { COPY } from '@/content/copy';
-import { COLORS, MOTION } from '@/lib/tokens';
+import { MOTION } from '@/lib/tokens';
 
 interface LogoMarqueeProps {
   className?: string;
@@ -13,6 +13,7 @@ interface LogoMarqueeProps {
 
 export function LogoMarquee({ className, speed = 'normal' }: LogoMarqueeProps) {
   const { logos } = COPY.clients;
+  const [isHovered, setIsHovered] = useState(false);
 
   // Duplicate logos for seamless loop
   const duplicatedLogos = [...logos, ...logos];
@@ -46,8 +47,20 @@ export function LogoMarquee({ className, speed = 'normal' }: LogoMarqueeProps) {
     }
   };
 
+  const marqueeTransition = {
+    x: {
+      repeat: Infinity,
+      duration: isHovered ? 0 : speedMap[speed],
+      ease: 'linear'
+    }
+  };
+
   return (
-    <section className={cn('py-16 relative overflow-hidden', className)}>
+    <section
+      className={cn('py-16 relative overflow-hidden', className)}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
       <div className="container mx-auto px-4 max-w-6xl">
         {/* Section header */}
         <motion.div
@@ -80,16 +93,8 @@ export function LogoMarquee({ className, speed = 'normal' }: LogoMarqueeProps) {
             className="flex overflow-hidden py-8"
           >
             <motion.div
-              animate={{
-                x: ['0%', `-${100 / duplicatedLogos.length}%`]
-              }}
-              transition={{
-                x: {
-                  repeat: Infinity,
-                  duration: speedMap[speed],
-                  ease: 'linear'
-                }
-              }}
+              animate={{ x: ['0%', '-50%'] }}
+              transition={marqueeTransition}
               className="flex flex-shrink-0"
             >
               {duplicatedLogos.map((logo, index) => (
@@ -133,16 +138,8 @@ export function LogoMarquee({ className, speed = 'normal' }: LogoMarqueeProps) {
             className="flex overflow-hidden py-8"
           >
             <motion.div
-              animate={{
-                x: [`-${100 / duplicatedLogos.length}%`, '0%']
-              }}
-              transition={{
-                x: {
-                  repeat: Infinity,
-                  duration: speedMap[speed],
-                  ease: 'linear'
-                }
-              }}
+              animate={{ x: ['-50%', '0%'] }}
+              transition={marqueeTransition}
               className="flex flex-shrink-0"
             >
               {duplicatedLogos.slice().reverse().map((logo, index) => (

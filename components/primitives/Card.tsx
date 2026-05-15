@@ -1,6 +1,6 @@
 'use client';
 
-import { forwardRef, ElementRef } from 'react';
+import { forwardRef } from 'react';
 import { motion, HTMLMotionProps } from 'framer-motion';
 import { cva, type VariantProps } from 'class-variance-authority';
 import { cn } from '@/lib/utils';

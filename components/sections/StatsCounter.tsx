@@ -4,7 +4,7 @@ import React, { useEffect, useState, useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
 import { cn } from '@/lib/utils';
 import { COPY } from '@/content/copy';
-import { COLORS, MOTION, TYPOGRAPHY } from '@/lib/tokens';
+import { MOTION } from '@/lib/tokens';
 
 interface StatsCounterProps {
   className?: string;

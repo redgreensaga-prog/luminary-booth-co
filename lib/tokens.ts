@@ -148,8 +148,8 @@ export const SHADOWS = {
   xl: '0 20px 25px -5px rgba(10, 10, 10, 0.1), 0 10px 10px -5px rgba(10, 10, 10, 0.04)',
   '2xl': '0 25px 50px -12px rgba(10, 10, 10, 0.25)',
   inner: 'inset 0 2px 4px 0 rgba(10, 10, 10, 0.06)',
-  gold: '0 0 20px 0 rgba(201, 169, 110, 0.15)',
-  goldLg: '0 0 40px 0 rgba(201, 169, 110, 0.25)',
+  gold: '0 0 20px 0 rgba(0, 92, 72, 0.15)',
+  goldLg: '0 0 40px 0 rgba(0, 92, 72, 0.25)',
 } as const;
 
 /**
