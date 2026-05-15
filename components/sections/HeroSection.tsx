@@ -2,12 +2,19 @@
 
 import { motion } from 'framer-motion';
 import { ArrowRight, Sparkles } from 'lucide-react';
-import { useMemo } from 'react';
+import { useMemo, useEffect, useState } from 'react';
+import { MOTION } from '@/lib/tokens';
+import { Button } from '@/components/primitives/Button';
 
 export default function HeroSection() {
+  const [prefersReduced, setPrefersReduced] = useState(false);
+
+  useEffect(() => {
+    setPrefersReduced(window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+  }, []);
+
   // Deterministic pseudo-random positions (same on server + client)
   const particles = useMemo(() => {
-    // Simple seeded "random" based on index
     const seed = (i: number) => {
       const x = Math.sin(i * 127.1 + 311.7) * 43758.5453;
       return x - Math.floor(x);
@@ -18,14 +25,16 @@ export default function HeroSection() {
     }));
   }, []);
 
+  const dur = prefersReduced ? 0 : undefined;
+
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.1,
+        staggerChildren: MOTION.stagger.normal,
         delayChildren: 0.3,
-        duration: 0.8,
+        duration: MOTION.duration.slow / 1000,
       },
     },
   };
@@ -36,9 +45,9 @@ export default function HeroSection() {
       y: 0,
       opacity: 1,
       transition: {
-        type: 'spring',
-        stiffness: 100,
-        damping: 20,
+        type: 'spring' as const,
+        ...MOTION.spring.normal,
+        ...(prefersReduced ? { duration: 0 } : {}),
       },
     },
   };
@@ -47,7 +56,7 @@ export default function HeroSection() {
 
   return (
     <section className="relative min-h-screen overflow-hidden bg-gradient-to-b from-[var(--color-black)] via-[var(--color-gray-dark)] to-[var(--color-black)]">
-      {/* Parallax background */}
+      {/* Background */}
       <div className="absolute inset-0 z-0">
         <svg
           aria-hidden="true"
@@ -56,7 +65,6 @@ export default function HeroSection() {
           preserveAspectRatio="xMidYMid slice"
         >
           <rect width="100%" height="100%" fill="#0A0A0A" />
-          {/* Diagonal grid lines */}
           {Array.from({ length: 20 }).map((_, i) => (
             <line
               key={`dg-${i}`}
@@ -66,7 +74,6 @@ export default function HeroSection() {
               strokeWidth="1"
             />
           ))}
-          {/* Large diamond outline */}
           <polygon
             points="50%,5% 95%,50% 50%,95% 5%,50%"
             fill="none"
@@ -75,7 +82,7 @@ export default function HeroSection() {
           />
         </svg>
         <div className="absolute inset-0 bg-gradient-to-r from-[var(--color-black-transparent-70)] via-transparent to-[var(--color-black-transparent-70)]"></div>
-        
+
         {/* Animated SVG lines */}
         <div className="absolute inset-0">
           <svg
@@ -91,9 +98,9 @@ export default function HeroSection() {
               initial={{ pathLength: 0, opacity: 0 }}
               animate={{ pathLength: 1, opacity: 1 }}
               transition={{
-                duration: 2,
-                ease: 'easeInOut',
-                delay: 0.5,
+                duration: dur ?? MOTION.duration.slowest / 1000,
+                ease: MOTION.easing.inOut,
+                delay: prefersReduced ? 0 : 0.5,
               }}
             />
             <motion.path
@@ -105,9 +112,9 @@ export default function HeroSection() {
               initial={{ pathLength: 0, opacity: 0 }}
               animate={{ pathLength: 1, opacity: 1 }}
               transition={{
-                duration: 2.5,
-                ease: 'easeInOut',
-                delay: 0.8,
+                duration: dur ?? MOTION.duration.slowest / 1000,
+                ease: MOTION.easing.inOut,
+                delay: prefersReduced ? 0 : 0.8,
               }}
             />
           </svg>
@@ -118,21 +125,18 @@ export default function HeroSection() {
           {particles.map((pos, i) => (
             <motion.div
               key={i}
-              className="absolute w-[1px] h-[1px] bg-[var(--color-gold)] rounded-full"
-              style={{
-                left: pos.left,
-                top: pos.top,
-              }}
+              className="absolute w-1 h-1 bg-[var(--color-gold)] rounded-full"
+              style={{ left: pos.left, top: pos.top }}
               initial={{ opacity: 0, scale: 0 }}
-              animate={{
+              animate={prefersReduced ? {} : {
                 opacity: [0, 1, 0],
                 scale: [0, 1, 0],
               }}
               transition={{
-                duration: 3,
+                duration: MOTION.duration.slowest / 1000,
                 repeat: Infinity,
                 delay: i * 0.2,
-                ease: 'linear',
+                ease: MOTION.easing.linear,
               }}
             />
           ))}
@@ -172,8 +176,8 @@ export default function HeroSection() {
             className="mb-10 max-w-3xl text-xl font-light leading-relaxed text-[var(--color-text-secondary)] md:text-2xl"
             variants={itemVariants}
           >
-            Luminary Booth Co. delivers premium photo booth experiences for luxury events. 
-            Editorial-grade photography, bespoke backdrops, and cinematic lighting for 
+            Luminary Booth Co. delivers premium photo booth experiences for luxury events.
+            Editorial-grade photography, bespoke backdrops, and cinematic lighting for
             unforgettable celebrations.
           </motion.p>
 
@@ -182,15 +186,21 @@ export default function HeroSection() {
             className="flex flex-col gap-4 sm:flex-row sm:items-center"
             variants={itemVariants}
           >
-            <button className="group relative inline-flex items-center justify-center gap-2 px-8 py-4 text-base font-medium text-[var(--color-black)] bg-[var(--color-gold)] rounded-sm hover:bg-[var(--color-gold-light)] transition-all duration-300 hover:scale-105 hover:shadow-[0_0_40px_0_var(--color-gold-transparent-30)]">
+            <Button
+              variant="primary"
+              size="lg"
+              rightIcon={<ArrowRight className="w-5 h-5" />}
+            >
               Book a Consultation
-              <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
-            </button>
-            
-            <button className="group inline-flex items-center justify-center gap-2 px-8 py-4 text-base font-medium border border-[var(--color-gray-medium)] text-[var(--color-text-primary)] rounded-sm hover:border-[var(--color-gold)] hover:text-[var(--color-gold)] transition-all duration-300 hover:scale-105">
+            </Button>
+
+            <Button
+              variant="ghost"
+              size="lg"
+              rightIcon={<ArrowRight className="w-5 h-5" />}
+            >
               View Our Portfolio
-              <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
-            </button>
+            </Button>
           </motion.div>
 
           {/* Scroll indicator */}
@@ -198,7 +208,10 @@ export default function HeroSection() {
             className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 2, duration: 1 }}
+            transition={{
+              delay: prefersReduced ? 0 : MOTION.duration.slower / 1000,
+              duration: prefersReduced ? 0 : MOTION.duration.normal / 1000,
+            }}
           >
             <div className="flex flex-col items-center">
               <span className="mb-2 text-sm tracking-wider text-[var(--color-text-tertiary)]">

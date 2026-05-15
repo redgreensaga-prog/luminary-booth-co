@@ -3,6 +3,7 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import { useEffect, useCallback } from 'react';
 import { X, ChevronLeft, ChevronRight, Maximize2, Download, Heart } from 'lucide-react';
+import { MOTION } from '@/lib/tokens';
 
 interface LightboxProps {
   image: string;
@@ -10,24 +11,48 @@ interface LightboxProps {
   category: string;
   isOpen: boolean;
   onClose: () => void;
+  currentIndex?: number;
+  images?: { image: string; title: string; category: string }[];
+  onNavigate?: (index: number) => void;
 }
 
-export default function Lightbox({ image, title, category, isOpen, onClose }: LightboxProps) {
+export default function Lightbox({
+  image,
+  title,
+  category,
+  isOpen,
+  onClose,
+  currentIndex = 0,
+  images = [],
+  onNavigate,
+}: LightboxProps) {
+  const total = images.length;
+
+  const handlePrev = useCallback(() => {
+    if (!onNavigate || total === 0) return;
+    onNavigate((currentIndex - 1 + total) % total);
+  }, [onNavigate, currentIndex, total]);
+
+  const handleNext = useCallback(() => {
+    if (!onNavigate || total === 0) return;
+    onNavigate((currentIndex + 1) % total);
+  }, [onNavigate, currentIndex, total]);
+
   const handleKeyDown = useCallback((event: KeyboardEvent) => {
     switch (event.key) {
       case 'Escape':
         onClose();
         break;
       case 'ArrowLeft':
-        // Navigate to previous image (would need image array in real implementation)
+        handlePrev();
         break;
       case 'ArrowRight':
-        // Navigate to next image (would need image array in real implementation)
+        handleNext();
         break;
       default:
         break;
     }
-  }, [onClose]);
+  }, [onClose, handlePrev, handleNext]);
 
   useEffect(() => {
     if (isOpen) {
@@ -79,7 +104,7 @@ export default function Lightbox({ image, title, category, isOpen, onClose }: Li
         <motion.div
           className="relative z-10 w-full h-full max-w-7xl max-h-[90vh] mx-4 overflow-hidden rounded-sm"
           variants={lightboxVariants}
-          transition={{ type: 'spring', stiffness: 100, damping: 20 }}
+          transition={{ type: 'spring', ...MOTION.spring.normal }}
         >
           {/* Close button */}
           <motion.button
@@ -90,31 +115,36 @@ export default function Lightbox({ image, title, category, isOpen, onClose }: Li
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
+            aria-label="Close lightbox"
           >
             <X className="w-6 h-6 text-[var(--color-text-primary)]" />
           </motion.button>
 
           {/* Navigation buttons */}
           <motion.button
-            className="absolute left-4 top-1/2 z-20 p-3 -translate-y-1/2 rounded-sm bg-[var(--color-black-transparent-70)] backdrop-blur-sm border border-[var(--color-gold-transparent-30)] hover:bg-[var(--color-black-transparent-80)] transition-colors"
-            onClick={() => {/* Navigate previous */}}
+            className="absolute left-4 top-1/2 z-20 p-3 -translate-y-1/2 rounded-sm bg-[var(--color-black-transparent-70)] backdrop-blur-sm border border-[var(--color-gold-transparent-30)] hover:bg-[var(--color-black-transparent-80)] transition-colors disabled:opacity-30 disabled:pointer-events-none"
+            onClick={handlePrev}
+            disabled={total === 0}
             whileHover={{ scale: 1.1, x: -2 }}
             whileTap={{ scale: 0.95 }}
             initial={{ opacity: 0, x: -10 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.3 }}
+            aria-label="Previous image"
           >
             <ChevronLeft className="w-6 h-6 text-[var(--color-text-primary)]" />
           </motion.button>
 
           <motion.button
-            className="absolute right-4 top-1/2 z-20 p-3 -translate-y-1/2 rounded-sm bg-[var(--color-black-transparent-70)] backdrop-blur-sm border border-[var(--color-gold-transparent-30)] hover:bg-[var(--color-black-transparent-80)] transition-colors"
-            onClick={() => {/* Navigate next */}}
+            className="absolute right-4 top-1/2 z-20 p-3 -translate-y-1/2 rounded-sm bg-[var(--color-black-transparent-70)] backdrop-blur-sm border border-[var(--color-gold-transparent-30)] hover:bg-[var(--color-black-transparent-80)] transition-colors disabled:opacity-30 disabled:pointer-events-none"
+            onClick={handleNext}
+            disabled={total === 0}
             whileHover={{ scale: 1.1, x: 2 }}
             whileTap={{ scale: 0.95 }}
             initial={{ opacity: 0, x: 10 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.3 }}
+            aria-label="Next image"
           >
             <ChevronRight className="w-6 h-6 text-[var(--color-text-primary)]" />
           </motion.button>
@@ -124,14 +154,14 @@ export default function Lightbox({ image, title, category, isOpen, onClose }: Li
             <motion.div
               className="relative w-full h-full"
               variants={imageVariants}
-              transition={{ duration: 0.5, ease: 'easeOut' }}
+              transition={{ duration: MOTION.duration.normal / 1000, ease: MOTION.easing.out }}
             >
               {/* Image */}
               <div
                 className="w-full h-full bg-cover bg-center"
                 style={{ backgroundImage: `url(${image})` }}
               />
-              
+
               {/* Gradient overlays */}
               <div className="absolute inset-0 bg-gradient-to-t from-[var(--color-black-transparent-80)] via-transparent to-transparent" />
               <div className="absolute inset-0 bg-gradient-to-b from-[var(--color-black-transparent-60)] via-transparent to-transparent" />
@@ -148,7 +178,7 @@ export default function Lightbox({ image, title, category, isOpen, onClose }: Li
             <div className="flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-center">
               <div>
                 {/* Category badge */}
-                <div className="inline-flex items-center gap-2 px-3 py-1 mb-2 text-xs font-medium tracking-wider uppercase rounded-sm bg-[var(--color-gold-transparent-20)] text-[var(--color-gold)]">
+                <div className="inline-flex items-center gap-2 px-3 py-1 mb-2 text-xs font-medium tracking-wider uppercase rounded-sm bg-[var(--color-gold-transparent-10)] text-[var(--color-gold)]">
                   <Heart className="w-3 h-3 fill-current" />
                   {category}
                 </div>
@@ -170,6 +200,7 @@ export default function Lightbox({ image, title, category, isOpen, onClose }: Li
                   className="p-3 rounded-sm bg-[var(--color-black-transparent-70)] border border-[var(--color-gold-transparent-30)] hover:bg-[var(--color-black-transparent-80)] transition-colors"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
+                  aria-label="Full screen (coming soon)"
                 >
                   <Maximize2 className="w-5 h-5 text-[var(--color-gold)]" />
                 </motion.button>
@@ -177,6 +208,8 @@ export default function Lightbox({ image, title, category, isOpen, onClose }: Li
                   className="p-3 rounded-sm bg-[var(--color-black-transparent-70)] border border-[var(--color-gold-transparent-30)] hover:bg-[var(--color-black-transparent-80)] transition-colors"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
+                  aria-label="Download image"
+                  onClick={() => image && window.open(image, '_blank')}
                 >
                   <Download className="w-5 h-5 text-[var(--color-gold)]" />
                 </motion.button>

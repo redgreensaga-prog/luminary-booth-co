@@ -114,12 +114,13 @@ export function StatsCounter({ className }: StatsCounterProps) {
             >
               {/* Card */}
               <div className={cn(
-                'p-8 rounded-2xl border border-grayMedium/20',
-                'bg-gradient-to-br from-grayDark/30 to-black/30',
+                'p-8 rounded-2xl border border-[var(--color-gray-medium)]',
+                'bg-gradient-to-br from-[var(--color-gray-dark)] to-[var(--color-black)]',
                 'backdrop-blur-sm',
                 'transition-all duration-500',
-                'group-hover:border-gold/30 group-hover:shadow-goldLg'
-              )}>
+                'group-hover:border-[var(--color-gold-transparent-30)] group-hover:shadow-[0_0_40px_0_rgba(0,92,72,0.25)]'
+              )}
+              >
                 {/* Animated number */}
                 <div className="flex items-baseline justify-center gap-1 mb-4">
                   <motion.span
@@ -154,15 +155,15 @@ export function StatsCounter({ className }: StatsCounterProps) {
                     delay: index * 0.1 + 0.3,
                     ease: MOTION.easing.editorial
                   }}
-                  className="h-px bg-gradient-to-r from-transparent via-gold/50 to-transparent mt-6"
+                  className="h-px bg-gradient-to-r from-transparent via-[var(--color-gold-transparent-50)] to-transparent mt-6"
                 />
               </div>
 
               {/* Decorative corner accents */}
-              <div className="absolute top-0 left-0 w-4 h-4 border-t border-l border-gold/30 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-              <div className="absolute top-0 right-0 w-4 h-4 border-t border-r border-gold/30 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-              <div className="absolute bottom-0 left-0 w-4 h-4 border-b border-l border-gold/30 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-              <div className="absolute bottom-0 right-0 w-4 h-4 border-b border-r border-gold/30 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              <div className="absolute top-0 left-0 w-4 h-4 border-t border-l border-[var(--color-gold-transparent-30)] opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              <div className="absolute top-0 right-0 w-4 h-4 border-t border-r border-[var(--color-gold-transparent-30)] opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              <div className="absolute bottom-0 left-0 w-4 h-4 border-b border-l border-[var(--color-gold-transparent-30)] opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              <div className="absolute bottom-0 right-0 w-4 h-4 border-b border-r border-[var(--color-gold-transparent-30)] opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
             </motion.div>
           ))}
         </motion.div>
@@ -172,7 +173,8 @@ export function StatsCounter({ className }: StatsCounterProps) {
           initial={{ opacity: 0 }}
           animate={isInView ? { opacity: 1 } : { opacity: 0 }}
           transition={{ delay: 0.5 }}
-          className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 rounded-full bg-gold/5 blur-3xl pointer-events-none"
+          className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 rounded-full blur-3xl pointer-events-none"
+          style={{ backgroundColor: 'rgba(0,92,72,0.05)' }}
         />
       </div>
     </section>

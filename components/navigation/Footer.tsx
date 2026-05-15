@@ -3,6 +3,9 @@
 import { cn } from '@/lib/utils';
 import { copy } from '@/content/copy';
 import Link from 'next/link';
+import { motion } from 'framer-motion';
+import { useEffect, useState } from 'react';
+import { MOTION } from '@/lib/tokens';
 import {
   Mail,
   Phone,
@@ -10,7 +13,7 @@ import {
   Send,
 } from 'lucide-react';
 
-/* ── Inline SVG social icons (brand logos not in lucide) ── */
+/* ── Inline SVG social icons ── */
 const InstagramIcon = ({ className }: { className?: string }) => (
   <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
     <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
@@ -77,114 +80,175 @@ const footerLinks = {
 const currentYear = new Date().getFullYear();
 
 export default function Footer() {
+  const [prefersReduced, setPrefersReduced] = useState(false);
+
+  useEffect(() => {
+    setPrefersReduced(window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+  }, []);
+
+  const dur = prefersReduced ? 0 : MOTION.duration.slow / 1000;
+  const fastDur = prefersReduced ? 0 : MOTION.duration.normal / 1000;
+
+  const containerVariants = {
+    hidden: { opacity: 0, y: prefersReduced ? 0 : 30 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: dur,
+        ease: MOTION.easing.editorial,
+        staggerChildren: MOTION.stagger.normal,
+      },
+    },
+  };
+
+  const brandVariants = {
+    hidden: { opacity: 0, y: prefersReduced ? 0 : 20 },
+    visible: (i: number) => ({
+      opacity: 1,
+      y: 0,
+      transition: {
+        delay: prefersReduced ? 0 : i * MOTION.stagger.normal,
+        duration: dur,
+        ease: MOTION.easing.editorial,
+      },
+    }),
+  };
+
+  const columnVariants = {
+    hidden: { opacity: 0, y: prefersReduced ? 0 : 20 },
+    visible: (i: number) => ({
+      opacity: 1,
+      y: 0,
+      transition: {
+        delay: prefersReduced ? 0 : (i + 2) * MOTION.stagger.normal,
+        duration: dur,
+        ease: MOTION.easing.editorial,
+      },
+    }),
+  };
+
+  const bottomBarVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        delay: prefersReduced ? 0 : 6 * MOTION.stagger.normal,
+        duration: fastDur,
+        ease: MOTION.easing.inOut,
+      },
+    },
+  };
+
   return (
     <footer className="bg-black text-white border-t border-gray-800">
       {/* Main footer content */}
-      <div className="max-w-7xl mx-auto px-4 py-16 md:py-24">
+      <motion.div
+        className="max-w-7xl mx-auto px-4 py-16 md:py-24"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: '-80px' }}
+        variants={containerVariants}
+      >
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 lg:gap-8">
           {/* Brand / About */}
           <div className="lg:col-span-4">
-            <Link href="/" className="inline-block mb-6">
-              <span className="text-2xl font-display font-bold tracking-wider text-gold">
-                {copy.business.name}
-              </span>
-            </Link>
-            <p className="text-white/60 mb-8 max-w-sm leading-relaxed">
-              Southern California&apos;s premier luxury photo booth experience. 
-              Elevating events with bespoke photography, artisanal design, and 
+            <motion.div custom={0} variants={brandVariants}>
+              <Link href="/" className="inline-block mb-6">
+                <span className="text-2xl font-display font-bold tracking-wider text-gold">
+                  {copy.business.name}
+                </span>
+              </Link>
+            </motion.div>
+            <motion.p custom={1} variants={brandVariants} className="text-white/60 mb-8 max-w-sm leading-relaxed">
+              Southern California&apos;s premier luxury photo booth experience.
+              Elevating events with bespoke photography, artisanal design, and
               unforgettable memories since 2018.
-            </p>
+            </motion.p>
             {/* Social links */}
-            <div className="flex items-center gap-4">
+            <motion.div custom={2} variants={brandVariants} className="flex items-center gap-4">
               {socialLinks.map((social) => (
                 <Link
                   key={social.name}
                   href={social.href}
                   aria-label={social.name}
-                  className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center text-white/50 hover:text-gold hover:border-gold/50 transition-colors"
+                  className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center text-white/50 hover:text-gold hover:border-[var(--color-gold-transparent-50)] transition-colors"
                 >
                   {social.icon}
                 </Link>
               ))}
-            </div>
+            </motion.div>
           </div>
 
-          {/* Quick Links */}
-          <div className="lg:col-span-2">
+          {/* Services column */}
+          <motion.div custom={0} variants={columnVariants} className="lg:col-span-2">
             <h3 className="text-xs font-semibold tracking-widest uppercase text-gold mb-6">
               Services
             </h3>
             <ul className="space-y-4">
               {footerLinks.services.map((link) => (
                 <li key={link.label}>
-                  <Link
-                    href={link.href}
-                    className="text-white/60 hover:text-gold transition-colors text-sm"
-                  >
+                  <Link href={link.href} className="text-white/60 hover:text-gold transition-colors text-sm">
                     {link.label}
                   </Link>
                 </li>
               ))}
             </ul>
-          </div>
+          </motion.div>
 
-          <div className="lg:col-span-2">
+          {/* Company column */}
+          <motion.div custom={1} variants={columnVariants} className="lg:col-span-2">
             <h3 className="text-xs font-semibold tracking-widest uppercase text-gold mb-6">
               Company
             </h3>
             <ul className="space-y-4">
               {footerLinks.company.map((link) => (
                 <li key={link.label}>
-                  <Link
-                    href={link.href}
-                    className="text-white/60 hover:text-gold transition-colors text-sm"
-                  >
+                  <Link href={link.href} className="text-white/60 hover:text-gold transition-colors text-sm">
                     {link.label}
                   </Link>
                 </li>
               ))}
             </ul>
-          </div>
+          </motion.div>
 
-          <div className="lg:col-span-2">
+          {/* Support column */}
+          <motion.div custom={2} variants={columnVariants} className="lg:col-span-2">
             <h3 className="text-xs font-semibold tracking-widest uppercase text-gold mb-6">
               Support
             </h3>
             <ul className="space-y-4">
               {footerLinks.support.map((link) => (
                 <li key={link.label}>
-                  <Link
-                    href={link.href}
-                    className="text-white/60 hover:text-gold transition-colors text-sm"
-                  >
+                  <Link href={link.href} className="text-white/60 hover:text-gold transition-colors text-sm">
                     {link.label}
                   </Link>
                 </li>
               ))}
             </ul>
-          </div>
+          </motion.div>
 
           {/* Contact + Newsletter */}
-          <div className="lg:col-span-2">
+          <motion.div custom={3} variants={columnVariants} className="lg:col-span-2">
             <h3 className="text-xs font-semibold tracking-widest uppercase text-gold mb-6">
               Contact
             </h3>
             <ul className="space-y-4 mb-8">
               <li>
                 <a href={`mailto:${copy.business.email}`} className="flex items-start gap-3 text-white/60 hover:text-gold transition-colors text-sm">
-                  <Mail className="w-4 h-4 mt-0.5 shrink-0 text-gold/60" />
+                  <Mail className="w-4 h-4 mt-0.5 shrink-0 text-[var(--color-gold-transparent-70)]" />
                   <span>{copy.business.email}</span>
                 </a>
               </li>
               <li>
                 <a href={`tel:${copy.business.phone}`} className="flex items-start gap-3 text-white/60 hover:text-gold transition-colors text-sm">
-                  <Phone className="w-4 h-4 mt-0.5 shrink-0 text-gold/60" />
+                  <Phone className="w-4 h-4 mt-0.5 shrink-0 text-[var(--color-gold-transparent-70)]" />
                   <span>{copy.business.phone}</span>
                 </a>
               </li>
               <li>
                 <span className="flex items-start gap-3 text-white/60 text-sm">
-                  <MapPin className="w-4 h-4 mt-0.5 shrink-0 text-gold/60" />
+                  <MapPin className="w-4 h-4 mt-0.5 shrink-0 text-[var(--color-gold-transparent-70)]" />
                   <span>{copy.business.location}</span>
                 </span>
               </li>
@@ -199,22 +263,28 @@ export default function Footer() {
                 <input
                   type="email"
                   placeholder="Your email"
-                  className="bg-white/5 border border-white/10 px-4 py-2.5 text-sm text-white placeholder:text-white/30 w-full focus:outline-none focus:border-gold/50 transition-colors"
+                  className="bg-white/5 border border-white/10 px-4 py-2.5 text-sm text-white placeholder:text-white/30 w-full focus:outline-none focus:border-[var(--color-gold-transparent-50)] transition-colors"
                 />
                 <button
                   aria-label="Subscribe"
-                  className="bg-gold/90 hover:bg-gold text-black px-4 flex items-center justify-center transition-colors"
+                  className="bg-[var(--color-gold)] hover:bg-[var(--color-gold-light)] text-black px-4 flex items-center justify-center transition-colors"
                 >
                   <Send className="w-4 h-4" />
                 </button>
               </div>
             </div>
-          </div>
+          </motion.div>
         </div>
-      </div>
+      </motion.div>
 
       {/* Bottom bar */}
-      <div className="border-t border-gray-800 py-6">
+      <motion.div
+        className="border-t border-gray-800 py-6"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+        variants={bottomBarVariants}
+      >
         <div className="max-w-7xl mx-auto px-4 flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-white/40 text-xs">
             &copy; {currentYear} {copy.business.name}. All rights reserved.
@@ -228,7 +298,7 @@ export default function Footer() {
             </Link>
           </div>
         </div>
-      </div>
+      </motion.div>
     </footer>
   );
 }

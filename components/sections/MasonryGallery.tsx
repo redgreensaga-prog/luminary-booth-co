@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useState, useRef } from 'react';
 import { Search, X, Maximize2, Heart } from 'lucide-react';
 import Lightbox from './Lightbox';
+import { MOTION } from '@/lib/tokens';
 
 type GalleryItem = {
   id: number;
@@ -253,7 +254,7 @@ export default function MasonryGallery() {
           <motion.div
             key={`${activeCategory}-${searchQuery}`}
             initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
+            animate={{ opacity: 1, transition: { staggerChildren: MOTION.stagger.normal } }}
             exit={{ opacity: 0 }}
             className="relative"
           >
@@ -270,21 +271,25 @@ export default function MasonryGallery() {
                     initial={{ opacity: 0, scale: 0.9 }}
                     animate={{ opacity: 1, scale: 1 }}
                     exit={{ opacity: 0, scale: 0.9 }}
-                    transition={{ duration: 0.3 }}
-                    className="relative mb-4 break-inside-avoid group cursor-pointer"
+                    transition={{ duration: MOTION.duration.fast / 1000 }}
+                    className="relative mb-4 break-inside-avoid cursor-pointer"
                     onClick={() => handleImageClick(item)}
                   >
                     <div className={`relative overflow-hidden rounded-sm ${aspectRatioClasses[item.aspectRatio as keyof typeof aspectRatioClasses]}`}>
                       {/* SVG pattern background */}
-                      <div className="absolute inset-0 transition-transform duration-700 group-hover:scale-110">
+                      <motion.div
+                        className="absolute inset-0"
+                        whileHover={{ scale: 1.1 }}
+                        transition={{ duration: MOTION.duration.slow / 1000, ease: MOTION.easing.inOut }}
+                      >
                         {item.svgPattern}
-                      </div>
+                      </motion.div>
 
                       {/* Overlay gradient */}
                       <div className="absolute inset-0 bg-gradient-to-t from-[var(--color-black-transparent-70)] via-transparent to-transparent"></div>
 
                       {/* Content overlay */}
-                      <div className="absolute inset-0 flex flex-col justify-end p-6 transition-all duration-300 group-hover:bg-[var(--color-black-transparent-50)]">
+                      <div className="absolute inset-0 flex flex-col justify-end p-6">
                         {/* Category badge */}
                         <div className="inline-flex mb-2 px-3 py-1 text-xs font-medium tracking-wider uppercase rounded-sm bg-[var(--color-gold-transparent-10)] text-[var(--color-gold)]">
                           {item.category}
@@ -313,7 +318,7 @@ export default function MasonryGallery() {
                     </div>
 
                     {/* Gold accent line */}
-                    <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-[var(--color-gold-transparent-50)] to-transparent transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500"></div>
+                    <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-[var(--color-gold-transparent-50)] to-transparent"></div>
                   </motion.div>
                 ))}
               </div>
