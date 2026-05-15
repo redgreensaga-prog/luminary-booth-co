@@ -57,7 +57,7 @@ export function LogoMarquee({ className, speed = 'normal' }: LogoMarqueeProps) {
 
   return (
     <section
-      className={cn('py-16 relative overflow-hidden', className)}
+      className={cn('py-16 relative overflow-hidden bg-surface', className)}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
@@ -107,22 +107,22 @@ export function LogoMarquee({ className, speed = 'normal' }: LogoMarqueeProps) {
                     'relative group',
                     'w-32 h-24 md:w-40 md:h-28',
                     'flex items-center justify-center',
-                    'border border-grayMedium/20 rounded-xl',
-                    'bg-gradient-to-b from-grayDark/20 to-black/20',
+                    'border border-[var(--color-gray-medium)] rounded-xl',
+                    'bg-gradient-to-b from-[var(--color-gray-dark)] to-[var(--color-black)]',
                     'backdrop-blur-sm',
                     'transition-all duration-500',
-                    'hover:border-gold/30 hover:shadow-gold'
+                    'hover:border-[var(--color-gold-transparent-30)] hover:shadow-gold'
                   )}>
                     {/* Logo text */}
                     <div className="text-center">
                       <span className="text-xl md:text-2xl font-display font-light text-textPrimary">
                         {logo.name}
                       </span>
-                      <div className="absolute inset-0 rounded-xl border border-gold/0 group-hover:border-gold/20 transition-all duration-500" />
+                      <div className="absolute inset-0 rounded-xl border border-transparent group-hover:border-[var(--color-gold-transparent-20)] transition-all duration-500" />
                     </div>
 
                     {/* Decorative dot */}
-                    <div className="absolute top-3 right-3 w-2 h-2 rounded-full bg-gold/0 group-hover:bg-gold/50 transition-all duration-500" />
+                    <div className="absolute top-3 right-3 w-2 h-2 rounded-full bg-transparent group-hover:bg-[var(--color-gold-transparent-50)] transition-all duration-500" />
                   </div>
                 </motion.div>
               ))}
@@ -152,22 +152,22 @@ export function LogoMarquee({ className, speed = 'normal' }: LogoMarqueeProps) {
                     'relative group',
                     'w-32 h-24 md:w-40 md:h-28',
                     'flex items-center justify-center',
-                    'border border-grayMedium/20 rounded-xl',
-                    'bg-gradient-to-b from-grayDark/20 to-black/20',
+                    'border border-[var(--color-gray-medium)] rounded-xl',
+                    'bg-gradient-to-b from-[var(--color-gray-dark)] to-[var(--color-black)]',
                     'backdrop-blur-sm',
                     'transition-all duration-500',
-                    'hover:border-gold/30 hover:shadow-gold'
+                    'hover:border-[var(--color-gold-transparent-30)] hover:shadow-gold'
                   )}>
                     {/* Logo text */}
                     <div className="text-center">
                       <span className="text-xl md:text-2xl font-display font-light text-textPrimary">
                         {logo.name}
                       </span>
-                      <div className="absolute inset-0 rounded-xl border border-gold/0 group-hover:border-gold/20 transition-all duration-500" />
+                      <div className="absolute inset-0 rounded-xl border border-transparent group-hover:border-[var(--color-gold-transparent-20)] transition-all duration-500" />
                     </div>
 
                     {/* Decorative dot */}
-                    <div className="absolute bottom-3 left-3 w-2 h-2 rounded-full bg-gold/0 group-hover:bg-gold/50 transition-all duration-500" />
+                    <div className="absolute bottom-3 left-3 w-2 h-2 rounded-full bg-transparent group-hover:bg-[var(--color-gold-transparent-50)] transition-all duration-500" />
                   </div>
                 </motion.div>
               ))}
@@ -176,8 +176,8 @@ export function LogoMarquee({ className, speed = 'normal' }: LogoMarqueeProps) {
         </div>
 
         {/* Background decorative elements */}
-        <div className="absolute top-0 left-1/4 w-32 h-32 rounded-full bg-gold/5 blur-3xl pointer-events-none" />
-        <div className="absolute bottom-0 right-1/4 w-40 h-40 rounded-full bg-gold/5 blur-3xl pointer-events-none" />
+        <div className="absolute top-0 left-1/4 w-32 h-32 rounded-full blur-3xl pointer-events-none" style={{ backgroundColor: 'rgba(0,92,72,0.05)' }} />
+        <div className="absolute bottom-0 right-1/4 w-40 h-40 rounded-full blur-3xl pointer-events-none" style={{ backgroundColor: 'rgba(0,92,72,0.05)' }} />
       </div>
     </section>
   );

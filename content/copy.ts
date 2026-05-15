@@ -1,3 +1,11 @@
+export interface Stat {
+  value: number;
+  suffix: string;
+  label: string;
+  description: string;
+  isStatic?: boolean;
+}
+
 export const copy = {
   business: {
     name: "Luminary Booth Co.",
@@ -52,13 +60,13 @@ export const copy = {
         description: "From intimate weddings to corporate galas"
       },
       {
-        value: 98,
+        value: 99,
         suffix: "%",
         label: "Client Satisfaction",
         description: "Rated excellent by our clients"
       },
       {
-        value: 50,
+        value: 200,
         suffix: "+",
         label: "Custom Backdrops",
         description: "Unique designs for every occasion"
@@ -66,6 +74,7 @@ export const copy = {
       {
         value: 24,
         suffix: "/7",
+        isStatic: true,
         label: "Support",
         description: "Dedicated team always available"
       }
@@ -77,27 +86,27 @@ export const copy = {
     items: [
       {
         question: "How far in advance should I book?",
-        answer: "We recommend booking at least 3–6 months in advance for peak seasons (spring/summer weddings, holiday parties). For last‑minute events, please contact us—we may have availability."
+        answer: "We recommend booking 3–6 months in advance for weddings and large events. For corporate events, 4–6 weeks is typically sufficient. Peak season (May–October) books fast — the earlier, the better."
       },
       {
         question: "What is included in the rental?",
-        answer: "Every rental includes professional photography equipment, custom backdrop, premium lighting, a trained attendant, instant digital delivery, and a curated online gallery. Additional add‑ons like custom props, photobooks, and social media integration are available."
+        answer: "Every rental includes delivery and setup, a dedicated on-site attendant, unlimited sessions, instant digital delivery via QR code, custom branding overlays, and professional editing. A private online gallery is delivered within 48 hours."
       },
       {
         question: "Do you travel outside Los Angeles?",
-        answer: "Yes, we serve all of Southern California and are available for destination events nationwide. Travel fees apply for locations beyond 50 miles from Los Angeles."
+        answer: "Yes. We serve all of Southern California including Orange County, San Diego, Santa Barbara, and Palm Springs. Travel fees apply beyond 50 miles from Los Angeles. Destination events nationwide are available upon request."
       },
       {
         question: "Can I customize the photo booth design?",
-        answer: "Absolutely. Our design team works with you to create a fully customized experience that matches your event theme, brand colors, and aesthetic vision. We offer bespoke backdrops, branded overlays, and custom prop collections."
+        answer: "Absolutely. Backdrops, props, overlays, print templates, and lighting can all be tailored to match your event aesthetic perfectly. Our design team works directly with you from concept to execution."
       },
       {
         question: "What kind of events do you serve?",
-        answer: "We specialize in luxury weddings, corporate galas, product launches, milestone birthdays, charity fundraisers, and editorial photoshoots. Each event receives the same level of attention to detail and premium service."
+        answer: "Weddings, corporate galas, product launches, brand activations, private parties, film premieres, and charity events. Each receives the same meticulous attention to detail and white-glove service."
       },
       {
         question: "How do guests receive their photos?",
-        answer: "Photos are delivered instantly via QR code, email, or text message. Guests can also share directly to social media platforms. After the event, you receive a full gallery of high‑resolution, edited images within 48 hours."
+        answer: "Instantly via QR code, email, or AirDrop. Guests can also share directly to social media. All images are archived in a private online gallery for 90 days after your event, available for download anytime."
       }
     ]
   },

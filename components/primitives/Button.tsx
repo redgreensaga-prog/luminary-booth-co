@@ -8,13 +8,14 @@ import { MOTION } from '@/lib/tokens';
 
 // Button variants using CVA
 const buttonVariants = cva(
-  'inline-flex items-center justify-center whitespace-nowrap rounded-lg font-medium transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-black disabled:pointer-events-none disabled:opacity-50 relative overflow-hidden',
+  'inline-flex items-center justify-center whitespace-nowrap rounded-lg font-medium transition-colors duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-black disabled:pointer-events-none disabled:opacity-50 relative overflow-hidden',
   {
     variants: {
       variant: {
         primary: [
           'bg-gold hover:bg-gold-light text-black font-semibold',
-          'shadow-md hover:shadow-lg hover:shadow-gold-transparent-30',
+          'shadow-[0_0_0_0_rgba(0,92,72,0)] hover:shadow-[0_0_30px_8px_rgba(0,92,72,0.35)]',
+          'transition-shadow duration-500',
           'border border-gold-dark/30',
         ].join(' '),
         secondary: [

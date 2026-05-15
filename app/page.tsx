@@ -17,41 +17,49 @@ export default function HomePage() {
       <Navbar />
       {/* Hero Section - full width, no extra spacing */}
       <HeroSection />
-      
+      <div className="section-divider" />
+
       {/* Booth Showcase */}
       <Section id="booths" variant="default" spacing="none" container={false}>
         <BoothShowcase />
       </Section>
-      
+      <div className="section-divider" />
+
       {/* Masonry Gallery */}
       <Section id="gallery" variant="default" spacing="none" container={false}>
         <MasonryGallery />
       </Section>
-      
+      <div className="section-divider" />
+
       {/* Process Timeline */}
       <Section id="process" variant="default" spacing="none" container={false}>
         <ProcessTimeline />
       </Section>
-      
+      <div className="section-divider" />
+
       {/* Stats Counter */}
       <Section id="stats" variant="default" spacing="none" container={false}>
         <StatsCounter />
       </Section>
-      
+      <div className="section-divider" />
+
       {/* Logo Marquee */}
       <Section id="clients" variant="default" spacing="none" container={false}>
         <LogoMarquee />
       </Section>
-      
+      <div className="section-divider" />
+
       {/* Testimonials */}
       <Section id="testimonials" variant="default" spacing="none" container={false}>
         <TestimonialsCarousel />
       </Section>
-      
+      <div className="section-divider" />
+
       {/* FAQ Accordion */}
       <Section id="faq" variant="default" spacing="none" container={false}>
         <FAQAccordion />
       </Section>
+      <div className="section-divider" />
 
       {/* Footer */}
       <Footer />

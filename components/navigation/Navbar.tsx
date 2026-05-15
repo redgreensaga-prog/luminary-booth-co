@@ -8,6 +8,7 @@ import { Menu, X } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import MobileMenu from '../navigation/MobileMenu';
+import { Button } from '@/components/primitives/Button';
 
 interface NavLink {
   href: string;
@@ -130,24 +131,48 @@ export default function Navbar() {
                 ...MOTION.spring.cinematic,
               }}
             >
-              <Link href="/" className="group flex items-center gap-3">
-                <div className="relative">
-                  <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[var(--color-gold)] to-[var(--color-gold-dark)] flex items-center justify-center">
-                    <span className="text-lg font-bold text-[var(--color-black)] font-display">
-                      L
+              <motion.div
+                initial="rest"
+                whileHover="hover"
+                animate="rest"
+                variants={{
+                  rest: { scale: 1 },
+                  hover: {
+                    scale: 1.02,
+                    transition: { duration: 0.3, ease: [0.16, 1, 0.3, 1] },
+                  },
+                }}
+              >
+                <Link href="/" className="group flex items-center gap-3">
+                  <div className="relative">
+                    <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[var(--color-gold)] to-[var(--color-gold-dark)] flex items-center justify-center">
+                      <span className="text-lg font-bold text-[var(--color-black)] font-display">
+                        L
+                      </span>
+                    </div>
+                    <div className="absolute inset-0 rounded-full border border-[var(--color-gold)] opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  </div>
+                  <div className="flex flex-col">
+                    <span className="text-xl font-bold tracking-tight text-[var(--color-text-primary)] font-display leading-none">
+                      Luminary
+                    </span>
+                    <span className="text-xs tracking-widest text-[var(--color-text-secondary)] uppercase">
+                      Booth Co.
                     </span>
                   </div>
-                  <div className="absolute inset-0 rounded-full border border-[var(--color-gold)] opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                </div>
-                <div className="flex flex-col">
-                  <span className="text-xl font-bold tracking-tight text-[var(--color-text-primary)] font-display leading-none">
-                    Luminary
-                  </span>
-                  <span className="text-xs tracking-widest text-[var(--color-text-secondary)] uppercase">
-                    Booth Co.
-                  </span>
-                </div>
-              </Link>
+                </Link>
+                <motion.div
+                  className="h-px bg-gold w-full"
+                  style={{ originX: 0 }}
+                  variants={{
+                    rest: { scaleX: 0 },
+                    hover: {
+                      scaleX: 1,
+                      transition: { duration: 0.4, ease: [0.16, 1, 0.3, 1] },
+                    },
+                  }}
+                />
+              </motion.div>
             </motion.div>
 
             {/* Desktop Navigation */}
@@ -201,18 +226,14 @@ export default function Navbar() {
 
             {/* Desktop CTA Button */}
             <div className="hidden lg:block">
-              <button className="group relative px-6 py-3 text-sm font-medium tracking-wider uppercase transition-all duration-300">
-                <span className="relative z-10 text-[var(--color-gold)] group-hover:text-[var(--color-black)] transition-colors duration-300">
-                  Book Now
-                </span>
-                <div className="absolute inset-0 border border-[var(--color-gold)] rounded-sm group-hover:bg-[var(--color-gold)] transition-all duration-300"></div>
-                <div className="absolute inset-0 border border-[var(--color-gold)] rounded-sm translate-x-1 translate-y-1 opacity-0 group-hover:translate-x-0 group-hover:translate-y-0 group-hover:opacity-30 transition-all duration-300"></div>
-              </button>
+              <Button variant="primary" size="md">
+                Book Now
+              </Button>
             </div>
 
             {/* Mobile Menu Toggle */}
             <button
-              className="lg:hidden relative w-10 h-10 flex items-center justify-center"
+              className="lg:hidden relative w-10 h-10 flex items-center justify-center rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-black"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               aria-label={isMobileMenuOpen ? 'Close menu' : 'Open menu'}
             >

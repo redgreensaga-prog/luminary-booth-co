@@ -39,6 +39,9 @@ const config: Config = {
           warning: 'var(--color-warning)',
           error: 'var(--color-error)',
         },
+        'black-green': 'var(--color-black-green)',
+        'surface': 'var(--color-surface)',
+        'surface-raised': 'var(--color-surface-raised)',
         // Transparent gold variants
         goldTransparent10: 'var(--color-gold-transparent-10)',
         goldTransparent30: 'var(--color-gold-transparent-30)',

@@ -22,11 +22,11 @@ const cardVariants = cva(
         ].join(' '),
         bordered: [
           'bg-transparent border-gray-medium',
-          'shadow-none hover:border-gold/30',
+          'shadow-none hover:border-[var(--color-gold-transparent-30)]',
         ].join(' '),
         ghost: [
           'bg-transparent border-transparent',
-          'shadow-none hover:bg-gray-dark/50',
+          'shadow-none hover:bg-[var(--color-gray-dark)]',
         ].join(' '),
       },
       padding: {

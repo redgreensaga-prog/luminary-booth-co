@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { cn } from '@/lib/utils';
 import { COPY } from '@/content/copy';
 import { MOTION } from '@/lib/tokens';
+import Link from 'next/link';
 
 interface FAQAccordionProps {
   className?: string;
@@ -73,7 +74,7 @@ export function FAQAccordion({ className, maxOpen = 1 }: FAQAccordionProps) {
   };
 
   return (
-    <section className={cn('py-20 relative overflow-hidden', className)}>
+    <section className={cn('py-20 relative overflow-hidden bg-surface', className)}>
       <div className="container mx-auto px-4 max-w-4xl">
         {/* Section header */}
         <motion.div
@@ -83,6 +84,9 @@ export function FAQAccordion({ className, maxOpen = 1 }: FAQAccordionProps) {
           transition={{ duration: 0.8, ease: MOTION.easing.cinematic }}
           className="text-center mb-16"
         >
+          <p className="section-label inline-block text-xs font-semibold tracking-widest uppercase text-gold mb-4">
+            Questions
+          </p>
           <h2 className="text-4xl md:text-5xl font-display font-light tracking-tight mb-4">
             {COPY.faq.title}
           </h2>
@@ -107,19 +111,19 @@ export function FAQAccordion({ className, maxOpen = 1 }: FAQAccordionProps) {
                 key={index}
                 variants={itemVariants}
                 className={cn(
-                  'rounded-xl border',
-                  'bg-gradient-to-b from-grayDark/30 to-black/30',
+                  'group rounded-xl border',
+                  'bg-gradient-to-b from-[var(--color-gray-dark)] to-[var(--color-black)]',
                   'backdrop-blur-sm',
                   'transition-all duration-300',
                   isOpen
-                    ? 'border-gold/30 shadow-gold'
-                    : 'border-grayMedium/20 hover:border-gold/20'
+                    ? 'border-[var(--color-gold-transparent-30)] shadow-[0_0_20px_0_rgba(0,92,72,0.15)]'
+                    : 'border-[var(--color-gray-medium)] hover:border-[var(--color-gold-transparent-20)]'
                 )}
               >
                 {/* Question header */}
                 <button
                   onClick={() => toggleItem(index)}
-                  className="w-full p-6 md:p-8 text-left flex items-center justify-between gap-6 group"
+                  className="w-full p-6 md:p-8 text-left flex items-center justify-between gap-6 group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-gold-transparent-50)] focus-visible:ring-inset rounded-xl"
                   aria-expanded={isOpen}
                 >
                   <div className="flex-1">
@@ -144,8 +148,8 @@ export function FAQAccordion({ className, maxOpen = 1 }: FAQAccordionProps) {
                       'w-10 h-10 rounded-full flex items-center justify-center',
                       'border',
                       isOpen
-                        ? 'border-gold bg-gold/10'
-                        : 'border-grayLight group-hover:border-gold',
+                        ? 'border-[var(--color-gold)] bg-[var(--color-gold-transparent-10)]'
+                        : 'border-[var(--color-gray-light)] group-hover:border-[var(--color-gold)]',
                       'transition-all duration-300'
                     )}>
                       <svg
@@ -176,7 +180,7 @@ export function FAQAccordion({ className, maxOpen = 1 }: FAQAccordionProps) {
                       className="overflow-hidden"
                     >
                       <div className="px-6 md:px-8 pb-6 md:pb-8">
-                        <div className="pl-10 border-l-2 border-gold/30">
+                        <div className="pl-10 border-l-2 border-[var(--color-gold-transparent-30)]">
                           <p className="text-textSecondary text-lg leading-relaxed">
                             {item.answer}
                           </p>
@@ -194,11 +198,10 @@ export function FAQAccordion({ className, maxOpen = 1 }: FAQAccordionProps) {
                 </AnimatePresence>
 
                 {/* Hover effect line */}
-                <div className={cn(
-                  'h-px mx-6 bg-gradient-to-r from-transparent via-gold/0 to-transparent',
-                  'transition-all duration-500',
-                  isOpen ? 'via-gold/50' : 'group-hover:via-gold/30'
-                )} />
+                <div
+                  className="h-px mx-6 bg-gradient-to-r from-transparent to-transparent transition-all duration-500"
+                  style={{ backgroundImage: isOpen ? 'linear-gradient(to right, transparent, rgba(0,92,72,0.50), transparent)' : undefined }}
+                />
               </motion.div>
             );
           })}
@@ -212,25 +215,25 @@ export function FAQAccordion({ className, maxOpen = 1 }: FAQAccordionProps) {
           transition={{ delay: 0.5 }}
           className="text-center mt-16"
         >
-          <div className="inline-flex flex-col items-center gap-6 p-8 rounded-2xl border border-grayMedium/30 bg-gradient-to-br from-grayDark/20 to-black/20 backdrop-blur-sm">
+          <div className="inline-flex flex-col items-center gap-6 p-8 rounded-2xl border border-[var(--color-gray-medium)] bg-gradient-to-br from-[var(--color-gray-dark)] to-[var(--color-black)] backdrop-blur-sm">
             <h3 className="text-2xl font-display font-light">
               Didn&apos;t find what you&apos;re looking for?
             </h3>
             <p className="text-textSecondary max-w-md">
               Our team is ready to answer any questions about custom designs, availability, or special requests.
             </p>
-            <a
+            <Link
               href="/contact"
-              className="px-8 py-3 rounded-lg bg-gradient-to-r from-goldDark to-gold text-textInverse font-medium hover:shadow-goldLg transition-all duration-300"
+              className="inline-flex items-center justify-center px-6 py-2.5 rounded-lg bg-gold hover:bg-gold-light text-black font-semibold text-sm transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-black shadow-md hover:shadow-lg"
             >
               Contact Our Team
-            </a>
+            </Link>
           </div>
         </motion.div>
 
         {/* Background decorative elements */}
-        <div className="absolute top-20 -left-20 w-48 h-48 rounded-full bg-gold/5 blur-3xl pointer-events-none" />
-        <div className="absolute bottom-20 -right-20 w-64 h-64 rounded-full bg-gold/3 blur-3xl pointer-events-none" />
+        <div className="absolute top-20 -left-20 w-48 h-48 rounded-full blur-3xl pointer-events-none" style={{ backgroundColor: 'rgba(0,92,72,0.05)' }} />
+        <div className="absolute bottom-20 -right-20 w-64 h-64 rounded-full blur-3xl pointer-events-none" style={{ backgroundColor: 'rgba(0,92,72,0.03)' }} />
       </div>
     </section>
   );

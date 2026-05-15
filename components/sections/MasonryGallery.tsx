@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useState, useRef } from 'react';
 import { Search, X, Maximize2, Heart } from 'lucide-react';
 import Lightbox from './Lightbox';
+import { MOTION } from '@/lib/tokens';
 
 type GalleryItem = {
   id: number;
@@ -49,10 +50,18 @@ const galleryItems: GalleryItem[] = [
   {
     id: 4, title: 'Editorial Portraits', category: 'editorial', image: '', aspectRatio: 'portrait', featured: true,
     svgPattern: makeSvg(<>
-      {Array.from({ length: 12 }).map((_, i) => {
-        const angle = (i * 30 * Math.PI) / 180;
-        return <line key={i} x1="50%" y1="50%" x2={`${50 + 50 * Math.cos(angle)}%`} y2={`${50 + 50 * Math.sin(angle)}%`} stroke="rgba(0,92,72,0.07)" strokeWidth="1" />;
-      })}
+      <line x1="50%" y1="50%" x2="100.00%" y2="50.00%" stroke="rgba(0,92,72,0.07)" strokeWidth="1" />
+      <line x1="50%" y1="50%" x2="93.30%" y2="75.00%" stroke="rgba(0,92,72,0.07)" strokeWidth="1" />
+      <line x1="50%" y1="50%" x2="75.00%" y2="93.30%" stroke="rgba(0,92,72,0.07)" strokeWidth="1" />
+      <line x1="50%" y1="50%" x2="50.00%" y2="100.00%" stroke="rgba(0,92,72,0.07)" strokeWidth="1" />
+      <line x1="50%" y1="50%" x2="25.00%" y2="93.30%" stroke="rgba(0,92,72,0.07)" strokeWidth="1" />
+      <line x1="50%" y1="50%" x2="6.70%" y2="75.00%" stroke="rgba(0,92,72,0.07)" strokeWidth="1" />
+      <line x1="50%" y1="50%" x2="0.00%" y2="50.00%" stroke="rgba(0,92,72,0.07)" strokeWidth="1" />
+      <line x1="50%" y1="50%" x2="6.70%" y2="25.00%" stroke="rgba(0,92,72,0.07)" strokeWidth="1" />
+      <line x1="50%" y1="50%" x2="25.00%" y2="6.70%" stroke="rgba(0,92,72,0.07)" strokeWidth="1" />
+      <line x1="50%" y1="50%" x2="50.00%" y2="0.00%" stroke="rgba(0,92,72,0.07)" strokeWidth="1" />
+      <line x1="50%" y1="50%" x2="75.00%" y2="6.70%" stroke="rgba(0,92,72,0.07)" strokeWidth="1" />
+      <line x1="50%" y1="50%" x2="93.30%" y2="25.00%" stroke="rgba(0,92,72,0.07)" strokeWidth="1" />
       <circle cx="50%" cy="50%" r="20%" fill="none" stroke="rgba(0,92,72,0.25)" strokeWidth="1.5" />
       <circle cx="50%" cy="50%" r="8%" fill="rgba(0,92,72,0.12)" />
     </>),
@@ -179,7 +188,7 @@ export default function MasonryGallery() {
   };
 
   return (
-    <section className="py-[var(--space-10)] bg-[var(--color-gray-dark)]" onKeyDown={handleKeyDown} tabIndex={-1}>
+    <section className="py-[var(--space-10)] bg-black-green" onKeyDown={handleKeyDown} tabIndex={-1}>
       <div className="container px-4 mx-auto max-w-7xl">
         {/* Header */}
         <div className="mb-12 text-center">
@@ -211,7 +220,7 @@ export default function MasonryGallery() {
               {categories.map((category) => (
                 <motion.button
                   key={category.id}
-                  className={`px-4 py-2 text-sm font-medium rounded-sm transition-all duration-300 ${
+                  className={`px-4 py-2 text-sm font-medium rounded-sm transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-black ${
                     activeCategory === category.id
                       ? 'bg-[var(--color-gold)] text-[var(--color-black)]'
                       : 'bg-[var(--color-gray-dark)] text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] hover:bg-[var(--color-gray-medium)]'
@@ -239,7 +248,8 @@ export default function MasonryGallery() {
               {searchQuery && (
                 <button
                   onClick={() => setSearchQuery('')}
-                  className="absolute right-3 top-1/2 transform -translate-y-1/2 text-[var(--color-text-tertiary)] hover:text-[var(--color-text-primary)]"
+                  className="absolute right-3 top-1/2 transform -translate-y-1/2 text-[var(--color-text-tertiary)] hover:text-[var(--color-text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold rounded-sm"
+                  aria-label="Clear search"
                 >
                   <X className="w-4 h-4" />
                 </button>
@@ -253,7 +263,7 @@ export default function MasonryGallery() {
           <motion.div
             key={`${activeCategory}-${searchQuery}`}
             initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
+            animate={{ opacity: 1, transition: { staggerChildren: MOTION.stagger.normal } }}
             exit={{ opacity: 0 }}
             className="relative"
           >
@@ -270,21 +280,34 @@ export default function MasonryGallery() {
                     initial={{ opacity: 0, scale: 0.9 }}
                     animate={{ opacity: 1, scale: 1 }}
                     exit={{ opacity: 0, scale: 0.9 }}
-                    transition={{ duration: 0.3 }}
-                    className="relative mb-4 break-inside-avoid group cursor-pointer"
+                    transition={{ duration: MOTION.duration.fast / 1000 }}
+                    className="relative mb-4 break-inside-avoid cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-black rounded-sm"
                     onClick={() => handleImageClick(item)}
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        handleImageClick(item);
+                      }
+                    }}
+                    role="button"
+                    tabIndex={0}
+                    aria-label={`View ${item.title}`}
                   >
                     <div className={`relative overflow-hidden rounded-sm ${aspectRatioClasses[item.aspectRatio as keyof typeof aspectRatioClasses]}`}>
                       {/* SVG pattern background */}
-                      <div className="absolute inset-0 transition-transform duration-700 group-hover:scale-110">
+                      <motion.div
+                        className="absolute inset-0"
+                        whileHover={{ scale: 1.1 }}
+                        transition={{ duration: MOTION.duration.slow / 1000, ease: MOTION.easing.inOut }}
+                      >
                         {item.svgPattern}
-                      </div>
+                      </motion.div>
 
                       {/* Overlay gradient */}
                       <div className="absolute inset-0 bg-gradient-to-t from-[var(--color-black-transparent-70)] via-transparent to-transparent"></div>
 
                       {/* Content overlay */}
-                      <div className="absolute inset-0 flex flex-col justify-end p-6 transition-all duration-300 group-hover:bg-[var(--color-black-transparent-50)]">
+                      <div className="absolute inset-0 flex flex-col justify-end p-6">
                         {/* Category badge */}
                         <div className="inline-flex mb-2 px-3 py-1 text-xs font-medium tracking-wider uppercase rounded-sm bg-[var(--color-gold-transparent-10)] text-[var(--color-gold)]">
                           {item.category}
@@ -313,7 +336,7 @@ export default function MasonryGallery() {
                     </div>
 
                     {/* Gold accent line */}
-                    <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-[var(--color-gold-transparent-50)] to-transparent transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500"></div>
+                    <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-[var(--color-gold-transparent-50)] to-transparent"></div>
                   </motion.div>
                 ))}
               </div>

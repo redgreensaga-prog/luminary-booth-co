@@ -110,7 +110,7 @@ export default function TestimonialsCarousel({
   return (
     <section
       className={cn(
-        'relative py-16 md:py-24 overflow-hidden',
+        'relative py-16 md:py-24 overflow-hidden bg-black-green',
         className
       )}
       onMouseEnter={handleMouseEnter}
@@ -129,6 +129,9 @@ export default function TestimonialsCarousel({
           transition={{ duration: MOTION.duration.slow / 1000, ease: MOTION.easing.cinematic }}
           className="text-center mb-12 md:mb-16"
         >
+          <p className="section-label inline-block text-xs font-semibold tracking-widest uppercase text-gold mb-4">
+            Client Stories
+          </p>
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-display font-light tracking-tight mb-4">
             {COPY.testimonials.title}
           </h2>
@@ -140,7 +143,7 @@ export default function TestimonialsCarousel({
         {/* Carousel container */}
         <div className="relative">
           {/* Testimonial card */}
-          <div className="relative bg-gradient-to-br from-grayDark/40 to-black/40 backdrop-blur-sm border border-grayMedium/20 rounded-3xl p-8 md:p-12 shadow-2xl shadow-gold/10 overflow-hidden">
+          <div className="relative bg-gradient-to-br from-[var(--color-gray-dark)] to-[var(--color-black)] backdrop-blur-sm border border-[var(--color-gray-medium)] rounded-3xl p-8 md:p-12 shadow-2xl overflow-hidden">
             {/* Decorative gold accent */}
             <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-gold to-transparent" />
             
@@ -154,7 +157,7 @@ export default function TestimonialsCarousel({
                 animate="center"
                 exit="exit"
                 transition={{
-                  x: { type: 'spring', stiffness: 300, damping: 30 },
+                  x: { type: 'spring', ...MOTION.spring.stiff },
                   opacity: { duration: MOTION.duration.normal / 1000 },
                   scale: { duration: MOTION.duration.normal / 1000 },
                 }}
@@ -168,7 +171,7 @@ export default function TestimonialsCarousel({
                       initial={{ opacity: 0, scale: 0.8 }}
                       animate={{ opacity: 1, scale: 1 }}
                       transition={{ delay: 0.2, type: 'spring', stiffness: 200, damping: 15 }}
-                      className="absolute inset-2 rounded-full overflow-hidden border-4 border-black/20"
+                      className="absolute inset-2 rounded-full overflow-hidden border-4 border-[var(--color-gray-medium)]"
                     >
                       {currentTestimonial.avatarUrl ? (
                         <img
@@ -189,14 +192,14 @@ export default function TestimonialsCarousel({
                       initial={{ opacity: 0, scale: 0.5 }}
                       animate={{ opacity: 1, scale: 1 }}
                       transition={{ delay: 0.3 }}
-                      className="absolute inset-0 rounded-full border border-gold/30"
+                      className="absolute inset-0 rounded-full border border-[var(--color-gold-transparent-30)]"
                       style={{ borderWidth: '2px' }}
                     />
                     <motion.div
                       initial={{ opacity: 0, scale: 0.8 }}
                       animate={{ opacity: 1, scale: 1 }}
                       transition={{ delay: 0.4 }}
-                      className="absolute -inset-2 rounded-full border border-gold/10"
+                      className="absolute -inset-2 rounded-full border border-[var(--color-gold-transparent-10)]"
                       style={{ borderWidth: '1px' }}
                     />
                   </div>
@@ -260,12 +263,12 @@ export default function TestimonialsCarousel({
                       )}
                       <div className="flex flex-wrap items-center justify-center lg:justify-start gap-2">
                         {currentTestimonial.company && (
-                          <span className="text-sm md:text-base text-textTertiary bg-grayDark/50 px-3 py-1 rounded-full">
+                          <span className="text-sm md:text-base text-textTertiary bg-[var(--color-gray-dark)] px-3 py-1 rounded-full">
                             {currentTestimonial.company}
                           </span>
                         )}
                         {currentTestimonial.event && (
-                          <span className="text-sm md:text-base text-gold bg-gold/30 px-3 py-1 rounded-full">
+                          <span className="text-sm md:text-base text-gold bg-[var(--color-gold-transparent-30)] px-3 py-1 rounded-full">
                             {currentTestimonial.event}
                           </span>
                         )}
@@ -280,7 +283,7 @@ export default function TestimonialsCarousel({
             {testimonials.length > 1 && (
               <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2">
                 <div className="flex items-center gap-2">
-                  <div className="w-32 h-0.5 bg-grayLight/30 rounded-full overflow-hidden">
+                  <div className="w-32 h-0.5 bg-[var(--color-gray-light)] rounded-full overflow-hidden">
                     <motion.div
                       key={currentIndex}
                       initial={{ width: '0%' }}
@@ -302,7 +305,7 @@ export default function TestimonialsCarousel({
             <>
               <button
                 onClick={goToPrev}
-                className="absolute top-1/2 -left-4 md:-left-8 transform -translate-y-1/2 w-12 h-12 md:w-16 md:h-16 rounded-full bg-grayDark/80 backdrop-blur-sm border border-grayMedium/30 hover:border-gold/50 hover:bg-grayDark flex items-center justify-center transition-all duration-300 group focus:outline-none focus:ring-2 focus:ring-gold/50 focus:ring-offset-2 focus:ring-offset-black"
+                className="absolute top-1/2 -left-4 md:-left-8 transform -translate-y-1/2 w-12 h-12 md:w-16 md:h-16 rounded-full bg-[var(--color-gray-dark)] backdrop-blur-sm border border-[var(--color-gray-medium)] hover:border-[var(--color-gold-transparent-50)] hover:bg-[var(--color-gray-dark)] flex items-center justify-center transition-all duration-300 group focus:outline-none focus:ring-2 focus:ring-[var(--color-gold-transparent-50)] focus:ring-offset-2 focus:ring-offset-black"
                 aria-label="Previous testimonial"
               >
                 <ChevronLeft
@@ -312,7 +315,7 @@ export default function TestimonialsCarousel({
               </button>
               <button
                 onClick={goToNext}
-                className="absolute top-1/2 -right-4 md:-right-8 transform -translate-y-1/2 w-12 h-12 md:w-16 md:h-16 rounded-full bg-grayDark/80 backdrop-blur-sm border border-grayMedium/30 hover:border-gold/50 hover:bg-grayDark flex items-center justify-center transition-all duration-300 group focus:outline-none focus:ring-2 focus:ring-gold/50 focus:ring-offset-2 focus:ring-offset-black"
+                className="absolute top-1/2 -right-4 md:-right-8 transform -translate-y-1/2 w-12 h-12 md:w-16 md:h-16 rounded-full bg-[var(--color-gray-dark)] backdrop-blur-sm border border-[var(--color-gray-medium)] hover:border-[var(--color-gold-transparent-50)] hover:bg-[var(--color-gray-dark)] flex items-center justify-center transition-all duration-300 group focus:outline-none focus:ring-2 focus:ring-[var(--color-gold-transparent-50)] focus:ring-offset-2 focus:ring-offset-black"
                 aria-label="Next testimonial"
               >
                 <ChevronRight
@@ -338,10 +341,10 @@ export default function TestimonialsCarousel({
                 key={index}
                 onClick={() => goToSlide(index)}
                 className={cn(
-                  'w-3 h-3 rounded-full transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-gold/50 focus:ring-offset-2 focus:ring-offset-black',
+                  'w-3 h-3 rounded-full transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-[var(--color-gold-transparent-50)] focus:ring-offset-2 focus:ring-offset-black',
                   index === currentIndex
                     ? 'bg-gold scale-125'
-                    : 'bg-grayLight/50 hover:bg-grayLight'
+                    : 'bg-[var(--color-gray-light)] hover:bg-[var(--color-gray-light)]'
                 )}
                 aria-label={`Go to testimonial ${index + 1}`}
               />
@@ -355,7 +358,7 @@ export default function TestimonialsCarousel({
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="absolute bottom-4 right-4 text-xs text-textTertiary bg-black/50 px-2 py-1 rounded"
+            className="absolute bottom-4 right-4 text-xs text-textTertiary bg-[var(--color-black-transparent-50)] px-2 py-1 rounded"
           >
             Paused
           </motion.div>
@@ -367,7 +370,8 @@ export default function TestimonialsCarousel({
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ delay: 0.5 }}
-          className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 rounded-full bg-gold/5 blur-3xl pointer-events-none"
+          className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 rounded-full blur-3xl pointer-events-none"
+          style={{ backgroundColor: 'rgba(0,92,72,0.05)' }}
         />
       </div>
     </section>

@@ -48,7 +48,7 @@ export function ProcessTimeline({ className }: ProcessTimelineProps) {
   };
 
   return (
-    <section className={cn('py-20 relative overflow-hidden', className)}>
+    <section className={cn('py-20 relative overflow-hidden bg-surface', className)}>
       <div className="container mx-auto px-4 max-w-6xl">
         {/* Section header */}
         <motion.div
@@ -58,6 +58,9 @@ export function ProcessTimeline({ className }: ProcessTimelineProps) {
           transition={{ duration: 0.8, ease: MOTION.easing.cinematic }}
           className="text-center mb-16"
         >
+          <p className="section-label inline-block text-xs font-semibold tracking-widest uppercase text-gold mb-4">
+            The Process
+          </p>
           <h2 className="text-4xl md:text-5xl font-display font-light tracking-tight mb-4">
             {COPY.process.title}
           </h2>
@@ -78,7 +81,7 @@ export function ProcessTimeline({ className }: ProcessTimelineProps) {
           <div className="absolute left-1/2 transform -translate-x-1/2 md:left-8 md:translate-x-0 h-full w-px hidden md:block">
             <motion.div
               variants={lineVariants}
-              className="h-full w-full bg-gradient-to-b from-gold via-gold/50 to-transparent"
+              className="h-full w-full bg-gradient-to-b from-[var(--color-gold)] via-[var(--color-gold-transparent-50)] to-transparent"
             />
           </div>
 
@@ -104,15 +107,15 @@ export function ProcessTimeline({ className }: ProcessTimelineProps) {
                     whileInView={{ scale: 1 }}
                     viewport={{ once: true }}
                     transition={{ delay: index * 0.2 + 0.7, type: 'spring', stiffness: 150 }}
-                    className="absolute inset-0 rounded-full border-2 border-gold/30"
+                    className="absolute inset-0 rounded-full border-2 border-[var(--color-gold-transparent-30)]"
                     style={{ scale: 1.5 }}
                   />
                 </div>
 
                 {/* Step card */}
                 <div className={cn(
-                  'md:ml-24 p-8 rounded-2xl border border-grayMedium/30',
-                  'bg-gradient-to-br from-grayDark/50 to-black/50',
+                  'md:ml-24 p-8 rounded-2xl border border-[var(--color-gray-medium)]',
+                  'bg-gradient-to-br from-[var(--color-gray-dark)] to-[var(--color-black)]',
                   'backdrop-blur-sm',
                   index % 2 === 0 ? 'md:mr-8' : ''
                 )}>
@@ -163,7 +166,7 @@ export function ProcessTimeline({ className }: ProcessTimelineProps) {
                       transition={{ delay: index * 0.2 + 0.3, duration: 0.7 }}
                       className="hidden md:block flex-shrink-0"
                     >
-                      <div className="w-px h-16 bg-gradient-to-b from-gold/30 via-gold/10 to-transparent" />
+                      <div className="w-px h-16 bg-gradient-to-b from-[var(--color-gold-transparent-30)] via-[var(--color-gold-transparent-10)] to-transparent" />
                     </motion.div>
                   </div>
                 </div>
@@ -171,7 +174,7 @@ export function ProcessTimeline({ className }: ProcessTimelineProps) {
                 {/* Connecting line for mobile */}
                 {index < steps.length - 1 && (
                   <div className="md:hidden absolute left-1/2 transform -translate-x-1/2 bottom-0 translate-y-8 w-px h-8">
-                    <div className="h-full w-full bg-gradient-to-b from-gold/50 to-transparent" />
+                    <div className="h-full w-full bg-gradient-to-b from-[var(--color-gold-transparent-50)] to-transparent" />
                   </div>
                 )}
               </motion.div>
@@ -180,8 +183,8 @@ export function ProcessTimeline({ className }: ProcessTimelineProps) {
         </motion.div>
 
         {/* Background decorative elements */}
-        <div className="absolute top-1/4 -right-20 w-64 h-64 rounded-full bg-gold/5 blur-3xl pointer-events-none" />
-        <div className="absolute bottom-1/4 -left-20 w-48 h-48 rounded-full bg-gold/3 blur-3xl pointer-events-none" />
+        <div className="absolute top-1/4 -right-20 w-64 h-64 rounded-full blur-3xl pointer-events-none" style={{ backgroundColor: 'rgba(0,92,72,0.05)' }} />
+        <div className="absolute bottom-1/4 -left-20 w-48 h-48 rounded-full blur-3xl pointer-events-none" style={{ backgroundColor: 'rgba(0,92,72,0.03)' }} />
       </div>
     </section>
   );

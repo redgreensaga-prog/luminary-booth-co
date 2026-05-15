@@ -3,14 +3,16 @@
 import { cn } from '@/lib/utils';
 import { copy } from '@/content/copy';
 import Link from 'next/link';
+import { motion } from 'framer-motion';
+import { useEffect, useState } from 'react';
+import { MOTION } from '@/lib/tokens';
 import {
   Mail,
   Phone,
   MapPin,
-  Send,
 } from 'lucide-react';
 
-/* ── Inline SVG social icons (brand logos not in lucide) ── */
+/* ── Inline SVG social icons ── */
 const InstagramIcon = ({ className }: { className?: string }) => (
   <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
     <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
@@ -31,10 +33,9 @@ const TwitterIcon = ({ className }: { className?: string }) => (
   </svg>
 );
 
-const YoutubeIcon = ({ className }: { className?: string }) => (
+const PinterestIcon = ({ className }: { className?: string }) => (
   <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.94 2C5.12 20 12 20 12 20s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z" />
-    <polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" />
+    <path d="M12 2C6.477 2 2 6.477 2 12c0 4.236 2.636 7.855 6.356 9.312-.088-.791-.167-2.005.035-2.868.181-.78 1.172-4.97 1.172-4.97s-.299-.598-.299-1.482c0-1.388.806-2.428 1.808-2.428.852 0 1.265.64 1.265 1.408 0 .858-.546 2.14-.828 3.33-.236.995.499 1.806 1.476 1.806 1.771 0 3.132-1.867 3.132-4.562 0-2.387-1.715-4.053-4.163-4.053-2.836 0-4.5 2.126-4.5 4.323 0 .856.33 1.772.741 2.273a.3.3 0 0 1 .069.286c-.076.315-.244.995-.277 1.134-.044.183-.146.222-.337.134-1.249-.581-2.03-2.407-2.03-3.874 0-3.154 2.292-6.052 6.608-6.052 3.469 0 6.165 2.473 6.165 5.776 0 3.447-2.173 6.22-5.19 6.22-1.013 0-1.966-.527-2.292-1.148l-.623 2.378c-.226.869-.835 1.958-1.244 2.621.937.29 1.931.446 2.962.446 5.523 0 10-4.477 10-10S17.523 2 12 2z" />
   </svg>
 );
 
@@ -45,10 +46,10 @@ interface SocialLink {
 }
 
 const socialLinks: SocialLink[] = [
-  { name: 'Instagram', href: '#', icon: <InstagramIcon className="w-5 h-5" /> },
-  { name: 'Facebook', href: '#', icon: <FacebookIcon className="w-5 h-5" /> },
-  { name: 'Twitter', href: '#', icon: <TwitterIcon className="w-5 h-5" /> },
-  { name: 'Youtube', href: '#', icon: <YoutubeIcon className="w-5 h-5" /> },
+  { name: 'Instagram', href: 'https://www.instagram.com/luminaryboothco/', icon: <InstagramIcon className="w-5 h-5" /> },
+  { name: 'Facebook', href: 'https://www.facebook.com/luminaryboothco/', icon: <FacebookIcon className="w-5 h-5" /> },
+  { name: 'Twitter', href: 'https://twitter.com/luminaryboothco', icon: <TwitterIcon className="w-5 h-5" /> },
+  { name: 'Pinterest', href: 'https://www.pinterest.com/luminaryboothco/', icon: <PinterestIcon className="w-5 h-5" /> },
 ];
 
 const footerLinks = {
@@ -77,144 +78,206 @@ const footerLinks = {
 const currentYear = new Date().getFullYear();
 
 export default function Footer() {
+  const [prefersReduced, setPrefersReduced] = useState(false);
+
+  useEffect(() => {
+    setPrefersReduced(window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+  }, []);
+
+  const dur = prefersReduced ? 0 : MOTION.duration.slow / 1000;
+  const fastDur = prefersReduced ? 0 : MOTION.duration.normal / 1000;
+
+  const containerVariants = {
+    hidden: { opacity: 0, y: prefersReduced ? 0 : 30 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: dur,
+        ease: MOTION.easing.editorial,
+        staggerChildren: MOTION.stagger.normal,
+      },
+    },
+  };
+
+  const brandVariants = {
+    hidden: { opacity: 0, y: prefersReduced ? 0 : 20 },
+    visible: (i: number) => ({
+      opacity: 1,
+      y: 0,
+      transition: {
+        delay: prefersReduced ? 0 : i * MOTION.stagger.normal,
+        duration: dur,
+        ease: MOTION.easing.editorial,
+      },
+    }),
+  };
+
+  const columnVariants = {
+    hidden: { opacity: 0, y: prefersReduced ? 0 : 20 },
+    visible: (i: number) => ({
+      opacity: 1,
+      y: 0,
+      transition: {
+        delay: prefersReduced ? 0 : (i + 2) * MOTION.stagger.normal,
+        duration: dur,
+        ease: MOTION.easing.editorial,
+      },
+    }),
+  };
+
+  const bottomBarVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        delay: prefersReduced ? 0 : 6 * MOTION.stagger.normal,
+        duration: fastDur,
+        ease: MOTION.easing.inOut,
+      },
+    },
+  };
+
   return (
     <footer className="bg-black text-white border-t border-gray-800">
       {/* Main footer content */}
-      <div className="max-w-7xl mx-auto px-4 py-16 md:py-24">
+      <motion.div
+        className="max-w-7xl mx-auto px-4 py-16 md:py-24"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: '-80px' }}
+        variants={containerVariants}
+      >
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 lg:gap-8">
           {/* Brand / About */}
           <div className="lg:col-span-4">
-            <Link href="/" className="inline-block mb-6">
-              <span className="text-2xl font-display font-bold tracking-wider text-gold">
-                {copy.business.name}
-              </span>
-            </Link>
-            <p className="text-white/60 mb-8 max-w-sm leading-relaxed">
-              Southern California&apos;s premier luxury photo booth experience. 
-              Elevating events with bespoke photography, artisanal design, and 
+            <motion.div custom={0} variants={brandVariants}>
+              <Link href="/" className="inline-block mb-6">
+                <span className="text-2xl font-display font-bold tracking-wider text-gold">
+                  {copy.business.name}
+                </span>
+              </Link>
+            </motion.div>
+            <motion.p custom={1} variants={brandVariants} className="text-white/60 mb-8 max-w-sm leading-relaxed">
+              Southern California&apos;s premier luxury photo booth experience.
+              Elevating events with bespoke photography, artisanal design, and
               unforgettable memories since 2018.
-            </p>
+            </motion.p>
             {/* Social links */}
-            <div className="flex items-center gap-4">
+            <motion.div custom={2} variants={brandVariants} className="flex items-center gap-4">
               {socialLinks.map((social) => (
-                <Link
+                <a
                   key={social.name}
                   href={social.href}
                   aria-label={social.name}
-                  className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center text-white/50 hover:text-gold hover:border-gold/50 transition-colors"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center text-white/50 hover:text-gold hover:border-[var(--color-gold-transparent-50)] transition-colors"
                 >
                   {social.icon}
-                </Link>
+                </a>
               ))}
-            </div>
+            </motion.div>
           </div>
 
-          {/* Quick Links */}
-          <div className="lg:col-span-2">
+          {/* Services column */}
+          <motion.div custom={0} variants={columnVariants} className="lg:col-span-2">
             <h3 className="text-xs font-semibold tracking-widest uppercase text-gold mb-6">
               Services
             </h3>
             <ul className="space-y-4">
               {footerLinks.services.map((link) => (
                 <li key={link.label}>
-                  <Link
-                    href={link.href}
-                    className="text-white/60 hover:text-gold transition-colors text-sm"
-                  >
+                  <Link href={link.href} className="text-white/60 hover:text-gold transition-colors text-sm">
                     {link.label}
                   </Link>
                 </li>
               ))}
             </ul>
-          </div>
+          </motion.div>
 
-          <div className="lg:col-span-2">
+          {/* Company column */}
+          <motion.div custom={1} variants={columnVariants} className="lg:col-span-2">
             <h3 className="text-xs font-semibold tracking-widest uppercase text-gold mb-6">
               Company
             </h3>
             <ul className="space-y-4">
               {footerLinks.company.map((link) => (
                 <li key={link.label}>
-                  <Link
-                    href={link.href}
-                    className="text-white/60 hover:text-gold transition-colors text-sm"
-                  >
+                  <Link href={link.href} className="text-white/60 hover:text-gold transition-colors text-sm">
                     {link.label}
                   </Link>
                 </li>
               ))}
             </ul>
-          </div>
+          </motion.div>
 
-          <div className="lg:col-span-2">
+          {/* Support column */}
+          <motion.div custom={2} variants={columnVariants} className="lg:col-span-2">
             <h3 className="text-xs font-semibold tracking-widest uppercase text-gold mb-6">
               Support
             </h3>
             <ul className="space-y-4">
               {footerLinks.support.map((link) => (
                 <li key={link.label}>
-                  <Link
-                    href={link.href}
-                    className="text-white/60 hover:text-gold transition-colors text-sm"
-                  >
+                  <Link href={link.href} className="text-white/60 hover:text-gold transition-colors text-sm">
                     {link.label}
                   </Link>
                 </li>
               ))}
             </ul>
-          </div>
+          </motion.div>
 
           {/* Contact + Newsletter */}
-          <div className="lg:col-span-2">
+          <motion.div custom={3} variants={columnVariants} className="lg:col-span-2">
             <h3 className="text-xs font-semibold tracking-widest uppercase text-gold mb-6">
               Contact
             </h3>
             <ul className="space-y-4 mb-8">
               <li>
                 <a href={`mailto:${copy.business.email}`} className="flex items-start gap-3 text-white/60 hover:text-gold transition-colors text-sm">
-                  <Mail className="w-4 h-4 mt-0.5 shrink-0 text-gold/60" />
+                  <Mail className="w-4 h-4 mt-0.5 shrink-0 text-[var(--color-gold-transparent-70)]" />
                   <span>{copy.business.email}</span>
                 </a>
               </li>
               <li>
                 <a href={`tel:${copy.business.phone}`} className="flex items-start gap-3 text-white/60 hover:text-gold transition-colors text-sm">
-                  <Phone className="w-4 h-4 mt-0.5 shrink-0 text-gold/60" />
+                  <Phone className="w-4 h-4 mt-0.5 shrink-0 text-[var(--color-gold-transparent-70)]" />
                   <span>{copy.business.phone}</span>
                 </a>
               </li>
               <li>
                 <span className="flex items-start gap-3 text-white/60 text-sm">
-                  <MapPin className="w-4 h-4 mt-0.5 shrink-0 text-gold/60" />
+                  <MapPin className="w-4 h-4 mt-0.5 shrink-0 text-[var(--color-gold-transparent-70)]" />
                   <span>{copy.business.location}</span>
                 </span>
               </li>
             </ul>
 
-            {/* Newsletter */}
+            {/* Email contact */}
             <div>
               <h4 className="text-[11px] font-semibold tracking-widest uppercase text-white/40 mb-3">
-                Newsletter
+                Get in Touch
               </h4>
-              <div className="flex">
-                <input
-                  type="email"
-                  placeholder="Your email"
-                  className="bg-white/5 border border-white/10 px-4 py-2.5 text-sm text-white placeholder:text-white/30 w-full focus:outline-none focus:border-gold/50 transition-colors"
-                />
-                <button
-                  aria-label="Subscribe"
-                  className="bg-gold/90 hover:bg-gold text-black px-4 flex items-center justify-center transition-colors"
-                >
-                  <Send className="w-4 h-4" />
-                </button>
-              </div>
+              <a
+                href={`mailto:${copy.business.email}`}
+                className="text-sm text-[var(--color-gold)] hover:text-[var(--color-gold-light)] transition-colors"
+              >
+                {copy.business.email}
+              </a>
             </div>
-          </div>
+          </motion.div>
         </div>
-      </div>
+      </motion.div>
 
       {/* Bottom bar */}
-      <div className="border-t border-gray-800 py-6">
+      <motion.div
+        className="border-t border-gray-800 py-6"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+        variants={bottomBarVariants}
+      >
         <div className="max-w-7xl mx-auto px-4 flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-white/40 text-xs">
             &copy; {currentYear} {copy.business.name}. All rights reserved.
@@ -228,7 +291,7 @@ export default function Footer() {
             </Link>
           </div>
         </div>
-      </div>
+      </motion.div>
     </footer>
   );
 }
