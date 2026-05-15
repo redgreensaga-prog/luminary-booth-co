@@ -6,44 +6,51 @@
  * Dark luxury editorial color palette
  */
 export const COLORS = {
-  // Core colors
-  black: '#0A0A0A',
+  // Semantic contract
+  forest: '#0B3D2C',
+  forestDeep: '#06281C',
+  forestLight: '#1A5A3F',
+  cream: '#F5F0E6',
+  creamMuted: 'rgba(245, 240, 230, 0.65)',
+  creamFaint: 'rgba(245, 240, 230, 0.4)',
+  gold: '#D4AF37',
+  goldLight: '#E2C76A',
+  goldDark: '#A8862A',
+  goldPale: '#F5E9B8',
+  ink: '#0A0A08',
+
+  // Core
+  black: '#0A0A08',
   grayDark: '#141414',
   grayMedium: '#2A2A2A',
   grayLight: '#404040',
   grayPale: '#5C5C5C',
-  
-  // Accent Forbes green palette
-  gold: '#005C48',
-  goldLight: '#1B8A6E',
-  goldDark: '#004235',
-  goldPale: '#D4EDE4',
-  
-  // Text colors
-  textPrimary: '#F5F0E8',
-  textSecondary: '#D9D4CC',
-  textTertiary: '#B8B4AE',
-  textInverse: '#0A0A0A',
+
+  // Text
+  textPrimary: '#F5F0E6',
+  textSecondary: 'rgba(245, 240, 230, 0.65)',
+  textTertiary: 'rgba(245, 240, 230, 0.4)',
+  textInverse: '#0A0A08',
   textPlaceholder: '#8A8A8A',
-  
-  // Functional colors
+
+  // Functional
   success: '#2E8B57',
   warning: '#DAA520',
   error: '#B22222',
   info: '#4169E1',
-  
+
   // Transparent variants
   blackTransparent: {
-    10: 'rgba(10, 10, 10, 0.1)',
-    30: 'rgba(10, 10, 10, 0.3)',
-    50: 'rgba(10, 10, 10, 0.5)',
-    70: 'rgba(10, 10, 10, 0.7)',
+    10: 'rgba(10, 10, 8, 0.1)',
+    30: 'rgba(10, 10, 8, 0.3)',
+    50: 'rgba(10, 10, 8, 0.5)',
+    70: 'rgba(10, 10, 8, 0.7)',
   },
   goldTransparent: {
-    10: 'rgba(0, 92, 72, 0.1)',
-    30: 'rgba(0, 92, 72, 0.3)',
-    50: 'rgba(0, 92, 72, 0.5)',
-    70: 'rgba(0, 92, 72, 0.7)',
+    10: 'rgba(212, 175, 55, 0.1)',
+    30: 'rgba(212, 175, 55, 0.3)',
+    50: 'rgba(212, 175, 55, 0.5)',
+    70: 'rgba(212, 175, 55, 0.7)',
   },
 } as const;
 
@@ -53,8 +60,8 @@ export const COLORS = {
 export const TYPOGRAPHY = {
   // Font families
   fontDisplay: "'Cormorant Garamond', serif",
-  fontBody: "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif",
-  fontMono: "'Cascadia Code', 'Consolas', 'Monaco', 'Courier New', monospace",
+  fontBody: "'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
+  fontMono: "'IBM Plex Mono', 'Consolas', 'Monaco', 'Courier New', monospace",
   
   // Font sizes (in rem)
   fontSize: {

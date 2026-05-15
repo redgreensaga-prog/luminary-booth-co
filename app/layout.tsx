@@ -1,4 +1,4 @@
-import { Cormorant_Garamond, Inter } from 'next/font/google';
+import { Cormorant_Garamond, DM_Sans, IBM_Plex_Mono } from 'next/font/google';
 import '../styles/globals.css';
 import '../styles/tokens.css';
 import ScrollProgress from '@/components/utility/ScrollProgress';
@@ -10,10 +10,17 @@ const cormorantGaramond = Cormorant_Garamond({
   display: 'swap',
 });
 
-const inter = Inter({
+const dmSans = DM_Sans({
   subsets: ['latin'],
   weight: ['300', '400', '500'],
   variable: '--font-body',
+  display: 'swap',
+});
+
+const ibmPlexMono = IBM_Plex_Mono({
+  subsets: ['latin'],
+  weight: ['400', '500'],
+  variable: '--font-mono',
   display: 'swap',
 });
 
@@ -23,7 +30,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`dark ${cormorantGaramond.variable} ${inter.variable}`}>
+    <html lang="en" className={`dark ${cormorantGaramond.variable} ${dmSans.variable} ${ibmPlexMono.variable}`}>
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
