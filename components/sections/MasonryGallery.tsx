@@ -132,7 +132,7 @@ export default function MasonryGallery() {
         {/* Header */}
         <div className="mb-12 text-center">
           <motion.h2
-            className="mb-4 text-4xl font-bold tracking-tight text-[var(--color-text-primary)] md:text-5xl"
+            className="mb-4 text-4xl font-light tracking-tight text-[var(--color-text-primary)] md:text-5xl"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -259,7 +259,7 @@ export default function MasonryGallery() {
                         </div>
 
                         {/* Title */}
-                        <h3 className="mb-2 text-xl font-semibold text-[var(--color-text-primary)]">
+                        <h3 className="mb-2 text-xl font-medium text-[var(--color-text-primary)]">
                           {item.title}
                         </h3>
 

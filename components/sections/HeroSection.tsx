@@ -150,7 +150,7 @@ export default function HeroSection() {
 
           {/* Headline */}
           <motion.h1
-            className="mb-6 text-5xl font-bold tracking-tight text-[var(--color-text-primary)] md:text-7xl lg:text-8xl"
+            className="mb-6 text-5xl font-light tracking-tight text-[var(--color-text-primary)] md:text-7xl lg:text-8xl"
             variants={itemVariants}
           >
             <span className="block">Illuminate</span>

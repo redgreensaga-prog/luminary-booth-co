@@ -154,7 +154,7 @@ export default function BoothShowcase() {
             Signature Collection
           </motion.p>
           <motion.h2
-            className="mb-4 text-4xl font-bold tracking-tight text-[var(--color-text-primary)] md:text-5xl"
+            className="mb-4 text-4xl font-light tracking-tight text-[var(--color-text-primary)] md:text-5xl"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -283,7 +283,7 @@ export default function BoothShowcase() {
                   </span>
                 </motion.div>
 
-                <h3 className="mb-4 text-3xl font-bold text-[var(--color-text-primary)] md:text-4xl">
+                <h3 className="mb-4 text-3xl font-medium text-[var(--color-text-primary)] md:text-4xl">
                   {activeBooth.title}
                 </h3>
 
@@ -293,7 +293,7 @@ export default function BoothShowcase() {
 
                 {/* Features */}
                 <div className="mb-8">
-                  <h4 className="mb-4 text-lg font-semibold text-[var(--color-text-primary)]">
+                  <h4 className="mb-4 text-lg font-medium text-[var(--color-text-primary)]">
                     Included Features
                   </h4>
                   <ul className="grid gap-3 sm:grid-cols-2">

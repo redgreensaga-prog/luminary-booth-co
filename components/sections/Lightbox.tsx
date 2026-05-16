@@ -184,7 +184,7 @@ export default function Lightbox({
                 </div>
 
                 {/* Title */}
-                <h3 className="mb-1 text-2xl font-bold text-[var(--color-text-primary)]">
+                <h3 className="mb-1 text-2xl font-medium text-[var(--color-text-primary)]">
                   {title}
                 </h3>
 

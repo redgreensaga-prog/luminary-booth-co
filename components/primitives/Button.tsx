@@ -14,7 +14,7 @@ const buttonVariants = cva(
       variant: {
         primary: [
           'bg-gold hover:bg-gold-light text-black font-semibold',
-          'shadow-[0_0_0_0_rgba(0,92,72,0)] hover:shadow-[0_0_30px_8px_rgba(0,92,72,0.35)]',
+          'shadow-[0_0_0_0_rgba(212,175,55,0)] hover:shadow-[0_0_30px_8px_rgba(212,175,55,0.35)]',
           'transition-shadow duration-500',
           'border border-gold-dark/30',
         ].join(' '),
