@@ -28,14 +28,19 @@ interface TestimonialsCarouselProps {
 
 export default function TestimonialsCarousel({
   testimonials = COPY.testimonials.testimonials,
-  autoRotateInterval = 6000, // 6 seconds
+  autoRotateInterval = 6000,
   showNavigation = true,
   showDots = true,
   className,
 }: TestimonialsCarouselProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
-  const [direction, setDirection] = useState(0); // -1 for left, 1 for right, 0 for initial
+  const [direction, setDirection] = useState(0);
+  const [prefersReduced, setPrefersReduced] = useState(false);
+
+  useEffect(() => {
+    setPrefersReduced(window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+  }, []);
 
   const goToSlide = useCallback((index: number) => {
     setDirection(index > currentIndex ? 1 : -1);
@@ -68,9 +73,9 @@ export default function TestimonialsCarousel({
   // Animation variants
   const slideVariants = {
     enter: (direction: number) => ({
-      x: direction > 0 ? '100%' : '-100%',
+      x: prefersReduced ? 0 : (direction > 0 ? '100%' : '-100%'),
       opacity: 0,
-      scale: 0.95,
+      scale: prefersReduced ? 1 : 0.95,
     }),
     center: {
       x: 0,
@@ -78,9 +83,9 @@ export default function TestimonialsCarousel({
       scale: 1,
     },
     exit: (direction: number) => ({
-      x: direction > 0 ? '-100%' : '100%',
+      x: prefersReduced ? 0 : (direction > 0 ? '-100%' : '100%'),
       opacity: 0,
-      scale: 0.95,
+      scale: prefersReduced ? 1 : 0.95,
     }),
   };
 
@@ -305,7 +310,7 @@ export default function TestimonialsCarousel({
             <>
               <button
                 onClick={goToPrev}
-                className="absolute top-1/2 -left-4 md:-left-8 transform -translate-y-1/2 w-12 h-12 md:w-16 md:h-16 rounded-full bg-[var(--color-gray-dark)] backdrop-blur-sm border border-[var(--color-gray-medium)] hover:border-[var(--color-gold-transparent-50)] hover:bg-[var(--color-gray-dark)] flex items-center justify-center transition-all duration-300 group focus:outline-none focus:ring-2 focus:ring-[var(--color-gold-transparent-50)] focus:ring-offset-2 focus:ring-offset-black"
+                className="absolute top-1/2 -left-4 md:-left-8 transform -translate-y-1/2 w-12 h-12 md:w-16 md:h-16 rounded-full bg-[var(--color-gray-dark)] backdrop-blur-sm border border-[var(--color-gray-medium)] hover:border-[var(--color-gold-transparent-50)] hover:bg-[var(--color-gray-dark)] flex items-center justify-center transition-all duration-300 group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--forest-deep)]"
                 aria-label="Previous testimonial"
               >
                 <ChevronLeft
@@ -315,7 +320,7 @@ export default function TestimonialsCarousel({
               </button>
               <button
                 onClick={goToNext}
-                className="absolute top-1/2 -right-4 md:-right-8 transform -translate-y-1/2 w-12 h-12 md:w-16 md:h-16 rounded-full bg-[var(--color-gray-dark)] backdrop-blur-sm border border-[var(--color-gray-medium)] hover:border-[var(--color-gold-transparent-50)] hover:bg-[var(--color-gray-dark)] flex items-center justify-center transition-all duration-300 group focus:outline-none focus:ring-2 focus:ring-[var(--color-gold-transparent-50)] focus:ring-offset-2 focus:ring-offset-black"
+                className="absolute top-1/2 -right-4 md:-right-8 transform -translate-y-1/2 w-12 h-12 md:w-16 md:h-16 rounded-full bg-[var(--color-gray-dark)] backdrop-blur-sm border border-[var(--color-gray-medium)] hover:border-[var(--color-gold-transparent-50)] hover:bg-[var(--color-gray-dark)] flex items-center justify-center transition-all duration-300 group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--forest-deep)]"
                 aria-label="Next testimonial"
               >
                 <ChevronRight
@@ -341,7 +346,7 @@ export default function TestimonialsCarousel({
                 key={index}
                 onClick={() => goToSlide(index)}
                 className={cn(
-                  'w-3 h-3 rounded-full transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-[var(--color-gold-transparent-50)] focus:ring-offset-2 focus:ring-offset-black',
+                  'w-3 h-3 rounded-full transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--forest-deep)]',
                   index === currentIndex
                     ? 'bg-gold scale-125'
                     : 'bg-[var(--color-gray-light)] hover:bg-[var(--color-gray-light)]'
