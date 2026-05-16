@@ -116,7 +116,7 @@ export function FAQAccordion({ className, maxOpen = 1 }: FAQAccordionProps) {
                   'backdrop-blur-sm',
                   'transition-all duration-300',
                   isOpen
-                    ? 'border-[var(--color-gold-transparent-30)] shadow-[0_0_20px_0_rgba(0,92,72,0.15)]'
+                    ? 'border-[var(--color-gold-transparent-30)] shadow-[0_0_20px_0_rgba(212,175,55,0.15)]'
                     : 'border-[var(--color-gray-medium)] hover:border-[var(--color-gold-transparent-20)]'
                 )}
               >
@@ -200,7 +200,7 @@ export function FAQAccordion({ className, maxOpen = 1 }: FAQAccordionProps) {
                 {/* Hover effect line */}
                 <div
                   className="h-px mx-6 bg-gradient-to-r from-transparent to-transparent transition-all duration-500"
-                  style={{ backgroundImage: isOpen ? 'linear-gradient(to right, transparent, rgba(0,92,72,0.50), transparent)' : undefined }}
+                  style={{ backgroundImage: isOpen ? `linear-gradient(to right, transparent, var(--color-gold-transparent-50), transparent)` : undefined }}
                 />
               </motion.div>
             );
@@ -232,8 +232,8 @@ export function FAQAccordion({ className, maxOpen = 1 }: FAQAccordionProps) {
         </motion.div>
 
         {/* Background decorative elements */}
-        <div className="absolute top-20 -left-20 w-48 h-48 rounded-full blur-3xl pointer-events-none" style={{ backgroundColor: 'rgba(0,92,72,0.05)' }} />
-        <div className="absolute bottom-20 -right-20 w-64 h-64 rounded-full blur-3xl pointer-events-none" style={{ backgroundColor: 'rgba(0,92,72,0.03)' }} />
+        <div className="absolute top-20 -left-20 w-48 h-48 rounded-full blur-3xl pointer-events-none" style={{ backgroundColor: 'rgba(212,175,55,0.04)' }} />
+        <div className="absolute bottom-20 -right-20 w-64 h-64 rounded-full blur-3xl pointer-events-none" style={{ backgroundColor: 'rgba(212,175,55,0.03)' }} />
       </div>
     </section>
   );

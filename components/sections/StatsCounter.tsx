@@ -16,6 +16,10 @@ const useCountUp = (end: number, duration: number = 2000, trigger: boolean = fal
 
   useEffect(() => {
     if (!trigger) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      setCount(end);
+      return;
+    }
     let start: number;
     let rafId: number;
     const animate = (ts: number) => {
@@ -65,11 +69,11 @@ function StatCard({
           'p-8 rounded-2xl border border-[var(--color-gray-medium)]',
           'bg-gradient-to-br from-[var(--color-gray-dark)] to-[var(--color-black)]',
           'backdrop-blur-sm transition-all duration-500',
-          'group-hover:border-[var(--color-gold-transparent-30)] group-hover:shadow-[0_0_40px_0_rgba(0,92,72,0.25)]'
+          'group-hover:border-[var(--color-gold-transparent-30)] group-hover:shadow-[0_0_40px_0_rgba(212,175,55,0.25)]'
         )}
       >
         <div className="flex flex-col items-center text-center">
-          <span className="text-5xl md:text-6xl lg:text-7xl font-display font-bold text-[var(--color-text-primary)]">
+          <span className="text-5xl md:text-6xl lg:text-7xl font-display font-light text-[var(--color-text-primary)]">
             {displayValue}{stat.suffix}
           </span>
           <h3 className="text-xl md:text-2xl font-display font-light mt-3 mb-2 text-[var(--color-text-primary)]">
@@ -152,7 +156,7 @@ export function StatsCounter({ className }: StatsCounterProps) {
           animate={isInView ? { opacity: 1 } : { opacity: 0 }}
           transition={{ delay: 0.5 }}
           className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 rounded-full blur-3xl pointer-events-none"
-          style={{ backgroundColor: 'rgba(0,92,72,0.05)' }}
+          style={{ backgroundColor: 'rgba(212,175,55,0.04)' }}
         />
       </div>
     </section>

@@ -74,8 +74,8 @@ const boothTypes: BoothType[] = [
     ],
     price: 'From $1,400',
     icon: <Camera className="w-6 h-6" />,
-    image: 'https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?w=600&q=80',
-    imageAlt: 'Vintage darkroom analog photo booth with film camera aesthetic at a retro-themed event',
+    image: 'https://images.unsplash.com/photo-1452587925148-ce544e77e70d?w=600&q=80',
+    imageAlt: 'Vintage darkroom aesthetic with warm film tones and classic photographic equipment',
     accentColor: 'var(--color-gold-dark)',
   },
 ];
@@ -154,7 +154,7 @@ export default function BoothShowcase() {
             Signature Collection
           </motion.p>
           <motion.h2
-            className="mb-4 text-4xl font-bold tracking-tight text-[var(--color-text-primary)] md:text-5xl"
+            className="mb-4 text-4xl font-light tracking-tight text-[var(--color-text-primary)] md:text-5xl"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -232,10 +232,10 @@ export default function BoothShowcase() {
               initial="enter"
               animate="center"
               exit="exit"
-              className="grid gap-12 lg:grid-cols-2"
+              className="grid gap-12 lg:grid-cols-5"
             >
               {/* Image with crossfade */}
-              <div className="relative overflow-hidden rounded-sm">
+              <div className="relative overflow-hidden rounded-sm lg:col-span-2">
                 <div className="aspect-[4/3]">
                   <AnimatePresence mode="wait">
                     <motion.div
@@ -270,7 +270,7 @@ export default function BoothShowcase() {
               </div>
 
               {/* Content */}
-              <div className="flex flex-col justify-center">
+              <div className="flex flex-col justify-center lg:col-span-3">
                 <motion.div
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
@@ -283,7 +283,7 @@ export default function BoothShowcase() {
                   </span>
                 </motion.div>
 
-                <h3 className="mb-4 text-3xl font-bold text-[var(--color-text-primary)] md:text-4xl">
+                <h3 className="mb-4 text-3xl font-medium text-[var(--color-text-primary)] md:text-4xl">
                   {activeBooth.title}
                 </h3>
 
@@ -293,7 +293,7 @@ export default function BoothShowcase() {
 
                 {/* Features */}
                 <div className="mb-8">
-                  <h4 className="mb-4 text-lg font-semibold text-[var(--color-text-primary)]">
+                  <h4 className="mb-4 text-lg font-medium text-[var(--color-text-primary)]">
                     Included Features
                   </h4>
                   <ul className="grid gap-3 sm:grid-cols-2">

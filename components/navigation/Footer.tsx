@@ -139,7 +139,7 @@ export default function Footer() {
   };
 
   return (
-    <footer className="bg-black text-white border-t border-gray-800">
+    <footer className="bg-[var(--forest-deep)] text-[var(--cream)] border-t border-[var(--cream-faint)]">
       {/* Main footer content */}
       <motion.div
         className="max-w-7xl mx-auto px-4 py-12 md:py-16"
@@ -153,12 +153,12 @@ export default function Footer() {
           <div className="lg:col-span-4">
             <motion.div custom={0} variants={brandVariants}>
               <Link href="/" className="inline-block mb-6">
-                <span className="text-2xl font-display font-bold tracking-wider text-gold">
+                <span className="text-2xl font-display font-light tracking-wider text-[var(--cream)]">
                   {copy.business.name}
                 </span>
               </Link>
             </motion.div>
-            <motion.p custom={1} variants={brandVariants} className="text-white/60 mb-8 max-w-sm leading-relaxed">
+            <motion.p custom={1} variants={brandVariants} className="text-[var(--cream-muted)] mb-8 max-w-sm leading-relaxed">
               Southern California&apos;s premier luxury photo booth experience.
               Elevating events with bespoke photography, artisanal design, and
               unforgettable memories since 2018.
@@ -172,7 +172,7 @@ export default function Footer() {
                   aria-label={social.name}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center text-white/50 hover:text-gold hover:border-[var(--color-gold-transparent-50)] transition-colors"
+                  className="w-10 h-10 rounded-full border border-[var(--cream-faint)] flex items-center justify-center text-[var(--cream-muted)] hover:text-[var(--cream)] hover:border-[var(--color-gold-transparent-50)] transition-colors"
                 >
                   {social.icon}
                 </a>
@@ -182,13 +182,13 @@ export default function Footer() {
 
           {/* Services column */}
           <motion.div custom={0} variants={columnVariants} className="lg:col-span-2">
-            <h3 className="text-xs font-semibold tracking-widest uppercase text-gold mb-6">
+            <h3 className="text-xs font-medium tracking-widest uppercase text-[var(--cream)] mb-6">
               Services
             </h3>
             <ul className="space-y-4">
               {footerLinks.services.map((link) => (
                 <li key={link.label}>
-                  <Link href={link.href} className="text-white/60 hover:text-gold transition-colors text-sm">
+                  <Link href={link.href} className="text-[var(--cream-muted)] hover:text-[var(--cream)] transition-colors text-sm">
                     {link.label}
                   </Link>
                 </li>
@@ -198,13 +198,13 @@ export default function Footer() {
 
           {/* Company column */}
           <motion.div custom={1} variants={columnVariants} className="lg:col-span-2">
-            <h3 className="text-xs font-semibold tracking-widest uppercase text-gold mb-6">
+            <h3 className="text-xs font-medium tracking-widest uppercase text-[var(--cream)] mb-6">
               Company
             </h3>
             <ul className="space-y-4">
               {footerLinks.company.map((link) => (
                 <li key={link.label}>
-                  <Link href={link.href} className="text-white/60 hover:text-gold transition-colors text-sm">
+                  <Link href={link.href} className="text-[var(--cream-muted)] hover:text-[var(--cream)] transition-colors text-sm">
                     {link.label}
                   </Link>
                 </li>
@@ -214,13 +214,13 @@ export default function Footer() {
 
           {/* Support column */}
           <motion.div custom={2} variants={columnVariants} className="lg:col-span-2">
-            <h3 className="text-xs font-semibold tracking-widest uppercase text-gold mb-6">
+            <h3 className="text-xs font-medium tracking-widest uppercase text-[var(--cream)] mb-6">
               Support
             </h3>
             <ul className="space-y-4">
               {footerLinks.support.map((link) => (
                 <li key={link.label}>
-                  <Link href={link.href} className="text-white/60 hover:text-gold transition-colors text-sm">
+                  <Link href={link.href} className="text-[var(--cream-muted)] hover:text-[var(--cream)] transition-colors text-sm">
                     {link.label}
                   </Link>
                 </li>
@@ -230,24 +230,24 @@ export default function Footer() {
 
           {/* Contact + Newsletter */}
           <motion.div custom={3} variants={columnVariants} className="lg:col-span-2">
-            <h3 className="text-xs font-semibold tracking-widest uppercase text-gold mb-6">
+            <h3 className="text-xs font-medium tracking-widest uppercase text-[var(--cream)] mb-6">
               Contact
             </h3>
             <ul className="space-y-4 mb-8">
               <li>
-                <a href={`mailto:${copy.business.email}`} className="flex items-start gap-3 text-white/60 hover:text-gold transition-colors text-sm">
+                <a href={`mailto:${copy.business.email}`} className="flex items-start gap-3 text-[var(--cream-muted)] hover:text-[var(--cream)] transition-colors text-sm">
                   <Mail className="w-4 h-4 mt-0.5 shrink-0 text-[var(--color-gold-transparent-70)]" />
                   <span>{copy.business.email}</span>
                 </a>
               </li>
               <li>
-                <a href={`tel:${copy.business.phone}`} className="flex items-start gap-3 text-white/60 hover:text-gold transition-colors text-sm">
+                <a href={`tel:${copy.business.phone}`} className="flex items-start gap-3 text-[var(--cream-muted)] hover:text-[var(--cream)] transition-colors text-sm">
                   <Phone className="w-4 h-4 mt-0.5 shrink-0 text-[var(--color-gold-transparent-70)]" />
                   <span>{copy.business.phone}</span>
                 </a>
               </li>
               <li>
-                <span className="flex items-start gap-3 text-white/60 text-sm">
+                <span className="flex items-start gap-3 text-[var(--cream-muted)] text-sm">
                   <MapPin className="w-4 h-4 mt-0.5 shrink-0 text-[var(--color-gold-transparent-70)]" />
                   <span>{copy.business.location}</span>
                 </span>
@@ -256,7 +256,7 @@ export default function Footer() {
 
             {/* Email contact */}
             <div>
-              <h4 className="text-[11px] font-semibold tracking-widest uppercase text-white/40 mb-3">
+              <h4 className="text-[11px] font-medium tracking-widest uppercase text-[var(--cream-faint)] mb-3">
                 Get in Touch
               </h4>
               <a
@@ -272,21 +272,21 @@ export default function Footer() {
 
       {/* Bottom bar */}
       <motion.div
-        className="border-t border-gray-800 py-6"
+        className="border-t border-[var(--cream-faint)] py-6"
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true }}
         variants={bottomBarVariants}
       >
         <div className="max-w-7xl mx-auto px-4 flex flex-col md:flex-row items-center justify-between gap-4">
-          <p className="text-white/40 text-xs">
+          <p className="text-[var(--cream-faint)] text-xs">
             &copy; {currentYear} {copy.business.name}. All rights reserved.
           </p>
           <div className="flex items-center gap-6">
-            <Link href="#" className="text-white/40 hover:text-gold text-xs transition-colors">
+            <Link href="#" className="text-[var(--cream-faint)] hover:text-[var(--cream)] text-xs transition-colors">
               Privacy Policy
             </Link>
-            <Link href="#" className="text-white/40 hover:text-gold text-xs transition-colors">
+            <Link href="#" className="text-[var(--cream-faint)] hover:text-[var(--cream)] text-xs transition-colors">
               Terms of Service
             </Link>
           </div>

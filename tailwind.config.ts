@@ -9,7 +9,25 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        // Dark luxury editorial palette
+        // Semantic contract — forest/cream/gold
+        forest: {
+          DEFAULT: 'var(--forest)',
+          deep: 'var(--forest-deep)',
+          light: 'var(--forest-light)',
+        },
+        cream: {
+          DEFAULT: 'var(--cream)',
+          muted: 'var(--cream-muted)',
+          faint: 'var(--cream-faint)',
+        },
+        gold: {
+          DEFAULT: 'var(--gold)',
+          light: 'var(--color-gold-light)',
+          dark: 'var(--color-gold-dark)',
+          pale: 'var(--color-gold-pale)',
+        },
+        ink: 'var(--ink)',
+        // Legacy aliases — keep for components not yet migrated
         black: {
           DEFAULT: 'var(--color-black)',
           light: 'var(--color-gray-dark)',
@@ -18,12 +36,6 @@ const config: Config = {
           dark: 'var(--color-gray-dark)',
           medium: 'var(--color-gray-medium)',
           light: 'var(--color-gray-light)',
-        },
-        gold: {
-          DEFAULT: 'var(--color-gold)',
-          light: 'var(--color-gold-light)',
-          dark: 'var(--color-gold-dark)',
-          pale: 'var(--color-gold-pale)',
         },
         textPrimary: 'var(--color-text-primary)',
         textSecondary: 'var(--color-text-secondary)',
@@ -42,7 +54,6 @@ const config: Config = {
         'black-green': 'var(--color-black-green)',
         'surface': 'var(--color-surface)',
         'surface-raised': 'var(--color-surface-raised)',
-        // Transparent gold variants
         goldTransparent10: 'var(--color-gold-transparent-10)',
         goldTransparent30: 'var(--color-gold-transparent-30)',
         goldTransparent50: 'var(--color-gold-transparent-50)',
