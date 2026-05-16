@@ -83,13 +83,13 @@ export default function Navbar() {
   const navbarVariants = {
     initial: {
       backdropFilter: 'blur(0px)',
-      backgroundColor: 'rgba(10, 10, 10, 0)',
-      borderBottomColor: 'rgba(0, 92, 72, 0)',
+      backgroundColor: 'rgba(6, 40, 28, 0)',
+      borderBottomColor: 'rgba(212, 175, 55, 0)',
     },
     scrolled: {
       backdropFilter: 'blur(12px)',
-      backgroundColor: 'rgba(10, 10, 10, 0.85)',
-      borderBottomColor: 'rgba(0, 92, 72, 0.15)',
+      backgroundColor: 'rgba(6, 40, 28, 0.92)',
+      borderBottomColor: 'rgba(212, 175, 55, 0.2)',
     },
   };
 

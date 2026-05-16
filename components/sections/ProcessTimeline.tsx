@@ -184,8 +184,8 @@ export function ProcessTimeline({ className }: ProcessTimelineProps) {
         </motion.div>
 
         {/* Background decorative elements */}
-        <div className="absolute top-1/4 -right-20 w-64 h-64 rounded-full blur-3xl pointer-events-none" style={{ backgroundColor: 'rgba(0,92,72,0.05)' }} />
-        <div className="absolute bottom-1/4 -left-20 w-48 h-48 rounded-full blur-3xl pointer-events-none" style={{ backgroundColor: 'rgba(0,92,72,0.03)' }} />
+        <div className="absolute top-1/4 -right-20 w-64 h-64 rounded-full blur-3xl pointer-events-none" style={{ backgroundColor: 'rgba(212,175,55,0.04)' }} />
+        <div className="absolute bottom-1/4 -left-20 w-48 h-48 rounded-full blur-3xl pointer-events-none" style={{ backgroundColor: 'rgba(212,175,55,0.03)' }} />
       </div>
     </section>
   );

@@ -166,7 +166,7 @@ export default function TestimonialsCarousel({
                 {/* Avatar/Image section */}
                 <div className="flex-shrink-0">
                   <div className="relative w-24 h-24 md:w-32 md:h-32 lg:w-40 lg:h-40">
-                    <div className="absolute inset-0 rounded-full bg-gradient-to-br from-gold to-goldDark" />
+                    <div className="absolute inset-0 rounded-full bg-gradient-to-br from-gold to-gold-dark" />
                     <motion.div
                       initial={{ opacity: 0, scale: 0.8 }}
                       animate={{ opacity: 1, scale: 1 }}
@@ -180,8 +180,8 @@ export default function TestimonialsCarousel({
                           className="w-full h-full object-cover"
                         />
                       ) : (
-                        <div className="w-full h-full flex items-center justify-center bg-grayMedium">
-                          <span className="text-3xl font-display text-goldPale">
+                        <div className="w-full h-full flex items-center justify-center bg-[var(--color-gray-medium)]">
+                          <span className="text-3xl font-display text-gold-pale">
                             {currentTestimonial.author.charAt(0).toUpperCase()}
                           </span>
                         </div>
@@ -371,7 +371,7 @@ export default function TestimonialsCarousel({
           viewport={{ once: true }}
           transition={{ delay: 0.5 }}
           className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 rounded-full blur-3xl pointer-events-none"
-          style={{ backgroundColor: 'rgba(0,92,72,0.05)' }}
+          style={{ backgroundColor: 'rgba(212,175,55,0.04)' }}
         />
       </div>
     </section>

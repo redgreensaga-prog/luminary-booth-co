@@ -232,10 +232,10 @@ export default function BoothShowcase() {
               initial="enter"
               animate="center"
               exit="exit"
-              className="grid gap-12 lg:grid-cols-2"
+              className="grid gap-12 lg:grid-cols-5"
             >
               {/* Image with crossfade */}
-              <div className="relative overflow-hidden rounded-sm">
+              <div className="relative overflow-hidden rounded-sm lg:col-span-2">
                 <div className="aspect-[4/3]">
                   <AnimatePresence mode="wait">
                     <motion.div
@@ -270,7 +270,7 @@ export default function BoothShowcase() {
               </div>
 
               {/* Content */}
-              <div className="flex flex-col justify-center">
+              <div className="flex flex-col justify-center lg:col-span-3">
                 <motion.div
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}

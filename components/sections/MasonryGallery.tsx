@@ -211,7 +211,7 @@ export default function MasonryGallery() {
                 <p className="text-lg text-[var(--color-text-secondary)]">No images found matching your criteria.</p>
               </div>
             ) : (
-              <div className="columns-1 gap-4 sm:columns-2 lg:columns-3">
+              <div className="columns-2 gap-4 lg:columns-4">
                 {filteredItems.map((item) => (
                   <motion.div
                     key={item.id}

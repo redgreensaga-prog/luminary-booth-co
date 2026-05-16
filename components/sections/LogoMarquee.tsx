@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { cn } from '@/lib/utils';
 import { COPY } from '@/content/copy';
@@ -14,6 +14,10 @@ interface LogoMarqueeProps {
 export function LogoMarquee({ className, speed = 'normal' }: LogoMarqueeProps) {
   const { logos } = COPY.clients;
   const [isHovered, setIsHovered] = useState(false);
+  const [prefersReduced, setPrefersReduced] = useState(false);
+  useEffect(() => {
+    setPrefersReduced(window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+  }, []);
 
   // Duplicate logos for seamless loop
   const duplicatedLogos = [...logos, ...logos];
@@ -93,7 +97,7 @@ export function LogoMarquee({ className, speed = 'normal' }: LogoMarqueeProps) {
             className="flex overflow-hidden py-8"
           >
             <motion.div
-              animate={{ x: ['0%', '-50%'] }}
+              animate={prefersReduced ? {} : { x: ['0%', '-50%'] }}
               transition={marqueeTransition}
               className="flex flex-shrink-0"
             >
@@ -138,7 +142,7 @@ export function LogoMarquee({ className, speed = 'normal' }: LogoMarqueeProps) {
             className="flex overflow-hidden py-8"
           >
             <motion.div
-              animate={{ x: ['-50%', '0%'] }}
+              animate={prefersReduced ? {} : { x: ['-50%', '0%'] }}
               transition={marqueeTransition}
               className="flex flex-shrink-0"
             >
@@ -176,8 +180,8 @@ export function LogoMarquee({ className, speed = 'normal' }: LogoMarqueeProps) {
         </div>
 
         {/* Background decorative elements */}
-        <div className="absolute top-0 left-1/4 w-32 h-32 rounded-full blur-3xl pointer-events-none" style={{ backgroundColor: 'rgba(0,92,72,0.05)' }} />
-        <div className="absolute bottom-0 right-1/4 w-40 h-40 rounded-full blur-3xl pointer-events-none" style={{ backgroundColor: 'rgba(0,92,72,0.05)' }} />
+        <div className="absolute top-0 left-1/4 w-32 h-32 rounded-full blur-3xl pointer-events-none" style={{ backgroundColor: 'rgba(212,175,55,0.04)' }} />
+        <div className="absolute bottom-0 right-1/4 w-40 h-40 rounded-full blur-3xl pointer-events-none" style={{ backgroundColor: 'rgba(212,175,55,0.04)' }} />
       </div>
     </section>
   );
